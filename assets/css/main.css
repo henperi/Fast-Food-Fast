@@ -456,3 +456,217 @@ button:disabled {
     flex: 1 1 45%
 }
 
+
+/* food-menu */
+.food-menu {
+    display: flex;
+    flex-flow: row wrap
+}
+.food-item {
+    margin: 0 8px 8px 0;
+    flex: 1 1 100%;
+    max-width: 30.6%;
+}
+
+
+/* 
+*=================================================================
+* Everything Image
+*=================================================================
+ */
+.image {
+    border-radius: 8px;
+}
+.image-rounded {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%
+}
+img:hover {
+    box-shadow: 0px 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+
+
+/* 
+*================================================================
+* Everything Table
+*================================================================
+ */
+.table {
+    overflow-x:auto;
+}
+table {
+    text-align: left;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-bottom: 15px 
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    color: #fff;
+    background-image: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+}
+tr:nth-child(odd) {
+    background-color: #ebe9e9
+}
+
+
+
+
+/* footer */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+    font-size: 16px;
+    padding: 20px;
+}
+
+
+/* Custom Additions */
+/* Links */
+.link {
+    color: #41b3f9;
+    cursor: pointer;
+    font: inherit
+}
+
+label {
+    text-align: left !important;
+}
+
+.content-div {
+    padding-top: 8px; 
+    flex: 1 1 70%
+}
+.cart {
+    border-radius: 5px;
+    max-width: 38%;;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    background: rgb(69, 89, 179);
+    font-size: 16px;
+    padding: 2px 8px;
+    margin: 0 0 8px 0;
+    position: fixed;
+    z-index: 2;
+}
+
+.count {
+    border-radius: 100%;
+    background: #fff;
+    color: rgb(69, 89, 179);
+    font-size: 16px;
+    padding: 8px;
+    margin-top: 5px;
+}
+section {
+    margin-top: 25px
+}
+
+.transparent {
+    background: rgba(238, 235, 235, 0.7) !important;
+}
+
+/* 
+*===================================================================================
+* Everything Media Query
+*===================================================================================
+ */
+@media screen and (max-width: 1080px) {
+    
+    .food-item {
+        flex: 1 1 45%;
+        max-width: 48%;
+    }  
+    .contain-50 {
+        width: 80%;
+        margin: 0 auto;
+        flex: 1 1 100;
+    } 
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 720px) {
+    .topnav a:not(:first-child), .dropdown .dropbtn {
+        display: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+  
+    .food-item {
+        margin-right: 5px;
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
+    .form-input {
+        width: 100%;
+    }
+    
+    .contain {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .contain-50 {
+        width: 90%;
+    }
+    
+    .hero {
+        min-height: 40vh;
+    }
+    main {
+        min-height: 100%;
+        /* position: relative; */
+        padding-top: 3rem;
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 720px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .topnav.responsive .dropdown {float: none;}
+    .topnav.responsive .dropdown-content {position: relative;}
+    .topnav.responsive .dropdown .dropbtn {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    .right-nav {
+        float: none;
+        display: block;
+    }
+    .left-nav {
+        float: none;
+        display: block;
+        width: 100%;
+    }
+    .container {
+        padding: 8px;
+    }
+}
