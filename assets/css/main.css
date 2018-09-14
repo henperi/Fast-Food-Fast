@@ -305,3 +305,112 @@ select option {
 }
 
 
+
+/* 
+*=========================================================
+* Everything Anchor 
+*=========================================================
+*/
+/* Anchor Tags */
+a {
+    text-decoration: none;
+    font: inherit;
+}
+
+a:hover {
+    outline: 0;
+    text-decoration: none;
+}
+a:active {
+    outline: 0;
+    text-decoration: none;
+}
+a:focus {
+    outline: 0;
+    text-decoration: none;
+}
+
+a.btn {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 4px;
+    min-height: 35px;
+    max-width: 100%;
+    padding: 10px 20px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+
+
+
+/* 
+*=========================================================
+* Everything Button, btn 
+*=========================================================
+*/
+/* Button */
+.btn {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 4px;
+    min-height: 35px;
+    max-width: 100%;
+    padding: 10px 20px;
+    margin: 5px 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+.btn:hover {
+    box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.2)
+}
+.btn-sm {
+    font-size: 60%;
+    padding: 2px 15px;
+}
+.btn-bg {
+    font-size: 120%;
+    padding: 8px 40px
+}
+.btn-block {
+    font-size: 120%;
+    padding: 12px 40px;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-rounded {
+    border-radius: 60px !important;
+}
+
+.btn-blue {
+    color: #fff;
+    background-image: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+}
+
+.btn-green {
+    color: #fff;
+    background-image: linear-gradient(rgb(61, 241, 85), rgb(10, 134, 47));
+}
+
+.btn-red {
+    color: #fff;
+    background-image: linear-gradient(rgb(226, 44, 84), rgb(231, 53, 106));
+}
+
+.btn-primary {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(rgb(209, 209, 209), rgb(105, 105, 105));
+}
+
+.btn-secondary {
+    color: rgb(49, 49, 49);
+    background-image: linear-gradient(rgb(209, 209, 209), rgb(209, 209, 209));
+}
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
