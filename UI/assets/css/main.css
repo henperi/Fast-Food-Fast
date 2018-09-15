@@ -56,14 +56,14 @@ nav {
     background-color: rgb(21, 116, 233);
     color: #f2f2f2;
 }
-.left-nav {
+/* .left-nav {
     float: left;
     display: block
 }
 .right-nav {
     float: right;
     display: block
-}
+} */
 
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
@@ -527,7 +527,7 @@ tr:nth-child(odd) {
 footer {
     position: relative;
     bottom: 0;
-    width: 100%;
+    /* width: 100%; */
     color: #fff;
     background: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
     font-size: 16px;
