@@ -35,28 +35,28 @@ app.use(
 
 app.use('/api/v1/orders', ordersRoute);
 
-app.get('/', (req, res) => res.status(200).send({
-  message: 'This is an API, not a website. Read more about the api endpoints below',
-  endpoints: [
-    {
-      type: 'GET',
-      uri: 'api/va/users/signin',
-      desired_parameters: ['email', 'password'],
-      description:
-          'This endpoint uses the desired parameters to login or authenticate a visiting user',
-    },
-  ],
-}));
-
 app.use('', (req, res) => res.status(404).json({
   message: 'This endpoint does not exist. Read more about the api endpoints below',
   endpoints: [
     {
       type: 'GET',
-      uri: 'api/va/users/signin',
-      desired_parameters: ['email', 'password'],
+      uri: 'api/v1/orders/',
+      desired_parameters: null,
+      description: 'This endpoint fetches all users orders stored in memory',
+    },
+    {
+      type: 'GET',
+      uri: 'api/v1/orders/:orderId',
+      desired_parameters: null,
       description:
-          'This endpoint uses the desired parameters to login or authenticate a visiting user',
+          'This endpoint uses the desired parameters to fetch a specific order stored in memory',
+    },
+    {
+      type: 'PUT',
+      uri: 'api/v1/orders/orderId',
+      desired_parameters: [{ orderStatus: { type: 'String' } }],
+      description:
+          'This endpoint uses the desired parameters to update the order status of a specific order stored in memory',
     },
   ],
 }));
