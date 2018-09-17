@@ -57,7 +57,7 @@ describe('Orders Route Tests', () => {
       // .catch(err => console.log(err));
     });
 
-    it.skip('should create an order and store it in memory', (done) => {
+    it('should create an order and store it in memory', (done) => {
       const newOrder = {
         foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088', quantity: 2 }],
       };
@@ -89,7 +89,7 @@ describe('Orders Route Tests', () => {
         });
     });
 
-    it.skip('should fetch an order when the orderId provided is found in the list of existing orderIds', (done) => {
+    it('should fetch an order when the orderId provided is found in the list of existing orderIds', (done) => {
       const newOrder = {
         foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088', quantity: 2 }],
       };
