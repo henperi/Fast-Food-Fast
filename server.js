@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
 
+// Routes =========================================
+import ordersRoute from './routes/api/v1/orders';
+
 const app = express();
 
 // Some neccessary middleware
@@ -29,6 +32,8 @@ app.use(
     },
   }),
 );
+
+app.use('/api/v1/orders', ordersRoute);
 
 app.get('/', (req, res) => res.status(200).send({
   message: 'This is an API, not a website. Read more about the api endpoints below',
