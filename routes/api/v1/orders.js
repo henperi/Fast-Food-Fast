@@ -18,7 +18,7 @@ router.get('/:orderId', ordersController.fetchOneOrder);
 /**
  * Place a new order.
  */
-// router.post('/', ordersController.makeAnOrder);
+router.post('/', ordersController.makeAnOrder);
 
 /**
  * Update the status of an order.
