@@ -9,3 +9,7 @@ See the sample interface being built here on github pages - <a  href="https://he
 [![Coverage Status](https://coveralls.io/repos/github/henperi/Fast-Food-Fast/badge.svg)](https://coveralls.io/github/henperi/Fast-Food-Fast)
 
 [![Build Status](https://travis-ci.org/henperi/Fast-Food-Fast.svg?branch=feature)](https://travis-ci.org/henperi/Fast-Food-Fast)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/e45b0a788e054d2cea0b/maintainability)](https://codeclimate.com/github/henperi/Fast-Food-Fast/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e45b0a788e054d2cea0b/test_coverage)](https://codeclimate.com/github/henperi/Fast-Food-Fast/test_coverage)
