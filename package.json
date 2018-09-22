@@ -8,7 +8,7 @@
     "dev-start": "babel-watch server.js",
     "start": "babel-node server.js",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./test/test.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha test/test.js --compilers js:babel-core/register --exit"
   },
   "nyc": {
