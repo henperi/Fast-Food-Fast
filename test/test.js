@@ -1,7 +1,11 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+// import server from '../server';
 // import ordersController from '../app/controllers/ordersController';
 
+
+const PORT = process.env.PORT || 5000;
+console.log(PORT)
 chai.use(chaiHttp);
 
 const [expect] = [chai.expect];
@@ -14,7 +18,7 @@ describe('Orders Route Tests', () => {
   describe('GET /orders', () => {
     it('should fetch all the orders stored in memory', (done) => {
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .get('/')
         .end((err, result) => {
           // console.log('orders:', result.body.orders);
@@ -41,7 +45,7 @@ describe('Orders Route Tests', () => {
       };
 
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .post('/')
         .send(newOrder)
         .end((err, result) => {
@@ -63,7 +67,7 @@ describe('Orders Route Tests', () => {
       };
 
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .post('/')
         .send(newOrder)
         .end((err, result) => {
@@ -80,7 +84,7 @@ describe('Orders Route Tests', () => {
   describe('GET /orders/:orderId', () => {
     it('should not fetch an order when the ordeId is not found in the list of existing orderIds', (done) => {
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .get('/1')
         .end((err, result) => {
           expect(result).to.have.status(404);
@@ -94,13 +98,13 @@ describe('Orders Route Tests', () => {
         foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088', quantity: 2 }],
       };
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .post('/')
         .send(newOrder)
         .end((err, result) => {
           // console.log(result.body);
           chai
-            .request('http://127.0.0.1:5000/api/v1/orders')
+            .request(`http://localhost:${PORT}/api/v1/orders`)
             .get(`/${result.body.createdOrder.orderId}`)
             .end((err2, newResult) => {
               expect(newResult).to.have.status(201);
@@ -114,7 +118,7 @@ describe('Orders Route Tests', () => {
   describe('PUT /orders/:orderId', () => {
     it('it should not update the status of one of the orders when the order status param is not provided', (done) => {
       chai
-        .request('http://127.0.0.1:5000/api/v1/orders')
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .put('/1')
         .end((err, result) => {
           // console.log(result.body.errors[0].msg);
