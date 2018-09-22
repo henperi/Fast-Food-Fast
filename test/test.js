@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-// import server from '../server';
+import server from '../server';
 // import ordersController from '../app/controllers/ordersController';
 
 
@@ -18,7 +18,7 @@ describe('Orders Route Tests', () => {
   describe('GET /orders', () => {
     it('should fetch all the orders stored in memory', (done) => {
       chai
-        .request(`http://localhost:${PORT}/api/v1/orders`)
+        .request(server)
         .get('/')
         .end((err, result) => {
           // console.log('orders:', result.body.orders);
