@@ -7,3 +7,5 @@ See the sample interface being built here on github pages - <a  href="https://he
 # Badges
 
 [![Coverage Status](https://coveralls.io/repos/github/henperi/Fast-Food-Fast/badge.svg)](https://coveralls.io/github/henperi/Fast-Food-Fast)
+
+[![Build Status](https://travis-ci.org/henperi/Fast-Food-Fast.svg?branch=feature)](https://travis-ci.org/henperi/Fast-Food-Fast)
