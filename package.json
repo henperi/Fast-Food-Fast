@@ -4,7 +4,7 @@
   "description": "Fast Food Fast Nodejs API endpoints to power the fast food fast web app client",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test/test.js --compilers js:babel-core/register",
+    "test": "mocha test/test.js --compilers js:babel-core/register --exit",
     "build": "babel server.js src -d lib",
     "dev-start": "babel-watch server.js",
     "start": "babel-node server.js"
