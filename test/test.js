@@ -18,7 +18,7 @@ describe('Orders Route Tests', () => {
   describe('GET /orders', () => {
     it('should fetch all the orders stored in memory', (done) => {
       chai
-        .request(server)
+        .request(`http://localhost:${PORT}/api/v1/orders`)
         .get('/')
         .end((err, result) => {
           // console.log('orders:', result.body.orders);
