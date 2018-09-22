@@ -10,6 +10,12 @@
     "test": "nyc mocha test/test.js --compilers js:babel-core/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
+  "nyc": {
+    "exclude": [
+      "**/Food.model.js",
+      "build"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/henperi/Fast-Food-Fast.git"
