@@ -4,7 +4,7 @@
   "description": "Fast Food Fast Nodejs API endpoints to power the fast food fast web app client",
   "main": "server.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha test/test.js --compilers js:babel-core/register --exit",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha test/test.js --compilers js:babel-core/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server.js --out-dir build",
     "dev-start": "babel-watch server.js",
@@ -56,6 +56,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.4",
