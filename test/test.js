@@ -1,8 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
-// import ordersController from '../app/controllers/ordersController';
-
 
 const PORT = process.env.PORT || 5000;
 console.log(PORT)
@@ -13,7 +11,6 @@ const [expect] = [chai.expect];
 /**
  * Test the orders route
  */
-
 describe('Orders Route Tests', () => {
   describe('GET /orders', () => {
     it('should fetch all the orders stored in memory', (done) => {
