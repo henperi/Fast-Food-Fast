@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fast-Food-Fast | Profile</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="topnav" id="myTopnav">
+            <a href="../index.html" class="brand">Fast Food Fast</a>
+            <a href="dashboard.html" class="">Dashboard</a>
+            <a href="foods.html" class="">Foods Menu</a>
+            <div class="dropdown">
+                <button class="dropbtn active">My Orders
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="pending-orders.html">Pending Orders</a>
+                    <a href="completed-orders.html">Completed Orders</a>
+                    <a class="" href="all-orders.html">All My Orders</a>
+                </div>
+            </div>
+            <a href="my-profile.html" class="">My Profile</a>
+            <a href="../logout.html" class="btn-rounded">Logout</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+
+        <div class="container">
+
+            <section class="card text-center">
+                <h2 class="">My Cart
+                    <a class="link">(2 Items)</a>
+                </h2>
+                <div class="card card-shadow">
+                    <div class="table">
+                        <table>
+                            <thead class="">
+                                <!-- <th>Order Id</th> -->
+                                <th>Food Name</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <td><a class="link">#55678</a></td> -->
+                                    <td>Orange Juice</td>
+                                    <td>&#8358; 500</td>
+                                    <td>1</td>
+                                    <td>&#8358; 500</td>
+                                    <td class="">
+                                        <button class="btn btn-primary btn-smX">Update Qauntity</button>
+                                        <button class="btn btn-red btn-smX">Remove Item</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><a class="link">#55678</a></td> -->
+                                    <td>Chicken Stew and Rice</td>
+                                    <td>&#8358; 3,500</td>
+                                    <td>2</td>
+                                    <td>&#8358; 7,000</td>
+                                    <td class="">
+                                        <button class="btn btn-primary btn-smX">Update Quantity</button>
+                                        <button class="btn btn-red btn-smX">Remove Item</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-green btn-bg btn-rounded">Checkout</button>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="cart card-shadow text-center">
+            <div class="right-nav">x</div>
+            <div class="container">My Cart</div>
+            <div class="card text-inverse">6 Items added</div>
+            <div class="container">
+                <a href="my-cart.html" class="btn btn-green">View Cart</a href="my-cart.html">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
+    </footer>
+
+    <script src="../assets/js/responsive-nav.js"></script>
+</body>
+
+</html>
