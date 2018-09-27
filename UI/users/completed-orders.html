@@ -17,6 +17,7 @@
             <div class="left-nav">
                 <a href="../index.html" class="brand">Fast Food Fast</a>
             </div>
+
             <div class="right-nav">
                 <a href="foods.html" class="active">Foods Menu</a>
                 <div class="dropdown">
@@ -44,35 +45,40 @@
         <div class="container">
 
             <section class="card text-center">
-                <h2 class="">Pending Orders</h2>
+                <h2 class="">Completed Orders</h2>
                 <div class="card card-shadow">
                     <div class="table">
                         <table>
                             <thead class="">
                                 <th>Order Id</th>
+                                <th>Ordered By</th>
                                 <th>Ordered Items</th>
                                 <th>Total Amount</th>
                                 <!-- <th>Quantity</th> -->
                                 <th>Date Ordered</th>
                                 <th>Order Status</th>
                                 <th>Delivery Status</th>
-                                <th>Actions</th>
+                                <th>Manage Order</th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <a class="link" href="ordered-items.html">#55678</a>
+                                        <a class="link">#55678</a>
                                     </td>
-                                    <td>1 Item(s)
-                                        <a href="ordered-items.html" class="btn btn-sm btn-blue">View items</a>
+                                    <td>Mr. Test User</td>
+                                    <td>7 Item(s)
+                                        <a href="ordered-items.html">
+                                            <button class="btn btn-sm btn-blue">View items</button>
+                                        </a>
                                     </td>
                                     <td>&#8358; 3,500</td>
                                     <!-- <td>2</td> -->
                                     <td>11/09/2018 08:55pm</td>
-                                    <td class="text-pending">Pending</td>
-                                    <td class="text-pending">Pending</td>
+                                    <td class="text-success">Completed</td>
+                                    <td class="text-success">Delivered</td>
                                     <td class="">
-                                        <button class="triggerModal btn btn-red btn-sm">Cancel Order</button>
+
+                                        <button class="triggerModal btn btn-red btn-sm" disabled>Cancel Order</button>
 
                                         <div class="modal" data-item='mmm'>
                                             <div class="modal-content">
@@ -97,8 +103,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -111,7 +115,6 @@
         </div>
 
         <div class="cart card-shadow text-center">
-            <div class="right-nav">x</div>
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
             <div class="container">
