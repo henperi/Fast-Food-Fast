@@ -76,9 +76,9 @@
                                     <td class="text-pending">Pending</td>
                                     <td class="text-pending">Pending</td>
                                     <td class="">
-                                        <button class="triggerModal btn btn-red btn-sm">Cancel Ordder</button>
+                                        <button class="triggerModal btn btn-red btn-sm" data-target="cartModal">Cancel Ordder</button>
 
-                                        <div class="modal" data-item='mmm'>
+                                        <div class="modal" id='#cartModal'>
                                             <div class="modal-content">
                                                 <div class="text-center">
                                                     <span class="close-button btn btn-primary btn-sm push-right">x</span>
@@ -118,7 +118,7 @@
                                     <td class="">
                                         <button class=" triggerModal btn btn-red btn-sm" disabled>Cancel Order</button>
 
-                                        <div class="modal" data-item='mmm'>
+                                        <div class="modal" id='cartModal5'>
                                             <div class="modal-content">
                                                 <div class="text-center">
                                                     <span class="close-button btn btn-primary btn-sm push-right">x</span>
@@ -156,9 +156,9 @@
                                     <td class="text-success">Completed</td>
                                     <td class="text-success">Delivered</td>
                                     <td class="">
-                                        <button class="triggerModal btn btn-red btn-sm" disabled>Cancel Order</button>
+                                        <button class="triggerModal btn btn-red btn-sm" data-target="cartModal" disabled>Cancel Order</button>
 
-                                        <div class="modal" data-item='mmm'>
+                                        <div class="modal" id='cartModal5'>
                                             <div class="modal-content">
                                                 <div class="text-center">
                                                     <span class="close-button btn btn-primary btn-sm push-right">x</span>
@@ -179,7 +179,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </td>
                                 </tr>
                             </tbody>
@@ -198,7 +197,7 @@
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
             <div class="container">
-                <button class="btn btn-red">Checkout</button>
+                <button class="btn btn-green">View</button>
             </div>
         </div>
     </main>

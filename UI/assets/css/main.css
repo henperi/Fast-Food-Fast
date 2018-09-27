@@ -139,6 +139,7 @@ nav {
   opacity: 0;
   visibility: hidden;
   transform: scale(1.1);
+  z-index: 1000;
 }
 
 .modal-content {
@@ -148,7 +149,7 @@ nav {
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 1rem 1.5rem;
-  width: 24rem;
+  width: 45%;
   border-radius: 0.5rem;
 }
 .close-button {
@@ -668,6 +669,9 @@ section {
     margin: 0 auto;
     flex: 1 1 100;
   }
+  .modal-content {
+    width: 65%;
+  }
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
@@ -751,5 +755,8 @@ section {
   }
   .container {
     padding: 8px;
+  }
+  .modal-content {
+    width: 80%;
   }
 }
