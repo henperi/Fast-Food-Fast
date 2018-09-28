@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,33 +9,42 @@
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
 </head>
+
 <body>
 
     <header>
         <nav class="topnav" id="myTopnav">
-            <a href="../index.html" class="brand">Fast Food Fast</a>        
-            <a href="dashboard.html" class="">Dashboard</a>
-            <a href="../foods-menu.html" class="">Foods Menu</a>
-            <div class="dropdown">
-                <button class="dropbtn active">My Orders 
-                <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="pending-orders.html">Pending Orders</a>
-                    <a href="completed-orders.html">Completed Orders</a>
-                    <a class="" href="all-orders.html">All My Orders</a>
-                </div>
+            <div class="left-nav">
+                <a href="../index.html" class="brand">Fast Food Fast</a>
             </div>
-            <a href="my-profile.html" class="">My Profile</a>
-            <a href="../logout.html" class="btn-rounded">Logout</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        </nav> 
+
+
+            <div class="right-nav">
+                <a href="foods.html" class="active">Foods Menu</a>
+                <div class="dropdown">
+                    <button class="dropbtn">My Orders
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="pending-orders.html">Pending Orders</a>
+                        <a href="completed-orders.html">Completed Orders</a>
+                        <a class="all-orders.html" href="all-orders.html">All My Orders</a>
+                    </div>
+                </div>
+                <a href="my-profile.html" class="">My Profile</a>
+                <a class="btn btn-green" href="my-cart.html">My Cart
+                    <span class="count">98</span>
+                </a>
+                <a href="../logout.html" class="btn-rounded">Logout</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </nav>
     </header>
-    
+
     <main class="main-content">
-        
-        <div class="container">            
-    
+
+        <div class="container">
+
             <section class="card text-center">
                 <h2 class="">All My Orders</h2>
                 <div class="card card-shadow">
@@ -52,8 +62,14 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a href="ordered-items.html" class="link">#55678</a></td>
-                                    <td>2 Item(s) <a href="ordered-items.html"><Button class="btn btn-sm btn-blue">View items</Button></a></td>
+                                    <td>
+                                        <a href="ordered-items.html" class="link">#55678</a>
+                                    </td>
+                                    <td>2 Item(s)
+                                        <a href="ordered-items.html">
+                                            <Button class="btn btn-sm btn-blue">View items</Button>
+                                        </a>
+                                    </td>
                                     <td>&#8358; 7,500</td>
                                     <!-- <td>2</td> -->
                                     <td>11/09/2018 08:55pm</td>
@@ -64,8 +80,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="ordered-items.html" class="link">#55678</a></td>
-                                    <td>3 Item(s) <a href="ordered-items.html"><Button class="btn btn-sm btn-blue">View items</Button></a></td>
+                                    <td>
+                                        <a href="ordered-items.html" class="link">#55678</a>
+                                    </td>
+                                    <td>3 Item(s)
+                                        <a href="ordered-items.html">
+                                            <Button class="btn btn-sm btn-blue">View items</Button>
+                                        </a>
+                                    </td>
                                     <td>&#8358; 3,500</td>
                                     <!-- <td>2</td> -->
                                     <td>11/09/2018 08:55pm</td>
@@ -76,8 +98,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="ordered-items.html" class="link">#55678</a></td>
-                                    <td>1 Item(s) <a href="ordered-items.html"><Button class="btn btn-sm btn-blue">View items</Button></a></td>
+                                    <td>
+                                        <a href="ordered-items.html" class="link">#55678</a>
+                                    </td>
+                                    <td>1 Item(s)
+                                        <a href="ordered-items.html">
+                                            <Button class="btn btn-sm btn-blue">View items</Button>
+                                        </a>
+                                    </td>
                                     <td>&#8358; 3,500</td>
                                     <!-- <td>2</td> -->
                                     <td>11/09/2018 08:55pm</td>
@@ -102,14 +130,17 @@
             <div class="right-nav">x</div>
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
-            <div class="container"><button class="btn btn-red">Checkout</button></div>
+            <div class="container">
+                <button class="btn btn-red">Checkout</button>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
-    </footer>    
-        
+    </footer>
+
     <script src="../assets/js/responsive-nav.js"></script>
 </body>
+
 </html>

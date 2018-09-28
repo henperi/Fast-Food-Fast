@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,19 @@
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
 </head>
+
 <body>
 
     <header>
         <nav class="topnav" id="myTopnav">
-            <a href="../index.html" class="brand">Fast Food Fast</a>        
+            <div class="left-nav">
+                <a href="../index.html" class="brand">Fast Food Fast</a>
+            </div>
             <a href="dashboard.html" class="active">Dashboard</a>
             <a href="foods.html" class="">Foods Menu</a>
             <div class="dropdown">
-                <button class="dropbtn">Orders 
-                <i class="fa fa-caret-down"></i>
+                <button class="dropbtn">Orders
+                    <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="#">Pending Orders</a>
@@ -30,16 +34,16 @@
                 <a href="../logout.html" class="btn-rounded">Logout</a>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        </nav> 
+        </nav>
     </header>
-    
+
     <main class="main-content">
-        
-        <div class="container">            
-    
+
+        <div class="container">
+
             <section class="card">
                 <h2 class="text-center">Welcome To Your Admin Dashboard</h2>
-                <div class="contain contain-50">   
+                <div class="contain contain-50">
 
                     <div class="card card-shadow card-shadow text-center">
                         <div class="flex">
@@ -48,24 +52,38 @@
                             </div>
                             <div class="content-div">
                                 <div class="item-title">Mr. Test Name</div>
-                                <div class="item-subtitle"><a href="">testmail@test.com</a></div>
+                                <div class="item-subtitle">
+                                    <a href="">testmail@test.com</a>
+                                </div>
                                 <div class="item-description">Reg Date - 04/09/2018</div>
                             </div>
                         </div>
                         <div>
-                            <a href="my-profile.html"><button class="btn btn-primary">Edit My Profile</button></a>
+                            <a href="my-profile.html">
+                                <button class="btn btn-primary">Edit My Profile</button>
+                            </a>
                             <button class="btn btn-blue">Update Password</button>
                         </div>
                     </div>
                 </div>
                 <div class="text-center contain contain-50">
-                    <a href="all-orders.html"><button class="btn btn-blue btn-sm btn-rounded">All Orders</button></a>
-                    <a href="completed-orders.html"><button class="btn btn-green btn-sm btn-rounded">Completed Orders</button></a>
-                    <a href="pending-orders.html"><button class="btn btn-primary btn-sm btn-rounded">Pending Orders</button></a>
+                    <a href="all-orders.html">
+                        <button class="btn btn-blue btn-sm btn-rounded">All Orders</button>
+                    </a>
+                    <a href="completed-orders.html">
+                        <button class="btn btn-green btn-sm btn-rounded">Completed Orders</button>
+                    </a>
+                    <a href="pending-orders.html">
+                        <button class="btn btn-primary btn-sm btn-rounded">Pending Orders</button>
+                    </a>
                     <div class="card card-shadow">
                         <h2>Want To Create A New Food Item?</h2>
-                        <a href="create-food.html"><button class="btn btn-red btn-block btn-rounded">Create Food Item</button></a>
-                        <a href="foods.html"><button class="btn btn-primary btn-block btn-rounded">See Food Items</button></a>
+                        <a href="create-food.html">
+                            <button class="btn btn-red btn-block btn-rounded">Create Food Item</button>
+                        </a>
+                        <a href="foods.html">
+                            <button class="btn btn-primary btn-block btn-rounded">See Food Items</button>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -76,8 +94,9 @@
 
     <footer>
         <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
-    </footer>    
-        
+    </footer>
+
     <script src="../assets/js/responsive-nav.js"></script>
 </body>
+
 </html>
