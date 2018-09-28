@@ -75,6 +75,10 @@ const ordersController = {
     }
     findOrder.orderStatus = req.body.orderStatus;
 
+    for (let i = 0; i < findOrder.orderedItems.length; i += 1) {
+      findOrder.orderedItems[i].itemStatus = req.body.orderStatus;
+    }
+
     return res.status(201).json({
       message: 'Order updated',
       order: findOrder,
