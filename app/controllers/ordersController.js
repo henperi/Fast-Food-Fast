@@ -75,6 +75,10 @@ const ordersController = {
     }
     findOrder.orderStatus = req.body.orderStatus;
 
+    for (let i = 0; i < findOrder.orderedItems.length; i += 1) {
+      findOrder.orderedItems[i].itemStatus = req.body.orderStatus;
+    }
+
     return res.status(201).json({
       message: 'Order updated',
       order: findOrder,
@@ -112,7 +116,7 @@ const ordersController = {
           message: 'Order not created',
           reasons:
             'Submitted foodItem does not have a valid format. foodId param or quantity param is not defined',
-          description: `foodItems value must be an array containing object literals which have
+          description: `foodItems  value must be an array containing object literals which have
             foodId and quantity as parameters,
             example: \n { foodItems: [{ foodId: 4801ac7c-4f19-4299-b709-aab25de4f088, quantity: 2 }] }.
             visit /orders to see sample existing foodIds`,

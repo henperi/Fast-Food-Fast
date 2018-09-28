@@ -21,7 +21,7 @@ class Order {
       orderedBy: userId,
       orderedItems: foodItems,
       totalAmount,
-      OrderStatus: 'Processing',
+      orderStatus: 'Processing',
       deliveryStatus: 'Pending',
       createdAt: moment.now(),
       updatedAt: moment.now(),
