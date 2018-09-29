@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fast-Food-Fast | Index page</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="topnav" id="myTopnav">
+            <div class="left-nav">
+                <a href="index.html" class="brand">Fast Food Fast</a>
+            </div>
+            <div class="right-nav">
+                <a href="foods-menu.html" class="">Foods Menu</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact Us</a>
+                <a href="signin.html" class="">Signin</a>
+                <a href="signup.html">Signup</a>
+                <a class="btn btn-green" href="users/my-cart.html">My Cart
+                    <span class="count">98</span>
+                </a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="hero">
+            <div class="contain text-center">
+                <h1 class="">Welcome To Fast Food Fast</h1>
+                <p>The best food ordering app. Order afordable food items, drinks, pastries and African dishes to your door
+                    step instantly!</p>
+                <form class="form-data" method="GET">
+                    <div class="form-member">
+                        <input type="text" name="search" class="form-input transparent text-center hero-input" placeholder="Search foods and dishes">
+                        <a>
+                            <button name="search" class="btn btn-primary">Search Food</button>
+                        </a>
+                        <a href="foods-menu.html" class="btn btn-blue">Our Menu</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="p-h-5 text-center">
+            <p>To enjoy amazing discounts and have a fun filled experience, login to your account!</p>
+            <div>
+                <a href="signin.html" class="btn btn-green">Login Now!</a>
+                <a href="signup.html" class="btn btn-blue">Signup Now!</a>
+            </div>
+        </div>
+        <div class="container">
+            <section>
+                <h2 class="text-center">Todays Featured Foods</h2>
+                <div class="food-menu">
+
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src="img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre</div>
+                                <span class="item-description link">Food Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="signin.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
+
+                            <div class="modal" id='#cartModal5'>
+                                <div class="modal-content">
+                                    <div class="text-center">
+                                        <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                        <h2 class="text-center">Add this food item to existing Cart</h2>
+
+                                        <div class="content-div">
+                                            <div class="item-title">Chicken Stew and Rice -
+                                                <span class="badge price">&#8358;3,500</span>
+                                            </div>
+                                            <div class="item-description">
+                                                <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre asc
+                                                    eqwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vres</p>
+                                            </div>
+                                        </div>
+                                        <form method="POST" class="xform-data xfood-item card card-shadow">
+                                            <div class="flex">
+                                                <h2>Desired Quantity</h2>
+                                                <div class="form-member text-left">
+                                                    <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
+                                                </div>
+                                                <button class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
+                                            </div>
+                                        </form>
+                                        <button class="close-button btn btn-primary btn-block btn-rounded btn-bg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src="img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre</div>
+                                <span class="item-description link">Food Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="signin.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
+
+                            <div class="modal" id='bbb'>
+                                <div class="modal-content">
+                                    <div class="text-center">
+                                        <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                        <h2 class="text-center">Add this food item to existing Cart</h2>
+
+                                        <div class="content-div">
+                                            <div class="item-title">BBB-Chicken Stew and Rice -
+                                                <span class="badge price">&#8358;3,500</span>
+                                            </div>
+                                            <div class="item-description">
+                                                <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre asc
+                                                    eqwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vres</p>
+                                            </div>
+                                        </div>
+                                        <form method="POST" class="xform-data xfood-item card card-shadow">
+                                            <div class="flex">
+                                                <h2>Desired Quantity</h2>
+                                                <div class="form-member text-left">
+                                                    <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
+                                                </div>
+                                                <button class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
+                                            </div>
+                                        </form>
+                                        <button class="close-button btn btn-primary btn-block btn-rounded btn-bg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src="img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre</div>
+                                <span class="item-description link">Food Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="signin.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src="img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre</div>
+                                <span class="item-description link">Food Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="signin.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src="img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre</div>
+                                <span class="item-description link">Food Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="signin.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <div class="card text-center">
+                    <h2>Visit Our Foods Menu To See All Available Foods</h2>
+                    <p>
+                        <a href="foods-menu.html" class="btn btn-blue btn-rounded btn-bg">Foods Menu</a>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p>
+                        <a href="signin.html" class="btn btn-green">Login Now!</a>
+                        <a href="signup.html" class="btn btn-blue">Signup Now!</a>
+                    </p>
+                </div>
+            </section>
+
+            <section class="flex-h text-center">
+                <div class="flex-item card" id="about">
+                    <h2>About Fast Food Fast</h2>
+                    <p class="text-simple">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora! Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit
+                        amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Totam in sequi incidunt tempora!</p>
+                    <p class="text-simple">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora! Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit
+                        amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Totam in sequi incidunt tempora!</p>
+                    <p class="text-simple">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora! Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit
+                        amet consectetur adipisicing elit. Totam in sequi incidunt tempora!Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Totam in sequi incidunt tempora!</p>
+                </div>
+                <div class="flex-item card" id="contact">
+                    <h2>Contact Us</h2>
+                    <form class="form-data container">
+                        <div class="form-member text-left">
+                            <label for="">Full Name</label>
+                            <input type="text" class="form-input" placeholder="Enter Fullname">
+                        </div>
+                        <div class="form-member text-left">
+                            <label for="">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter Email">
+                        </div>
+                        <div class="form-member text-left">
+                            <label for="">Message</label>
+                            <textarea name="" id="" cols="8" rows="10" placeholder="Type a message"></textarea>
+                        </div>
+                        <button class="btn btn-blue btn-block btn-rounded btn-bg">Contact Us</button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer text-center">
+        <div>Fast Food Fast. &copy; All Rights Reserved</div>
+    </footer>
+
+    <script src="assets/js/responsive-nav.js"></script>
+</body>
+
+</html>

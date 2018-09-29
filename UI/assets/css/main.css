@@ -1,0 +1,762 @@
+html {
+  background: #f4f6f2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  color: #313131;
+  font-weight: 300;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Header And Nav*/
+
+header {
+  margin: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+nav {
+  width: 100%;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+*=====================================================================
+* Everything Topnav
+*=====================================================================
+ */
+.topnav {
+  background: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0;
+}
+/* Add a lighter background on topnav links and the dropdown button on hover */
+.topnav a:hover,
+.dropdown:hover .dropbtn {
+  background-color: rgb(21, 116, 233);
+  color: #f2f2f2;
+}
+.left-nav {
+  float: left;
+  display: block;
+}
+.right-nav {
+  float: right;
+  display: block;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+/* Add an active class to highlight the current page */
+.brand {
+  color: white;
+  font-weight: bold !important;
+  font-size: 110% !important;
+}
+.active {
+  background-color: rgb(21, 116, 233) !important;
+}
+
+/* topnav dropdown things */
+/* Dropdown container - needed to position the dropdown content */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Style the dropdown button to fit inside the topnav */
+.dropdown .dropbtn {
+  font-size: inherit;
+  border: none;
+  outline: none;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* Style the links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+/* Add a grey background to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+/* Show the dropdown menu when the user moves the mouse over the dropdown button */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Modal Area */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 45%;
+  border-radius: 0.5rem;
+}
+.close-button {
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+.close-button:hover {
+  background-color: darkgray;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.push-right {
+  float: right;
+}
+
+/* Main And Container And Contain*/
+
+main {
+  min-height: 100%;
+  padding-top: 2rem;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.contain {
+  width: 80%;
+  margin: auto;
+  flex: 1 1 100;
+}
+.contain-50 {
+  width: 50%;
+  margin: 0 auto;
+  flex: 1 1 100;
+}
+
+/* Hero */
+.hero {
+  margin: 0;
+  padding: 20px;
+  color: white !important;
+  min-height: 60vh;
+  display: flex;
+  flex-flow: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../img/food-items/1.jpg");
+}
+
+.hero-full {
+  margin: 0;
+  padding: 20px;
+  color: white !important;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../img/food-items/1.jpg");
+}
+.hero-input {
+  font-size: 140%;
+}
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 50px;
+  color: white;
+}
+.hero p {
+  font-size: 1.1rem;
+  color: white;
+  /* font-weight: 400; */
+}
+
+/* =========================================================== 
+|  Every Thing Text
+/* =========================================================== */
+/* Head Tags */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #313131;
+  font-family: "Rubik", sans-serif;
+  margin: 10px 0;
+  font-weight: 500;
+}
+/* Paragraph */
+p {
+  line-height: 1.6;
+}
+/* Text Colour */
+.text-info {
+  color: #41b3f9 !important;
+}
+.text-inverse {
+  color: #4c5667 !important;
+}
+.text-blue {
+  color: #02bec9 !important;
+}
+.text-purple {
+  color: #707cd2 !important;
+}
+.text-white {
+  color: white !important;
+}
+.text-pending {
+  color: #dfab02;
+}
+.text-success {
+  color: rgb(3, 197, 61);
+}
+
+.text-rejected {
+  color: rgb(240, 35, 35);
+}
+
+/* Text Alignment */
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+/* **
+*==========================================================
+*Everything Forms
+*==========================================================
+ */
+.form-member {
+  margin-bottom: 25px;
+}
+.form-input {
+  background-color: #ffffff;
+  border: 1px solid #e4e7ea;
+  border-radius: 5px;
+  box-shadow: 4px;
+  color: #333232;
+  height: 25px;
+  width: 100%;
+  padding: 5px 0px;
+  transition: all 300ms linear 0s;
+  text-indent: 5px;
+  text-transform: capitalize;
+}
+input::-webkit-input-placeholder {
+  color: #333232;
+}
+.form-input:focus {
+  box-shadow: none;
+  border-color: #263238;
+}
+textarea {
+  font-family: inherit;
+  background-color: #ffffff;
+  border: 1px solid #e4e7ea;
+  border-radius: 5px;
+  box-shadow: 4px;
+  padding: 5px 0px;
+  transition: all 300ms linear 0s;
+  width: 100%;
+  text-indent: 5px;
+
+  min-height: 60px;
+}
+.form-member select {
+  /* background: #707cd2; */
+  background-image: linear-gradient(
+    rgb(255, 238, 238),
+    rgba(231, 223, 223, 0.795)
+  );
+  /* padding: 18px 0px; */
+  height: 38px;
+}
+select option {
+  background: rgb(255, 238, 238);
+}
+
+/* 
+*=========================================================
+* Everything Anchor 
+*=========================================================
+*/
+/* Anchor Tags */
+a {
+  text-decoration: none;
+  font: inherit;
+}
+
+a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+a:active {
+  outline: 0;
+  text-decoration: none;
+}
+a:focus {
+  outline: 0;
+  text-decoration: none;
+}
+
+a.btn {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 4px;
+  min-height: 35px;
+  max-width: 100%;
+  padding: 10px 20px;
+  margin: 5px 5px;
+  cursor: pointer;
+}
+
+/* 
+*=========================================================
+* Everything Button, btn 
+*=========================================================
+*/
+/* Button */
+.btn {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 4px;
+  min-height: 35px;
+  max-width: 100%;
+  padding: 10px 20px;
+  margin: 5px 5px 5px 0px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-block;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.btn:hover {
+  box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-sm {
+  font-size: 60%;
+  padding: 2px 15px;
+}
+.btn-bg {
+  font-size: 120%;
+  padding: 8px 40px;
+}
+.btn-block {
+  font-size: 120%;
+  padding: 12px 40px;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-rounded {
+  border-radius: 60px !important;
+}
+
+.btn-blue {
+  color: #fff;
+  background-image: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+}
+
+.btn-green {
+  color: #fff;
+  background-image: linear-gradient(rgb(61, 241, 85), rgb(10, 134, 47));
+}
+
+.btn-red {
+  color: #fff;
+  background-image: linear-gradient(rgb(226, 44, 84), rgb(231, 53, 106));
+}
+
+.btn-primary {
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(209, 209, 209), rgb(105, 105, 105));
+}
+
+.btn-secondary {
+  color: rgb(49, 49, 49);
+  background-image: linear-gradient(rgb(209, 209, 209), rgb(209, 209, 209));
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+/* 
+*===================================================================
+* Everything Cards
+*===================================================================
+ */
+/* Cards */
+.card {
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 10px 0;
+}
+.card-shadow {
+  box-shadow: 0px 8px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.card-shadow:hover {
+  box-shadow: 0px 8px 40px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* 
+*=================================================================
+* Everything Flex Things
+*=================================================================
+ */
+.flex {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.flex-h {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-v {
+  display: flex;
+  flex-flow: column;
+}
+.flex-item {
+  margin: 0 8px 8px 0;
+  flex: 1 1 45%;
+}
+.food-item {
+  margin: 6px;
+  flex: 1 1 45%;
+  max-width: 50%;
+}
+.card > .food-menu > .food-item {
+  /* flex: 1 1 46.7%; */
+  /* max-width: 46.7%; */
+}
+
+/* food-menu */
+.food-menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+.food-item {
+  margin: 6px 6px 6px 6px;
+  flex: 1 1 30.3%;
+  max-width: 30.9%;
+}
+.card > .food-menu > .food-item {
+  flex: 1 1 30%;
+  /* max-width: 30.985%; */
+}
+
+/* 
+*=================================================================
+* Everything Image
+*=================================================================
+ */
+.image {
+  border-radius: 8px;
+}
+.image-rounded {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+img:hover {
+  box-shadow: 0px 8px 16px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* 
+*================================================================
+* Everything Table
+*================================================================
+ */
+.table {
+  overflow-x: auto;
+}
+table {
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  color: #fff;
+  background-image: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+}
+tr:nth-child(odd) {
+  background-color: #ebe9e9;
+}
+
+/* footer */
+footer {
+  position: relative;
+  bottom: 0;
+  /* width: 100%; */
+  color: #fff;
+  background: linear-gradient(rgb(32, 131, 254), rgb(8, 46, 94));
+  font-size: 16px;
+  padding: 20px;
+}
+
+/* Custom Additions */
+/* Links */
+.link {
+  color: #41b3f9;
+  cursor: pointer;
+  font: inherit;
+}
+
+label {
+  text-align: left !important;
+}
+
+.content-div {
+  padding-top: 8px;
+  flex: 1 1 70%;
+}
+.cart {
+  border-radius: 5px;
+  max-width: 38%;
+  bottom: 0;
+  right: 0;
+  color: #fff;
+  background: rgb(69, 89, 179);
+  font-size: 16px;
+  padding: 2px 8px;
+  margin: 0 0 8px 0;
+  position: fixed;
+  z-index: 2;
+}
+
+.count {
+  background: #fff;
+  color: rgb(69, 89, 179);
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  /* padding: 2px 8px; */
+}
+section {
+  margin-top: 25px;
+}
+
+.transparent {
+  background: rgba(238, 235, 235, 0.7) !important;
+}
+.item-title {
+  font-weight: 600;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+.item-description {
+  font-size: 13px;
+  padding: 2px 0;
+  font-weight: 50;
+}
+/* Badge */
+.price {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 3px 5px;
+  font-size: 18px;
+  margin-top: 1px;
+  background-color: #ffbb44;
+  padding: 4px 10px;
+  border-radius: 25px;
+}
+
+/* 
+*===================================================================================
+* Everything Media Query
+*===================================================================================
+ */
+@media screen and (max-width: 1110px) {
+  .food-item {
+    /* margin: 0 6px 8px 6px; */
+    flex: 1 1 45%;
+    max-width: 46.8%;
+  }
+  .card > .food-menu > .food-item {
+    flex: 1 1 45%;
+    /* max-width: 30.5%; */
+  }
+  .contain-50 {
+    width: 80%;
+    margin: 0 auto;
+    flex: 1 1 100;
+  }
+  .modal-content {
+    width: 65%;
+  }
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 750px) {
+  .topnav a:not(:first-child),
+  .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .food-item {
+    margin-right: 5px;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .card > .food-menu > .food-item {
+    /* margin: 0 6px 8px 6px; */
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .form-input {
+    width: 100%;
+  }
+
+  .contain {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .contain-50 {
+    width: 90%;
+  }
+
+  .hero {
+    min-height: 40vh;
+  }
+  main {
+    min-height: 100%;
+    /* position: relative; */
+    padding-top: 3rem;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 720px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {
+    float: none;
+  }
+  .topnav.responsive .dropdown-content {
+    position: relative;
+  }
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  .right-nav {
+    float: none;
+    display: block;
+  }
+  .left-nav {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  .container {
+    padding: 8px;
+  }
+  .modal-content {
+    width: 80%;
+  }
+}
