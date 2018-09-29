@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +9,44 @@
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
 </head>
+
 <body>
 
     <header>
         <nav class="topnav" id="myTopnav">
-            <a href="../index.html" class="brand">Fast Food Fast</a>        
-            <a href="dashboard.html" class="">Dashboard</a>
-            <a href="foods.html" class="">Foods Menu</a>
-            <div class="dropdown">
-                <button class="dropbtn">My Orders 
-                <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#">Pending Orders</a>
-                    <a href="#">Completed Orders</a>
-                    <a class="" href="all-orders.html">All My Orders</a>
-                </div>
+            <div class="left-nav">
+                <a href="../index.html" class="brand">Fast Food Fast</a>
             </div>
-            <a href="my-profile.html" class="active">My Profile</a>
-            <a href="../logout.html" class="btn-rounded">Logout</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        </nav> 
+
+            <div class="right-nav">
+                <a href="foods.html" class="active">Foods Menu</a>
+                <div class="dropdown">
+                    <button class="dropbtn">My Orders
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="pending-orders.html">Pending Orders</a>
+                        <a href="completed-orders.html">Completed Orders</a>
+                        <a class="all-orders.html" href="all-orders.html">All My Orders</a>
+                    </div>
+                </div>
+                <a href="my-profile.html" class="">My Profile</a>
+                <a class="btn btn-green" href="my-cart.html">My Cart
+                    <span class="count">98</span>
+                </a>
+                <a href="../logout.html" class="btn-rounded">Logout</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </nav>
     </header>
-    
+
     <main class="main-content">
-        
-        <div class="container">            
-    
+
+        <div class="container">
+
             <section class="card text-center">
                 <h2 class="text-center">Welcome To Your Profile</h2>
-                <div class="contain contain-50">   
+                <div class="contain contain-50">
 
                     <div class="card card-shadow">
                         <div class="flex">
@@ -46,12 +55,16 @@
                             </div>
                             <div class="content-div">
                                 <div class="item-title">Mr. Test Name</div>
-                                <div class="item-subtitle"><a href="">testmail@test.com</a></div>
+                                <div class="item-subtitle">
+                                    <a href="">testmail@test.com</a>
+                                </div>
                                 <div class="item-description">Reg Date - 04/09/2018</div>
                             </div>
                         </div>
                         <div>
-                            <a href="my-profile.html"><button class="btn btn-primary">Edit My Profile</button></a>
+                            <a href="my-profile.html">
+                                <button class="btn btn-primary">Edit My Profile</button>
+                            </a>
                             <button class="btn btn-blue">Update Password</button>
                         </div>
                     </div>
@@ -87,7 +100,7 @@
                             <button class="btn btn-blue btn-block btn-rounded btn-bg">Update Address</button>
                         </div>
                     </form>
-                    
+
                 </div>
             </section>
 
@@ -97,14 +110,17 @@
             <div class="right-nav">x</div>
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
-            <div class="container"><button class="btn btn-red">Checkout</button></div>
+            <div class="container">
+                <a href="my-cart.html" class="btn btn-green">View</a>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
-    </footer>    
-        
+    </footer>
+
     <script src="../assets/js/responsive-nav.js"></script>
 </body>
+
 </html>

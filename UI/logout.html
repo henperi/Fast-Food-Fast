@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 </head>
+
 <body>
 
     <div class="container hero-fullx">
@@ -24,14 +26,20 @@
                         <input type="password" name="password" id="password" class="form-input" placeholder="Enter Password">
                     </div>
                     <div class="form-member">
-                        <button name="signin" type="submit" data-foodId="foodId7675" class="btn btn-green btn-block">Login</button>
+                        <a href="users/foods.html">
+                            <button name="signin" type="button" data-foodId="foodId7675" class="btn btn-green btn-block">Login</button>
+                        </a>
                     </div>
-                    <p>Don't have an account? <a href="signup.html" class="link">Signup Instead</a></p>
-                    <p>Go back home <a href="index.html" class="link">Home</a></p>
+                    <p>Don't have an account?
+                        <a href="signup.html" class="link">Signup Instead</a>
+                    </p>
+                    <p>Go back home
+                        <a href="index.html" class="link">Home</a>
+                    </p>
                 </form>
             </div>
         </div>
-        
+
 
     </div>
     <script>
@@ -50,7 +58,7 @@
             e.preventDefault();
             const email = emailInput.value
             const password = passwordInput.value
-            
+
             const loginParams = {
                 email, password
             }
@@ -63,12 +71,13 @@
                 // },
                 loginParams
             })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => {
-                console.log(err)
-            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => {
+                    console.log(err)
+                })
         });
     </script>
 </body>
+
 </html>
