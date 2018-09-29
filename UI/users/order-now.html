@@ -57,25 +57,60 @@
                                     <span class="badge price">&#8358;3,500</span>
                                 </div>
                                 <div class="item-description">
-                                    <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre asc eqwewdsc asdfefedv
+                                    <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vre asc
+                                        eqwewdsc asdfefedv
                                         ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev vres</p>
-                                </div>
-                                <div class="item-subtitle">
-                                    <a href="">Cooked Foods</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="contain contain-50">
-                    <form method="POST" class="form-data card card-shadow">
+                    <form method="POST" action="javascript:;" class="form-data card card-shadow">
                         <div class="flex">
-                            <h2>Order</h2>
+                            <h2>Make Instant Order</h2>
+                            <h3>Desired Quantity</h3>
                             <div class="form-member text-left">
-                                <label for="">Desired Quantity</label>
                                 <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
                             </div>
-                            <button class="btn btn-blue btn-block btn-rounded btn-bg">Order Now</button>
+                            <button class="btn btn-green btn-block btn-rounded btn-bg">Order Now</button>
+                            <button class="triggerModal btn btn-blue btn-block btn-rounded btn-bg" data-target="mmm">Add
+                                to Cart Instead</button>
+
+                            <div class="modal" id='#mmm'>
+                                <div class="modal-content">
+                                    <div class="text-center">
+                                        <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                        <h2 class="text-center">Add this food item to existing Cart</h2>
+
+                                        <div class="content-div">
+                                            <div class="image-div">
+                                                <img src="../img/food-items/1.jpg" class="image" width="50%" />
+                                            </div>
+
+                                            <div class="item-title">Chicken Stew and Rice -
+                                                <span class="badge price">&#8358;3,500</span>
+                                            </div>
+                                            <div class="item-description">
+                                                <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev
+                                                    vre asc
+                                                    eqwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev
+                                                    vres</p>
+                                            </div>
+                                        </div>
+                                        <form action="javascript:;" method="POST" class=" card card-shadow">
+                                            <div class="flex">
+                                                <h2>Desired Quantity</h2>
+                                                <div class="form-member text-left">
+                                                    <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
+                                                </div>
+                                                <button class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
+                                            </div>
+                                        </form>
+                                        <button class="close-button btn btn-primary btn-block btn-rounded btn-bg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
 
@@ -89,7 +124,7 @@
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
             <div class="container">
-                <button class="btn btn-red">Checkout</button>
+                <a href="my-cart.html" class="btn btn-green">View</a>
             </div>
         </div>
     </main>

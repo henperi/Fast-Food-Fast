@@ -76,7 +76,29 @@
                                     <td class="text-pending">Pending</td>
                                     <td class="text-pending">Pending</td>
                                     <td class="">
-                                        <button class="btn btn-red btn-sm">Cancel Order</button>
+                                        <button class="triggerModal btn btn-red btn-sm" data-target="cartModal">Cancel
+                                            Order</button>
+
+                                        <div class="modal" id='#cartModal'>
+                                            <div class="modal-content">
+                                                <div class="text-center">
+                                                    <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                                    <h2 class="text-center">Cancel Your Order</h2>
+
+                                                    <div class="content-div">
+                                                        <h3 class="item-title link">Order(#32234)</h3>
+                                                        <h3 class="">Total Price &#8358;3,500</h3>
+                                                    </div>
+                                                    <form action="javascript:;" method="POST" class=" card card-shadow">
+                                                        <div class="">
+                                                            <h2>Are you sure you want to cancel your order?</h2>
+                                                            <button class="btn btn-red btn-rounded btn-bg">Cancel</button>
+                                                            <button class="close-button btn btn-primary btn-rounded btn-bg">Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +116,29 @@
                                     <td class="text-rejected">Rejected</td>
                                     <td class="text-rejected">Canceled</td>
                                     <td class="">
-                                        <button class="btn btn-red btn-sm" disabled>Cancel Order</button>
+                                        <button class=" triggerModal btn btn-red btn-sm" disabled>Cancel Order</button>
+
+                                        <div class="modal" id='cartModal5'>
+                                            <div class="modal-content">
+                                                <div class="text-center">
+                                                    <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                                    <h2 class="text-center">Cancel Your Order,</h2>
+
+                                                    <div class="content-div">
+                                                        <div class="item-title">Chicken Stew and Rice -
+                                                        </div>
+                                                        <span class="badge price">&#8358;3,500</span>
+                                                    </div>
+                                                    <form action="javascript:;" method="POST" class=" card card-shadow">
+                                                        <div class="">
+                                                            <h2>Are you sure you want to cancel your order?</h2>
+                                                            <button class="btn btn-red btn-rounded btn-bg">Proceed</button>
+                                                            <button class="close-button btn btn-primary btn-rounded btn-bg">Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -112,7 +156,30 @@
                                     <td class="text-success">Completed</td>
                                     <td class="text-success">Delivered</td>
                                     <td class="">
-                                        <button class="btn btn-red btn-sm" disabled>Cancel Order</button>
+                                        <button class="triggerModal btn btn-red btn-sm" data-target="cartModal"
+                                            disabled>Cancel Order</button>
+
+                                        <div class="modal" id='cartModal5'>
+                                            <div class="modal-content">
+                                                <div class="text-center">
+                                                    <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                                    <h2 class="text-center">Cancel Your Order,</h2>
+
+                                                    <div class="content-div">
+                                                        <div class="item-title">Chicken Stew and Rice -
+                                                            <span class="badge price">&#8358;3,500</span>
+                                                        </div>
+                                                    </div>
+                                                    <form action="javascript:;" method="POST" class=" card card-shadow">
+                                                        <div class="">
+                                                            <h2>Are you sure you want to cancel your order?</h2>
+                                                            <button class="btn btn-red btn-rounded btn-bg">Proceed</button>
+                                                            <button class="close-button btn btn-primary btn-rounded btn-bg">Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -131,7 +198,7 @@
             <div class="container">My Cart</div>
             <div class="card text-inverse">6 Items added</div>
             <div class="container">
-                <button class="btn btn-red">Checkout</button>
+                <a href="my-cart.html" class="btn btn-green">View</a>
             </div>
         </div>
     </main>

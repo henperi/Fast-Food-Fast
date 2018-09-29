@@ -139,6 +139,7 @@ nav {
   opacity: 0;
   visibility: hidden;
   transform: scale(1.1);
+  z-index: 1000;
 }
 
 .modal-content {
@@ -148,7 +149,7 @@ nav {
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 1rem 1.5rem;
-  width: 24rem;
+  width: 45%;
   border-radius: 0.5rem;
 }
 .close-button {
@@ -492,6 +493,15 @@ button:disabled {
   margin: 0 8px 8px 0;
   flex: 1 1 45%;
 }
+.food-item {
+  margin: 6px;
+  flex: 1 1 45%;
+  max-width: 50%;
+}
+.card > .food-menu > .food-item {
+  /* flex: 1 1 46.7%; */
+  /* max-width: 46.7%; */
+}
 
 /* food-menu */
 .food-menu {
@@ -499,9 +509,13 @@ button:disabled {
   flex-flow: row wrap;
 }
 .food-item {
-  margin: 0 8px 8px 0;
-  flex: 1 1 100%;
-  max-width: 30.6%;
+  margin: 6px 6px 6px 6px;
+  flex: 1 1 30.3%;
+  max-width: 30.9%;
+}
+.card > .food-menu > .food-item {
+  flex: 1 1 30%;
+  /* max-width: 30.985%; */
 }
 
 /* 
@@ -640,20 +654,28 @@ section {
 * Everything Media Query
 *===================================================================================
  */
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1110px) {
   .food-item {
+    /* margin: 0 6px 8px 6px; */
     flex: 1 1 45%;
-    max-width: 48%;
+    max-width: 46.8%;
+  }
+  .card > .food-menu > .food-item {
+    flex: 1 1 45%;
+    /* max-width: 30.5%; */
   }
   .contain-50 {
     width: 80%;
     margin: 0 auto;
     flex: 1 1 100;
   }
+  .modal-content {
+    width: 65%;
+  }
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 750px) {
   .topnav a:not(:first-child),
   .dropdown .dropbtn {
     display: none;
@@ -665,6 +687,11 @@ section {
 
   .food-item {
     margin-right: 5px;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .card > .food-menu > .food-item {
+    /* margin: 0 6px 8px 6px; */
     flex: 1 1 100%;
     max-width: 100%;
   }
@@ -728,5 +755,8 @@ section {
   }
   .container {
     padding: 8px;
+  }
+  .modal-content {
+    width: 80%;
   }
 }
