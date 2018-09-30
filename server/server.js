@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
+import 'babel-polyfill';
 
 // Routes =========================================
 import ordersRoute from './routes/api/v1/orders';
