@@ -8,7 +8,7 @@
     "dev-start": "babel-watch ./server/server.js",
     "start": "babel-watch ./server/server.js",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./server/test/test.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha ./server/test/test.js --compilers js:babel-core/register --exit",
+    "test": "set NODE_ENV=test && nyc --reporter=html --reporter=text --reporter=lcov mocha ./server/test/test.js --compilers js:babel-core/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "migrate-up": "node server/migration createAllTables",
     "migrate-down": "node server/migration dropAllTables"
