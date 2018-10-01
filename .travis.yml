@@ -5,8 +5,7 @@ node_js:
 
 addons:
   code_climate:
-    repo_token:
-      secure: "1cad8483e05f9dd48535e678ceea1b6e33034228fd804b0f4278e9f3e69d221e"
+    repo_token: 1cad8483e05f9dd48535e678ceea1b6e33034228fd804b0f4278e9f3e69d221e
 
 services:
   - postgresql
