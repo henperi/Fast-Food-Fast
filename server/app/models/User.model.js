@@ -59,7 +59,6 @@ class User {
     const queryText = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await this.users.query(queryText, [email]);
-      // console.log(rows[0]);
       return rows[0];
     } catch (err) {
       const response = { success: false, err };
@@ -72,7 +71,7 @@ class User {
    * @returns {object} user object
    */
   async findOne(userId) {
-    const queryText = 'SELECT * FROM users WHERE userId = $1';
+    const queryText = 'SELECT user_id, fullname, email, address, mobile, created_at, updated_at FROM users WHERE userId = $1';
     try {
       const { rows } = await this.users.query(queryText, [userId]);
       return rows[0];
@@ -86,10 +85,10 @@ class User {
    *
    */
   async findAll() {
-    const queryText = 'SELECT * FROM users WHERE 1';
+    const queryText = 'SELECT user_id, fullname, email, address, mobile, created_at, updated_at FROM users';
     try {
       const { rows } = await this.users.query(queryText);
-      return rows[0];
+      return rows;
     } catch (err) {
       const response = { success: false, err };
       return response;
