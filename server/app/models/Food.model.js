@@ -1,5 +1,6 @@
 import moment from 'moment';
 import randomId from 'uuid';
+import db from './Query.model';
 
 class Food {
   /**
