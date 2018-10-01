@@ -1,4 +1,4 @@
-// import randomId from 'uuid';
+import randomId from 'uuid';
 import Order from '../models/Order.model';
 import Food from '../models/Food.model';
 
@@ -10,6 +10,13 @@ const ordersController = {
   async fetchAllOrders(req, res) {
     const fetchOrders = await Order.findAll();
     const count = fetchOrders.length;
+
+    for (let i = 0; i < count; i += 1) {
+      /**
+       * for each fetchOrders fetch its ordered_items from an ordered_items table
+       * Then append each item to the fetchOrders.orderedItems
+       */
+    }
 
     return res.status(200).send({
       totalOrders: count,
@@ -76,7 +83,7 @@ const ordersController = {
    * @param {coverImg} coverImg is required
    * @returns {object} the created Order object
    */
-  makeAnOrder(req, res) {
+  async makeAnOrder(req, res) {
     req.checkBody('foodItems', 'Food Item(s) are required').notEmpty();
 
     const errors = req.validationErrors();
@@ -85,6 +92,7 @@ const ordersController = {
       return res.status(400).json({ errors });
     }
     const userId = req.params.userId || 1; // authenticated userId
+    const orderId = randomId.v1();
 
     const submittedFoodItems = req.body.foodItems;
     // console.log('submittedFoodItems=', submittedFoodItems);
@@ -112,22 +120,31 @@ const ordersController = {
         const item = {
           foodId,
           foodName: findFood.foodName,
-          coverImg: findFood.coverImg || `uploads/img/${foodItemsOrdered[i].foodId}`,
+          foodImg: findFood.foodImg || `uploads/img/${submittedFoodItems[i].foodId}`,
           unitPrice: Number(findFood.unitPrice),
           quantity: Number(submittedFoodItems[i].quantity),
           total: Number(findFood.unitPrice * submittedFoodItems[i].quantity),
           itemStatus: 'Processing',
         };
+
         foodItemsOrdered.push(item);
         totalAmount += findFood.unitPrice * submittedFoodItems[i].quantity;
-        // console.log('totalAmount', totalAmount);
+
+        const orderedItems = Order.insertOrderedItem(orderId, item);
+        console.log('orderdItems', orderedItems);
       }
     }
     if (foodItemsOrdered.length > 0) {
-      const createdOrder = Order.createOrder(userId, foodItemsOrdered, totalAmount);
+      const createdOrder = await Order.createOrder(
+        orderId,
+        userId,
+        foodItemsOrdered.length,
+        totalAmount,
+      );
+
       return res.status(201).json({
         message: 'Order created',
-        createdOrder,
+        createdOrder: createdOrder.newOrder,
       });
     }
     return res.status(404).json({

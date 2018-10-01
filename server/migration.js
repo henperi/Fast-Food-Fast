@@ -22,12 +22,41 @@ const createOrdersTable = () => {
   console.log('db', databaseURL);
   const queryText = `CREATE TABLE IF NOT EXISTS
       orders(
-        order_id VARCHAR(128) NOT NULL,
+        order_id UUID PRIMARY KEY,
         ordered_by VARCHAR(128) NOT NULL,
         ordered_items VARCHAR(128) NOT NULL,
         total_mount NUMERIC(11, 2) NOT NULL,
         Order_status VARCHAR(128) NOT NULL,
         delivery_status VARCHAR(128) NOT NULL,
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
+      )`;
+
+  pool
+    .query(queryText)
+    .then((res) => {
+      console.log('res:', res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log('err:', err);
+      pool.end();
+    });
+};
+
+const createOrderedItemsTable = () => {
+  console.log('db', databaseURL);
+  const queryText = `CREATE TABLE IF NOT EXISTS
+      ordered_items(
+        item_id UUID PRIMARY KEY,
+        order_id VARCHAR(128) NOT NULL,
+        food_id VARCHAR(128) NOT NULL,
+        food_name VARCHAR(128) NOT NULL,
+        food_img VARCHAR(128) NOT NULL,
+        unit_price VARCHAR(128) NOT NULL,
+        quantity NUMERIC(11, 2) NOT NULL,
+        total NUMERIC(11, 2) NOT NULL,
+        itemStatus VARCHAR(128) NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;
@@ -112,6 +141,20 @@ const dropOrdersTable = () => {
     });
 };
 
+const dropOrderedItemsTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS ordered_items';
+  pool
+    .query(queryText)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
 const dropUsersTable = () => {
   const queryText = 'DROP TABLE IF EXISTS users';
   pool
@@ -142,12 +185,14 @@ const dropFoodsTable = () => {
 
 const createAllTables = () => {
   createUsersTable();
+  createOrderedItemsTable();
   createOrdersTable();
   createFoodsTable();
 };
 
 const dropAllTables = () => {
   dropFoodsTable();
+  dropOrderedItemsTable();
   dropOrdersTable();
   dropUsersTable();
 };

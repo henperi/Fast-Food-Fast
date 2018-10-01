@@ -10,21 +10,21 @@ class Order {
   }
 
   /**
-   *
+   * Place an Order
    * @param {userId} userId
    * @param {data} data
    * @returns {object} created order object
    */
-  async createOrder(userId, foodItems, totalAmount) {
+  async createOrder(orderId, userId, foodItems, totalAmount) {
     const queryText = `INSERT INTO orders(order_id, ordered_by, ordered_items, 
       total_mount, order_status, delivery_status, created_at, updated_at)
       Values($1, $2, $3, $4, $5, $6, $7, $8)
       returning *`;
 
     const values = [
-      randomId.v1(),
+      orderId,
       userId,
-      'foodItems',
+      foodItems,
       totalAmount,
       'Processing',
       'Pending',
@@ -40,13 +40,62 @@ class Order {
         orderedBy: rows[0].ordered_by,
         orderedItems: foodItems,
         totalAmount,
-        OrderStatus: rows[0].order_status,
+        orderStatus: rows[0].order_status,
         deliveryStatus: rows[0].delivery_status,
         createdAt: rows[0].created_at,
         updatedAt: rows[0].updated_at,
       };
 
       const response = { success: true, newOrder };
+      return response;
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
+  }
+
+  /**
+   *
+   * @param {userId} userId
+   * @param {data} data
+   * @returns {object} created order object
+   */
+  async insertOrderedItem(orderId, foodItems) {
+    const queryText = `INSERT INTO ordered_items(order_id, item_id, food_id, food_name, food_img, 
+      unit_price, quantity, total, itemStatus, created_at, updated_at)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      returning *`;
+
+    const values = [
+      orderId,
+      randomId.v1(),
+      foodItems.foodId,
+      foodItems.foodName,
+      foodItems.foodImg,
+      foodItems.unitPrice,
+      foodItems.quantity,
+      foodItems.total,
+      foodItems.itemStatus,
+      new Date(),
+      new Date(),
+    ];
+
+    try {
+      const { rows } = await this.orders.query(queryText, values);
+
+      const orderedItems = {
+        foodId: rows[0].food_id,
+        foodName: rows[0].food_name,
+        foodImg: rows[0].food_img,
+        unitPrice: rows[0].unit_price,
+        quantity: rows[0].quantity,
+        total: rows[0].unit_price,
+        itemStatus: rows[0].item_status,
+        createdAt: rows[0].created_at,
+        updatedAt: rows[0].updated_at,
+      };
+
+      const response = { success: true, orderedItems };
       return response;
     } catch (err) {
       const response = { success: false, err };
