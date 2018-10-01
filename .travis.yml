@@ -3,15 +3,17 @@ language: node_js
 node_js:
   - "node"
 
-addons:
-  code_climate:
-    repo_token: 1cad8483e05f9dd48535e678ceea1b6e33034228fd804b0f4278e9f3e69d221e
+# addons:
+#   code_climate:
+#     repo_token: 7147a7584017be0dd9ef3401c20ded1483e9a9594b52067833b7d6ba0c048f39
 
 services:
   - postgresql
 
 env:
   - NODE_ENV=test
+  global:
+    - CC_TEST_REPORTER_ID=7147a7584017be0dd9ef3401c20ded1483e9a9594b52067833b7d6ba0c048f39
 
 script:
   - npm run test
