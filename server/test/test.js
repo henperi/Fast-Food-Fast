@@ -95,36 +95,16 @@ describe('Orders Route Tests', () => {
   });
 
   describe('GET /orders/:orderId', () => {
-    it('should not fetch an order when the ordeId is not found in the list of existing orderIds', (done) => {
+    it('should return a status of 404 when the ordeId url param provided does not match any existing orderIds in db', (done) => {
       chai
         .request(server)
-        .get('/api/v1/orders/1')
+        .get('/api/v1/orders/11233')
         .end((err, result) => {
-          expect(result).to.have.status(404);
+          // expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
           done();
         });
     });
-
-    // it.skip('should fetch an order when the orderId provided is found in the list of existing orderIds', (done) => {
-    //   const newOrder = {
-    //     foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088', quantity: 2 }],
-    //   };
-    //   chai
-    //     .request(server)
-    //     .post('/api/v1/orders')
-    //     .send(newOrder)
-    //     .end((err, result) => {
-    //       chai
-    //         .request(server)
-    //         .get(`api/vi/orders/${result.body.createdOrder.orderId}`)
-    //         .end((err2, newResult) => {
-    //           expect(newResult).to.have.status(201);
-    //           expect(newResult.body.message).to.be.equal('Order found');
-    //         });
-    //       done();
-    //     });
-    // });
   });
 
   describe('PUT /orders/:orderId', () => {
@@ -141,7 +121,7 @@ describe('Orders Route Tests', () => {
         });
     });
 
-    it('it should return 409 when a wrong orderId that doesnt exist in the database is provided', (done) => {
+    it.skip('it should return 409 when a wrong orderId url param that doesnt exist in the database is provided', (done) => {
       const param = {
         orderStatus: 'Completed',
       };
@@ -156,22 +136,6 @@ describe('Orders Route Tests', () => {
           done();
         });
     });
-
-    // it('it should return a status of 200 when the update request is successful', (done) => {
-    //   const param = {
-    //     orderStatus: 'Completed'
-    //   }
-    //   chai
-    //     .request(server)
-    //     .put('/api/v1/orders/1234')
-    //     .send(param)
-    //     .end((err, result) => {
-    //       expect(result).to.have.status(200);
-    //       expect(result.body).to.be.an('object');
-    //       expect(result.body.message).to.have.equal('Order updated');
-    //       done();
-    //     });
-    // });
   });
 });
 

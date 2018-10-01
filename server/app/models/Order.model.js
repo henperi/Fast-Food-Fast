@@ -1,12 +1,12 @@
-import moment from 'moment';
 import randomId from 'uuid';
+import db from './Query.model';
 
 class Order {
   /**
    * class constructor
    */
   constructor() {
-    this.orders = [];
+    this.orders = db;
   }
 
   /**
@@ -15,20 +15,43 @@ class Order {
    * @param {data} data
    * @returns {object} created order object
    */
-  createOrder(userId, foodItems, totalAmount) {
-    const newOrder = {
-      orderId: randomId.v1(),
-      orderedBy: userId,
-      orderedItems: foodItems,
-      totalAmount,
-      orderStatus: 'Processing',
-      deliveryStatus: 'Pending',
-      createdAt: moment.now(),
-      updatedAt: moment.now(),
-    };
+  async createOrder(userId, foodItems, totalAmount) {
+    const queryText = `INSERT INTO orders(order_id, ordered_by, ordered_items, 
+      total_mount, order_status, delivery_status, created_at, updated_at)
+      Values($1, $2, $3, $4, $5, $6, $7, $8)
+      returning *`;
 
-    this.orders.push(newOrder);
-    return newOrder;
+    const values = [
+      randomId.v1(),
+      userId,
+      'foodItems',
+      totalAmount,
+      'Processing',
+      'Pending',
+      new Date(),
+      new Date(),
+    ];
+
+    try {
+      const { rows } = await this.orders.query(queryText, values);
+
+      const newOrder = {
+        orderId: rows[0].order_id,
+        orderedBy: rows[0].ordered_by,
+        orderedItems: foodItems,
+        totalAmount,
+        OrderStatus: rows[0].order_status,
+        deliveryStatus: rows[0].delivery_status,
+        createdAt: rows[0].created_at,
+        updatedAt: rows[0].updated_at,
+      };
+
+      const response = { success: true, newOrder };
+      return response;
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
   }
 
   /**
@@ -36,32 +59,30 @@ class Order {
    * @param {userId} (optional)
    * @returns {object} one order object
    */
-  findOne(orderId, userId) {
-    let foundOrder;
-    if (!userId) {
-      foundOrder = this.orders.find(order => order.orderId === orderId);
+  async findOne(orderId) {
+    const queryText = 'SELECT * from orders WHERE order_id = $1';
+    try {
+      const { rows } = await this.orders.query(queryText, [orderId]);
+      console.log(rows);
+      return rows[0];
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
     }
-    if (orderId && userId) {
-      foundOrder = this.orders.find(
-        order => order.orderId === orderId && order.orderedBy === userId,
-      );
-    }
-    return foundOrder;
   }
 
   /**
-   * @param {randomId} id
-   * @returns {object} orders object
+   * @returns {object} all orders object
    */
-  findUserOrders(userId) {
-    return this.orders.find(order => order.orderedBy === userId);
-  }
-
-  /**
-   * @returns {object} orders object
-   */
-  findAll() {
-    return this.orders;
+  async findAll() {
+    const queryText = 'SELECT * from orders';
+    try {
+      const { rows } = await this.orders.query(queryText);
+      return rows;
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
   }
 }
 
