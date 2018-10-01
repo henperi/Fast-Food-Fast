@@ -26,6 +26,21 @@ describe('Orders Route Tests', () => {
   });
 
   describe('POST /orders', () => {
+    it('should return a status of 400 when food items array is not sent', (done) => {
+      const newOrder = {};
+
+      chai
+        .request(server)
+        .post('/api/v1/orders')
+        .send(newOrder)
+        .end((err, result) => {
+          expect(result).to.have.status(400);
+          expect(result.body).to.be.an('object');
+          expect(result.body).to.have.property('errors');
+          done();
+        });
+    });
+
     it('should not create an order if foodId or quantity is missing', (done) => {
       const newOrder = {
         foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088' }],
@@ -61,6 +76,22 @@ describe('Orders Route Tests', () => {
           done();
         });
     });
+
+    it('should return a status of 404 when the fooditems submitted do not exist in the database', (done) => {
+      const newOrder = {
+        foodItems: [{ foodId: '4801ac7c', quantity: 2 }],
+      };
+      chai
+        .request(server)
+        .post('/api/v1/orders')
+        .send(newOrder)
+        .end((err, result) => {
+          expect(result).to.have.status(404);
+          expect(result.body).to.be.an('object');
+          expect(result.body.message).to.be.equal('Order not created');
+          done();
+        });
+    });
   });
 
   describe('GET /orders/:orderId', () => {
@@ -85,8 +116,8 @@ describe('Orders Route Tests', () => {
         .send(newOrder)
         .end((err, result) => {
           chai
-            .request(`http://localhost:${PORT}/api/v1/orders`)
-            .get(`/${result.body.createdOrder.orderId}`)
+            .request(server)
+            .get(`api/vi/orders/${result.body.createdOrder.orderId}`)
             .end((err2, newResult) => {
               expect(newResult).to.have.status(201);
               expect(newResult.body.message).to.be.equal('Order found');
@@ -97,12 +128,11 @@ describe('Orders Route Tests', () => {
   });
 
   describe('PUT /orders/:orderId', () => {
-    it('it should not update the status of one of the orders when the order status param is not provided', (done) => {
+    it('it should not update the status of an orders when the order status body param is not provided', (done) => {
       chai
         .request(server)
-        .put('/api/v1/orders/1')
+        .put('/api/v1/orders/1234')
         .end((err, result) => {
-          // console.log(result.body.errors[0].msg);
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
           expect(result.body.errors[0].msg).to.be.equal('order status is required');
@@ -110,6 +140,38 @@ describe('Orders Route Tests', () => {
           done();
         });
     });
+
+    it('it should return 409 when a wrong orderId that doesnt exist in the database is provided', (done) => {
+      const param = {
+        orderStatus: 'Completed',
+      };
+      chai
+        .request(server)
+        .put('/api/v1/orders/1234')
+        .send(param)
+        .end((err, result) => {
+          expect(result).to.have.status(409);
+          expect(result.body).to.be.an('object');
+          expect(result.body.message).to.equal('This particular order can not be updated as it does not exist');
+          done();
+        });
+    });
+
+    // it('it should return a status of 200 when the update request is successful', (done) => {
+    //   const param = {
+    //     orderStatus: 'Completed'
+    //   }
+    //   chai
+    //     .request(server)
+    //     .put('/api/v1/orders/1234')
+    //     .send(param)
+    //     .end((err, result) => {
+    //       expect(result).to.have.status(200);
+    //       expect(result.body).to.be.an('object');
+    //       expect(result.body.message).to.have.equal('Order updated');
+    //       done();
+    //     });
+    // });
   });
 });
 
@@ -187,7 +249,7 @@ describe('Users Route Tests', () => {
     it.skip('should not login a user if the email does not exist in the database', (done) => {
       const newUser = {
         email: 'henry5g@gmail.com',
-        password: 'henry5g@gmail,com',
+        password: '123',
       };
 
       chai
@@ -213,15 +275,11 @@ describe('Users Route Tests', () => {
         .post('/api/v1/auth/login')
         .send(newUser)
         .end((err, result) => {
-          // expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
-          // expect(result.body.message).to.be.equal('signin successful');
           done();
         });
     });
-
   });
-
 });
 
 
@@ -269,7 +327,7 @@ describe('Foods Route Tests', () => {
   describe('POST /foods', () => {
     it('should not create a food if any of the required parameters are missing', (done) => {
       const newFood = {
-        foodName: 'Chiken'
+        foodName: 'Chiken',
       };
       chai
         .request(server)
@@ -317,7 +375,7 @@ describe('Foods Route Tests', () => {
           done();
         });
     });
-    
+
     it('it should update the status of a food when the foodname is provided', (done) => {
       const food = {
         foodName: 'Henry Pere',

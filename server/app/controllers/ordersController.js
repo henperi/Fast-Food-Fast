@@ -28,11 +28,6 @@ const ordersController = {
     if (!fetchOrder) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    if (fetchOrder.length === 0) {
-      return res.status(404).json({
-        message: 'Order not found',
-      });
-    }
     return res.status(201).json({
       message: 'Order found',
       order: fetchOrder,
@@ -61,18 +56,13 @@ const ordersController = {
         message: 'This particular order can not be updated as it does not exist',
       });
     }
-    if (findOrder.length === 0) {
-      return res.status(409).json({
-        message: 'This particular order can not be updated as it does not exist',
-      });
-    }
     findOrder.orderStatus = req.body.orderStatus;
 
     for (let i = 0; i < findOrder.orderedItems.length; i += 1) {
       findOrder.orderedItems[i].itemStatus = req.body.orderStatus;
     }
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Order updated',
       order: findOrder,
     });
@@ -140,7 +130,7 @@ const ordersController = {
         createdOrder,
       });
     }
-    return res.status(201).json({
+    return res.status(404).json({
       message: 'Order not created',
       reasons: 'Submitted fooditem foodId(s) do not exist',
     });
