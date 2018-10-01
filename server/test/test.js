@@ -98,7 +98,7 @@ describe('Orders Route Tests', () => {
     it('should return a status of 404 when the ordeId url param provided does not match any existing orderIds in db', (done) => {
       chai
         .request(server)
-        .get('/api/v1/orders/1')
+        .get('/api/v1/orders/11233')
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
