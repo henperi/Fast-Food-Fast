@@ -7,8 +7,8 @@ const ordersController = {
    * GET /orders route to find and fetch all the orders
    * @returns {object} All the found Orders
    */
-  fetchAllOrders(req, res) {
-    const fetchOrders = Order.findAll();
+  async fetchAllOrders(req, res) {
+    const fetchOrders = await Order.findAll();
     const count = fetchOrders.length;
 
     return res.status(200).send({
@@ -21,14 +21,14 @@ const ordersController = {
    * GET /orders/:id route to find and fetch a particular order given its id.
    * @returns {object} the found Order object
    */
-  fetchOneOrder(req, res) {
+  async fetchOneOrder(req, res) {
     const [orderId] = [req.params.orderId];
-    const fetchOrder = Order.findOne(orderId);
+    const fetchOrder = await Order.findOne(orderId);
 
     if (!fetchOrder) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Order found',
       order: fetchOrder,
     });
@@ -39,7 +39,7 @@ const ordersController = {
    * @param {orderStatus} orderStatus is required
    * @returns {object} the updated Order object
    */
-  updateOrderStatus(req, res) {
+  async updateOrderStatus(req, res) {
     req.checkBody('orderStatus', 'order status is required').notEmpty();
 
     const errors = req.validationErrors();
@@ -49,7 +49,7 @@ const ordersController = {
     }
 
     const [orderId] = [req.params.orderId];
-    const findOrder = Order.findOne(orderId);
+    const findOrder = await Order.findOne(orderId);
 
     if (!findOrder) {
       return res.status(409).json({
