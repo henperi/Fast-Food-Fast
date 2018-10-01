@@ -1,81 +1,55 @@
 import randomId from 'uuid';
 import db from './Query.model';
 
-class Order {
+class OrderedItems {
   /**
    * class constructor
    */
   constructor() {
-    this.orders = db;
+    this.orderedItems = db;
   }
 
   /**
-   * Place an Order
-   * @param {userId} userId
-   * @param {data} data
-   * @returns {object} created order object
+   * Update one or more itemStatus's
+   * @param {orderId}  optional, null
+   * @param {itemId} itemid String
+   * @returns {object} updated data
    */
-  async createOrder(orderId, userId, foodItems, totalAmount) {
-    const queryText = `INSERT INTO orders(order_id, ordered_by, ordered_items, 
-      total_mount, order_status, delivery_status, created_at, updated_at)
-      Values($1, $2, $3, $4, $5, $6, $7, $8)
-      returning *`;
-
-    const values = [
-      orderId,
-      userId,
-      foodItems,
-      totalAmount,
-      'Processing',
-      'Pending',
-      new Date(),
-      new Date(),
-    ];
-
-    try {
-      const { rows } = await this.orders.query(queryText, values);
-
-      const newOrder = {
-        orderId: rows[0].order_id,
-        orderedBy: rows[0].ordered_by,
-        orderedItems: foodItems,
-        totalAmount,
-        orderStatus: rows[0].order_status,
-        deliveryStatus: rows[0].delivery_status,
-        createdAt: rows[0].created_at,
-        updatedAt: rows[0].updated_at,
-      };
-
-      const response = { success: true, newOrder };
-      return response;
-    } catch (err) {
-      const response = { success: false, err };
-      return response;
-    }
-  }
-
-  /**
-   * Update an Order
-   * @param {userId} userId
-   * @param {data} data
-   * @returns {object} created order object
-   */
-  async updateOrder(orderId, status) {
-    const queryText = `UPDATE orders SET order_status=$1, updated_at=$2 
+  async updateItemStatus(orderId, itemId, status) {
+    if (orderId) {
+      const queryText = `UPDATE ordered_items SET itemstatus=$1, updated_at=$2 
       WHERE order_id=$3
       returning *`;
 
-    const values = [status, new Date(), orderId];
+      const values = [status, new Date(), orderId];
 
-    try {
-      const { rows } = await this.orders.query(queryText, values);
+      try {
+        const { rows } = await this.orderedItems.query(queryText, values);
 
-      const updatedData = rows[0];
-      const response = { success: true, updatedData };
-      return response;
-    } catch (err) {
-      const response = { success: false, err };
-      return response;
+        const updatedData = rows[0];
+        const response = { success: true, updatedData };
+        return response;
+      } catch (err) {
+        const response = { success: false, err };
+        return response;
+      }
+    } else {
+      const queryText = `UPDATE ordered_items SET itemstatus=$1, updated_at=$2 
+      WHERE item_id=$3
+      returning *`;
+
+      const values = [status, new Date(), itemId];
+
+      try {
+        const { rows } = await this.orderedItems.query(queryText, values);
+
+        const updatedData = rows[0];
+        const response = { success: true, updatedData };
+        return response;
+      } catch (err) {
+        const response = { success: false, err };
+        return response;
+      }
     }
   }
 
@@ -129,16 +103,33 @@ class Order {
   }
 
   /**
+   * @param {itemId} required
+   * @param {userId} (optional)
+   * @returns {object} one order object
+   */
+  async findOne(itemId) {
+    const queryText = 'SELECT * from ordered_items WHERE item_id = $1';
+    try {
+      const { rows } = await this.orders.query(queryText, [itemId]);
+      console.log(rows);
+      return rows[0];
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
+  }
+
+  /**
    * @param {orderId} required
    * @param {userId} (optional)
    * @returns {object} one order object
    */
-  async findOne(orderId) {
-    const queryText = 'SELECT * from orders WHERE order_id = $1';
+  async findItems(orderId) {
+    const queryText = 'SELECT * from ordered_items WHERE order_id = $1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
-      console.log(rows[0]);
-      return rows[0];
+      console.log(rows);
+      return rows;
     } catch (err) {
       const response = { success: false, err };
       return response;
@@ -149,7 +140,7 @@ class Order {
    * @returns {object} all orders object
    */
   async findAll() {
-    const queryText = 'SELECT * from orders';
+    const queryText = 'SELECT * from ordered_items';
     try {
       const { rows } = await this.orders.query(queryText);
       return rows;
@@ -160,4 +151,4 @@ class Order {
   }
 }
 
-export default new Order();
+export default new OrderedItems();
