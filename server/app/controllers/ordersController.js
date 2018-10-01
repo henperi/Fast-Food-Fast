@@ -51,7 +51,7 @@ const ordersController = {
     const [orderId] = [req.params.orderId];
     const findOrder = await Order.findOne(orderId);
 
-    if (findOrder.length === 0) {
+    if (!findOrder) {
       return res.status(409).json({
         message: 'This particular order can not be updated as it does not exist',
       });
