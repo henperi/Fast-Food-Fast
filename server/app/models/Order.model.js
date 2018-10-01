@@ -64,7 +64,7 @@ class Order {
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
       console.log(rows);
-      return rows[0];
+      return rows;
     } catch (err) {
       const response = { success: false, err };
       return response;
