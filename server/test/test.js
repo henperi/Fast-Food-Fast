@@ -95,7 +95,7 @@ describe('Orders Route Tests', () => {
   });
 
   describe('GET /orders/:orderId', () => {
-    it('should a status of 404 when the ordeId url param provided dies not match any existing orderIds in db', (done) => {
+    it('should return a status of 404 when the ordeId url param provided does not match any existing orderIds in db', (done) => {
       chai
         .request(server)
         .get('/api/v1/orders/1')
