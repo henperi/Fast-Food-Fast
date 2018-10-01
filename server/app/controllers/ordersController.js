@@ -1,5 +1,6 @@
 import randomId from 'uuid';
 import Order from '../models/Order.model';
+import OrderedItems from '../models/OrderedItems.model';
 import Food from '../models/Food.model';
 
 const ordersController = {
@@ -55,6 +56,12 @@ const ordersController = {
       return res.status(400).json({ errors });
     }
 
+    if (isNaN(req.body.orderStatus) || req.body.orderStatus > 5) {
+      return res.status(400).json({
+        message: 'The order status is not valid',
+      });
+    }
+
     const [orderId] = [req.params.orderId];
     const findOrder = await Order.findOne(orderId);
 
@@ -63,15 +70,40 @@ const ordersController = {
         message: 'This particular order can not be updated as it does not exist',
       });
     }
-    findOrder.orderStatus = req.body.orderStatus;
 
-    for (let i = 0; i < findOrder.orderedItems.length; i += 1) {
-      findOrder.orderedItems[i].itemStatus = req.body.orderStatus;
+    const orderStatusMaping = [
+      'Pending',
+      'Processing',
+      'Cancelled',
+      'Rejected',
+      'Completed',
+      'Delivered',
+    ];
+
+    console.log('type', typeof parseInt(req.body.orderStatus, 10));
+    const orderStatus = orderStatusMaping[req.body.orderStatus] || orderStatusMaping[0];
+    const itemStattus = orderStatus;
+
+    // findOrder.orderStatus = req.body.orderStatus;
+    const updatedOrder = await Order.updateOrder(orderId, orderStatus);
+    console.log('returned', updatedOrder);
+    if (updatedOrder.success) {
+      let count = 1;
+      for (let i = 0; i < updatedOrder.updatedData.ordered_items; i += 1) {
+        OrderedItems.updateItemStatus(orderId, null, itemStattus);
+        console.log(count, parseInt(updatedOrder.updatedData.ordered_items, 10));
+        count += 1;
+        if (count === parseInt(updatedOrder.updatedData.ordered_items, 10)) {
+          return res.status(200).json({
+            message: 'Order updated',
+            updatedOrder: updatedOrder.updatedData,
+          });
+        }
+      }
     }
-
     return res.status(200).json({
-      message: 'Order updated',
-      order: findOrder,
+      success: updatedOrder.success,
+      message: 'Order not updated',
     });
   },
 
