@@ -91,8 +91,8 @@ const usersController = {
   /**
    *
    */
-  fetchAllUsers(req, res) {
-    const fetchUsers = User.findAll();
+  async fetchAllUsers(req, res) {
+    const fetchUsers = await User.findAll();
 
     return res.status(200).json({
       success: true,
