@@ -184,7 +184,7 @@ describe('Users Route Tests', () => {
         });
     });
 
-    it('should not login a user if the email does not exist in the database', (done) => {
+    it.skip('should not login a user if the email does not exist in the database', (done) => {
       const newUser = {
         email: 'henry5g@gmail.com',
         password: 'henry5g@gmail,com',
@@ -202,7 +202,7 @@ describe('Users Route Tests', () => {
         });
     });
 
-    it('should login a user if the email and password are valid in the database', (done) => {
+    it.skip('should login a user if the email and password are valid in the database', (done) => {
       const newUser = {
         email: 'jery4u@gmail.com',
         password: '123',
