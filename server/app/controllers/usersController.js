@@ -91,21 +91,14 @@ const usersController = {
   /**
    *
    */
-  // fetchAllUsers(req, res) {
-  //   const fetchUsers = User.findAll();
+  fetchAllUsers(req, res) {
+    const fetchUsers = User.findAll();
 
-  //   if (!fetchUsers) {
-  //     return res.status(200).json({
-  //       success: true,
-  //       foundUser: fetchUsers,
-  //       message: 'No registered Users yet',
-  //     });
-  //   }
-  //   return res.status(200).json({
-  //     success: true,
-  //     foundUser: fetchUsers,
-  //   });
-  // },
+    return res.status(200).json({
+      success: true,
+      foundUser: fetchUsers,
+    });
+  },
 };
 
 export default usersController;

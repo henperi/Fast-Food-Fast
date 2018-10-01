@@ -85,16 +85,16 @@ class User {
   /**
    *
    */
-  // async findAll() {
-  //   const queryText = 'SELECT * FROM users WHERE 1';
-  //   try {
-  //     const { rows } = await this.users.query(queryText);
-  //     return rows[0];
-  //   } catch (err) {
-  //     const response = { success: false, err };
-  //     return response;
-  //   }
-  // }
+  async findAll() {
+    const queryText = 'SELECT * FROM users WHERE 1';
+    try {
+      const { rows } = await this.users.query(queryText);
+      return rows[0];
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
+  }
 }
 
 export default new User();

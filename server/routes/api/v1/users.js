@@ -6,7 +6,7 @@ import usersController from '../../../app/controllers/usersController';
 
 const router = express.Router();
 
-// router.post('/', usersController.fetchAllUsers);
+router.get('/', usersController.fetchAllUsers);
 router.post('/signup', usersController.attemptSignup);
 router.post('/login', usersController.attemptSignin);
 
