@@ -6,6 +6,8 @@ import 'babel-polyfill';
 
 // Routes =========================================
 import ordersRoute from './routes/api/v1/orders';
+import userRoute from './routes/api/v1/users';
+import foodRoute from './routes/api/v1/foods';
 
 const app = express();
 
@@ -34,7 +36,10 @@ app.use(
   }),
 );
 
+app.use('/api/v1/auth', userRoute);
+app.use('/api/v1/users', userRoute);
 app.use('/api/v1/orders', ordersRoute);
+app.use('/api/v1/foods', foodRoute);
 
 app.use('', (req, res) => res.status(404).json({
   message: 'This endpoint does not exist. Read more about the api endpoints below',

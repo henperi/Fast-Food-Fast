@@ -51,8 +51,8 @@ const createUsersTable = () => {
         fullname VARCHAR(128) NOT NULL,
         email VARCHAR(128) NOT NULL,
         password VARCHAR(128) NOT NULL,
-        address TEXT NOT NULL,
         mobile VARCHAR(128) NOT NULL,
+        address TEXT NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;

@@ -11,14 +11,7 @@ const ordersController = {
     const fetchOrders = Order.findAll();
     const count = fetchOrders.length;
 
-    if (!fetchOrders) {
-      return res.status(404).send({ message: 'No orders were found' });
-    }
-    if (fetchOrders.length === 0) {
-      return res.status(404).send({ message: 'No orders were found' });
-    }
     return res.status(200).send({
-      message: 'Orders found',
       totalOrders: count,
       orders: fetchOrders,
     });
