@@ -11,7 +11,8 @@ const foodsController = {
     const count = fetchFoods.length;
 
     return res.status(200).send({
-      // message: 'Food(s) found',
+      success: true,
+      message: 'Food(s) found',
       totalfoods: count,
       foodsInMenu: fetchFoods,
     });

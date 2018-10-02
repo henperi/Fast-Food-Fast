@@ -11,7 +11,7 @@ class Food {
   }
 
   async createFood(data) {
-    console.log(data);
+    // console.log(data);
     const queryText = `INSERT INTO foods(food_id, food_name, food_cat, food_img,
       description, unit_price, quantity_available, created_at, updated_at)
       Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -47,7 +47,7 @@ class Food {
       const response = { success: true, newFood };
       return response;
     } catch (err) {
-      console.log(err);
+      console.log('err:', err);
       const response = { success: false, err };
       return response;
     }
@@ -62,27 +62,27 @@ class Food {
   }
 
   /**
+   * @param {request.params.foodCat} foodCat
+   * @returns {object} food objects belonging to a category
+   */
+  findFoodsByCategory(foodCat) {
+    return this.foods.find(food => food.foodCat === foodCat);
+  }
+
+  /**
    * @param {request.params.foodId} foodId
    * @returns {object} food object
    */
-  async findOne(foodName) {
-    const queryText = 'SELECT * from foods WHERE order_id = $1';
+  async findOne(foodId) {
+    const queryText = 'SELECT * from foods WHERE food_id = $1';
     try {
-      const { rows } = await this.foods.query(queryText, [foodName]);
+      const { rows } = await this.foods.query(queryText, [foodId]);
       console.log(rows[0]);
       return rows[0];
     } catch (err) {
       const response = { success: false, err };
       return response;
     }
-  }
-
-  /**
-   * @param {request.params.foodCat} foodCat
-   * @returns {object} food objects belonging to a category
-   */
-  findFoodsByCategory(foodCat) {
-    return this.foods.find(food => food.foodCat === foodCat);
   }
 
   /**
@@ -93,7 +93,7 @@ class Food {
   async findAll() {
     const queryText = 'SELECT * from foods';
     try {
-      const { rows } = await this.orders.query(queryText);
+      const { rows } = await this.foods.query(queryText);
       console.log(rows);
       return rows;
     } catch (err) {
