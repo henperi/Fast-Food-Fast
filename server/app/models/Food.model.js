@@ -44,8 +44,16 @@ class Food {
    * @param {request.params.foodId} foodId
    * @returns {object} food object
    */
-  findOne(foodId) {
-    return this.foods.find(food => food.foodId === foodId);
+  async findOne(foodName) {
+    const queryText = 'SELECT * from foods WHERE order_id = $1';
+    try {
+      const { rows } = await this.foods.query(queryText, [foodName]);
+      console.log(rows[0]);
+      return rows[0];
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
   }
 
   /**
