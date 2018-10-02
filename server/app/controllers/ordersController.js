@@ -131,6 +131,7 @@ const ordersController = {
 
     const foodItemsOrdered = [];
     let totalAmount = 0;
+
     for (let i = 0; i < submittedFoodItems.length; i += 1) {
       const [foodId] = [submittedFoodItems[i].foodId];
       const [quantity] = [submittedFoodItems[i].quantity];
@@ -146,24 +147,24 @@ const ordersController = {
         });
       }
 
-      const findFood = Food.findOne(submittedFoodItems[i].foodId);
-      // console.log('findFood:', findFood);
+      const findFood = await Food.findOne(submittedFoodItems[i].foodId);
+      // console.log('findFood:', findFood.food_id);
       if (findFood) {
         const item = {
           foodId,
-          foodName: findFood.foodName,
-          foodImg: findFood.foodImg || `uploads/img/${submittedFoodItems[i].foodId}`,
-          unitPrice: Number(findFood.unitPrice),
+          foodName: findFood.food_name,
+          foodImg: findFood.food_img || `uploads/img/${submittedFoodItems[i].foodId}`,
+          unitPrice: Number(findFood.unit_price),
           quantity: Number(submittedFoodItems[i].quantity),
-          total: Number(findFood.unitPrice * submittedFoodItems[i].quantity),
+          total: Number(findFood.unit_price * submittedFoodItems[i].quantity),
           itemStatus: 'Processing',
         };
 
         foodItemsOrdered.push(item);
-        totalAmount += findFood.unitPrice * submittedFoodItems[i].quantity;
+        totalAmount += findFood.unit_price * submittedFoodItems[i].quantity;
 
-        const orderedItems = Order.insertOrderedItem(orderId, item);
-        console.log('orderdItems', orderedItems);
+        Order.insertOrderedItem(orderId, item);
+        // console.log('orderdItems', orderedItems);
       }
     }
     if (foodItemsOrdered.length > 0) {
