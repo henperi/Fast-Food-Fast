@@ -24,6 +24,7 @@ const usersController = {
     const [fullname] = [req.body.fullname];
     const [mobile] = [req.body.mobile];
     const [address] = [req.body.address];
+    const role = 'User';
 
     const findUser = await User.findByEmail(email);
     if (findUser) {
@@ -40,6 +41,7 @@ const usersController = {
       fullname,
       mobile,
       address,
+      role,
     };
     const createdUser = await User.createUser(newUser);
     return res.status(201).json({

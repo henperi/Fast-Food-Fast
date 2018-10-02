@@ -17,8 +17,8 @@ class User {
    */
   async createUser(data) {
     const queryText = `INSERT INTO users(user_id, fullname, email, 
-      password, mobile, address, created_at, updated_at)
-      Values($1, $2, $3, $4, $5, $6, $7, $8)
+      password, mobile, address, role, created_at, updated_at)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
       returning *`;
     const values = [
       randomId.v1(),
@@ -27,6 +27,7 @@ class User {
       data.hashPassword,
       data.mobile,
       data.address,
+      data.role,
       new Date(),
       new Date(),
     ];

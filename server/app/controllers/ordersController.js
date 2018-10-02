@@ -26,6 +26,28 @@ const ordersController = {
   },
 
   /**
+   * GET /orders route to find and fetch all the orders
+   * @returns {object} All the found Orders
+   */
+  async fetchAllUserOrders(req, res) {
+    const userId = req.params.userId || 1;
+    const fetchOrders = await Order.findOrdersByUserId(userId);
+    const count = fetchOrders.length;
+
+    for (let i = 0; i < count; i += 1) {
+      /**
+       * for each fetchOrders fetch its ordered_items from an ordered_items table
+       * Then append each item to the fetchOrders.orderedItems
+       */
+    }
+
+    return res.status(200).send({
+      totalOrders: count,
+      orders: fetchOrders,
+    });
+  },
+
+  /**
    * GET /orders/:id route to find and fetch a particular order given its id.
    * @returns {object} the found Order object
    */
