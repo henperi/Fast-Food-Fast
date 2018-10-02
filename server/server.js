@@ -39,7 +39,7 @@ app.use(
 app.use('/api/v1/auth', userRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/orders', ordersRoute);
-app.use('/api/v1/foods', foodRoute);
+app.use('/api/v1/menu', foodRoute);
 
 app.use('', (req, res) => res.status(404).json({
   message: 'This endpoint does not exist. Read more about the api endpoints below',

@@ -82,6 +82,7 @@ const createUsersTable = () => {
         password VARCHAR(128) NOT NULL,
         mobile VARCHAR(128) NOT NULL,
         address TEXT NOT NULL,
+        role TEXT NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;
@@ -104,10 +105,10 @@ const createFoodsTable = () => {
         food_id UUID PRIMARY KEY,
         food_name VARCHAR(128) NOT NULL,
         food_cat VARCHAR(128) NOT NULL,
+        food_img VARCHAR(128) NOT NULL,
         description TEXT NOT NULL,
-        img VARCHAR(128) NOT NULL,
-        unitPrice NUMERIC(11, 2) NOT NULL,
-        quantityAvailable NUMERIC(11) NOT NULL,
+        unit_price NUMERIC(11, 2) NOT NULL,
+        quantity_available NUMERIC(11) NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;
