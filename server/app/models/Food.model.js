@@ -1,4 +1,4 @@
-import moment from 'moment';
+// import moment from 'moment';
 import randomId from 'uuid';
 import db from './Query.model';
 
@@ -10,26 +10,47 @@ class Food {
     this.foods = db;
   }
 
-  /**
-   *
-   * @param {*} data
-   * @returns {object} food ubject
-   */
-  createFood(data) {
-    const newFood = {
-      foodId: randomId.v4(),
-      foodName: data.foodName,
-      foodCat: data.foodCat,
-      description: data.description,
-      coverImg: data.coverImg,
-      unitPrice: data.UnitPrice,
-      quantityAvailable: data.quantity,
-      createdAt: moment.now(),
-      updatedAt: moment.now(),
-    };
+  async createFood(data) {
+    console.log(data);
+    const queryText = `INSERT INTO foods(food_id, food_name, food_cat, food_img,
+      description, unit_price, quantity_available, created_at, updated_at)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      returning *`;
 
-    this.foods.push(newFood);
-    return newFood;
+    const values = [
+      randomId.v4(),
+      data.foodName,
+      data.foodCat,
+      data.foodImg,
+      data.description,
+      data.unitPrice,
+      data.quantityAvailable,
+      new Date(),
+      new Date(),
+    ];
+
+    try {
+      const { rows } = await this.foods.query(queryText, values);
+
+      const newFood = {
+        foodId: rows[0].food_id,
+        foodName: rows[0].food_name,
+        foodCat: rows[0].food_cat,
+        foodImg: rows[0].food_img,
+        description: rows[0].description,
+        unitPrice: rows[0].unit_price,
+        quantityAvailable: rows[0].quantity_available,
+        createdAt: rows[0].created_at,
+        updatedAt: rows[0].updated_at,
+      };
+
+      const response = { success: true, newFood };
+      return response;
+    } catch (err) {
+      console.log(err);
+      const response = { success: false, err };
+      return response;
+    }
   }
 
   /**
@@ -73,8 +94,10 @@ class Food {
     const queryText = 'SELECT * from foods';
     try {
       const { rows } = await this.orders.query(queryText);
+      console.log(rows);
       return rows;
     } catch (err) {
+      console.log(err);
       const response = { success: false, err };
       return response;
     }
