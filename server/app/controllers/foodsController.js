@@ -6,14 +6,14 @@ const foodsController = {
    * GET /foods route to find and fetch all the foods
    * @returns {object} All the found foods
    */
-  fetchAllFoods(req, res) {
-    const fetchFoods = Food.findAll();
+  async fetchAllFoods(req, res) {
+    const fetchFoods = await Food.findAll();
     const count = fetchFoods.length;
 
     return res.status(200).send({
-      message: 'Food(s) found',
+      // message: 'Food(s) found',
       totalfoods: count,
-      foods: fetchFoods,
+      foodsInMenu: fetchFoods,
     });
   },
 
