@@ -11,6 +11,13 @@ class TestHelper {
     this.fullname = randomId.v1();
     this.mobile = randomId.v1();
     this.address = randomId.v1();
+
+    this.foodName = randomId.v1();
+    this.foodCat = 'CookedFood';
+    this.foodImg = `uploads/img/${this.foodName}`;
+    this.description = 'lorem ipsum odolur vasch trek na uguler';
+    this.unitPrice = 500;
+    this.quantityAvailable = 80;
   }
 
   // setExistingEmail(email) {

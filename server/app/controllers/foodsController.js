@@ -12,8 +12,8 @@ const foodsController = {
 
     return res.status(200).send({
       success: true,
-      message: 'Food(s) found',
-      totalfoods: count,
+      success_msg: `returning ${count} availabel food(s)`,
+      totalFoods: count,
       foodsInMenu: fetchFoods,
     });
   },
@@ -26,14 +26,15 @@ const foodsController = {
   async fetchOneFood(req, res) {
     const [foodId] = [req.params.foodId];
     const fetchFood = await Food.findOne(foodId);
+    // console.log('fetcF', fetchFood);
 
-    if (!fetchFood) {
-      return res.status(404).json({ message: 'Food not found' });
+    if (fetchFood.success) {
+      return res.status(200).json({
+        message: 'Food found',
+        food: fetchFood,
+      });
     }
-    return res.status(200).json({
-      message: 'Food found',
-      food: fetchFood,
-    });
+    return res.status(404).json({ message: 'Food not found' });
   },
 
   /**
@@ -64,12 +65,14 @@ const foodsController = {
     const createdFood = await Food.createFood(req.body);
     if (createdFood.success) {
       return res.status(201).json({
-        message: 'Food created',
+        success: true,
+        success_msg: 'Food item created and added to menu',
         createdFood: createdFood.newFood,
       });
     }
     return res.status(400).json({
-      createdFood,
+      success: false,
+      success_msg: 'Error occured while creating food, try again',
     });
   },
 

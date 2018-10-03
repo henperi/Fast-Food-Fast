@@ -8,6 +8,9 @@ chai.use(chaiHttp);
 
 const [expect] = [chai.expect];
 
+/**
+ * SignUp New User Helper
+ */
 const newUser = {
   emptyData: {},
   validData: {
@@ -34,6 +37,10 @@ const newUser = {
     address: TestHelper.address,
   },
 };
+
+/**
+ * Login A User Helper
+ */
 const loginUser = {
   emptyData: {},
   missingPassword: {
@@ -113,9 +120,7 @@ describe('Users Route Tests', () => {
           expect(result.body)
             .to.have.property('success_msg')
             .to.equal('Signup Successful');
-          console.log('loginUser.userExist.email', loginUser.userExist.email);
           loginUser.userExist.email = result.body.createdUser.email;
-          console.log('eetEmail', loginUser.userExist.email);
           done();
         });
     });
@@ -138,7 +143,6 @@ describe('Users Route Tests', () => {
   });
 
   describe('POST /auth/login', () => {
-    
     it('should return error for logging in a user with invalid or missing data', (done) => {
       chai
         .request(server)
@@ -172,10 +176,11 @@ describe('Users Route Tests', () => {
         .post('/api/v1/auth/login')
         .send(loginUser.wrongPassword)
         .end((err, result) => {
-          console.log('wrongPass', result.body)
+          console.log('wrongPass', result.body);
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.message).to.be.equal('password is wrong');          done();
+          expect(result.body.message).to.be.equal('password is wrong');
+          done();
         });
     });
     it('should login a user if the email and password are valid in the database', (done) => {

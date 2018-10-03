@@ -94,7 +94,7 @@ class Food {
     const queryText = 'SELECT * from foods';
     try {
       const { rows } = await this.foods.query(queryText);
-      console.log(rows);
+      // console.log(rows);
       return rows;
     } catch (err) {
       console.log(err);

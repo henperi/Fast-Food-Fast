@@ -4,9 +4,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const envType = process.env.ENV_TYPE;
-// const databaseURL = envType === 'DEV'
-// ? process.env.LOCAL_DATABASE_URL
-// : process.env.REMOTE_DATABASE_URL;
 
 let databaseURL;
 switch (envType) {
@@ -32,7 +29,7 @@ const pool = new Pool({
 });
 
 pool.on('connect', () => {
-  console.log('connected to the local database', databaseURL);
+  console.log(`connected to the ${envType} database`, databaseURL);
 });
 
 /**
