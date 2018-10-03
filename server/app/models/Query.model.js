@@ -13,12 +13,16 @@ switch (envType) {
     databaseURL = process.env.LOCAL_DATABASE_URL;
     break;
 
+  case 'PROD':
+    databaseURL = process.env.REMOTE_DATABASE_URL;
+    break;
+
   case 'TEST':
     databaseURL = process.env.TEST_DATABASE_URL;
     break;
 
   default:
-    databaseURL = process.env.REMOTE_DATABASE_URL;
+    databaseURL = process.env.TEST_DATABASE_URL;
     break;
 }
 

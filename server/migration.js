@@ -4,7 +4,28 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const envType = process.env.ENV_TYPE;
-const databaseURL = envType === 'DEV' ? process.env.LOCAL_DATABASE_URL : process.env.REMOTE_DATABASE_URL;
+// const databaseURL = envType === 'DEV'
+// ? process.env.LOCAL_DATABASE_URL
+// : process.env.REMOTE_DATABASE_URL;
+
+let databaseURL;
+switch (envType) {
+  case 'DEV':
+    databaseURL = process.env.LOCAL_DATABASE_URL;
+    break;
+
+  case 'PROD':
+    databaseURL = process.env.REMOTE_DATABASE_URL;
+    break;
+
+  case 'TEST':
+    databaseURL = process.env.TEST_DATABASE_URL;
+    break;
+
+  default:
+    databaseURL = process.env.TEST_DATABASE_URL;
+    break;
+}
 
 const pool = new Pool({
   connectionString: databaseURL,
