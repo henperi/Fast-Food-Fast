@@ -2,7 +2,7 @@ import express from 'express';
 
 // Import Relevant Controllers
 import usersController from '../../../app/controllers/usersController';
-// import ordersController from '../../../app/controllers/ordersController';
+import ordersController from '../../../app/controllers/ordersController';
 
 const router = express.Router();
 /**
@@ -19,6 +19,11 @@ router.post('/signup', usersController.attemptSignup);
  * Attempt Login An Authenticated User
  */
 router.post('/login', usersController.attemptSignin);
+
+/**
+ * Fetch a users orders
+ */
+router.get('/:userId/orders', ordersController.fetchAllUserOrders);
 
 // router.post('/orders/:user_id', ordersController.makeAnOrder);
 // router.get('/orders/:user_id', ordersController.fetchAllMyOrders);

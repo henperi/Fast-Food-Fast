@@ -158,6 +158,20 @@ class Order {
       return response;
     }
   }
+
+  /**
+   * @returns {object} all orders object
+   */
+  async findOrdersByUserId(userId) {
+    const queryText = 'SELECT * from orders WHERE ordered_by=$1';
+    try {
+      const { rows } = await this.orders.query(queryText, [userId]);
+      return rows;
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
+  }
 }
 
 export default new Order();
