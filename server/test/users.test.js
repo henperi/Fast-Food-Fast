@@ -57,7 +57,7 @@ const loginUser = {
 };
 
 /**
- * Test the users route
+ * Test the users route and endpoints
  */
 describe('Users Route Tests', () => {
   describe('GET /users', () => {
