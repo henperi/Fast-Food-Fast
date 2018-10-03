@@ -55,7 +55,7 @@ const ordersController = {
     const [orderId] = [req.params.orderId];
     const fetchOrder = await Order.findOne(orderId);
     console.log(fetchOrder);
-    if (!fetchOrder) {
+    if (!fetchOrder.success) {
       return res.status(404).json({ message: 'Order not found' });
     }
     return res.status(200).json({
@@ -78,7 +78,7 @@ const ordersController = {
       return res.status(400).json({ errors });
     }
 
-    if (isNaN(req.body.orderStatus) || req.body.orderStatus > 5) {
+    if (Number.isNaN(req.body.orderStatus) || req.body.orderStatus > 5) {
       return res.status(400).json({
         message: 'The order status is not valid',
       });
