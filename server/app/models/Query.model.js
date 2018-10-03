@@ -3,11 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const envType = process.env.ENV_TYPE;
-// const databaseURL = envType === 'DEV'
-// ? process.env.LOCAL_DATABASE_URL : envType === 'TEST'
-// ? process.env.TEST_DATABASE_URL : process.env.REMOTE_DATABASE_URL;
-let databaseURL;
 
+let databaseURL;
 switch (envType) {
   case 'DEV':
     databaseURL = process.env.LOCAL_DATABASE_URL;
@@ -32,10 +29,10 @@ const pool = new Pool({
 
 export default {
   /**
-   * DB Query
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} object
+   * DB Query Helper
+   * @param {string} queryText
+   * @param {object} values
+   * @returns {object || array}
    */
   query(text, params) {
     return new Promise((resolve, reject) => {

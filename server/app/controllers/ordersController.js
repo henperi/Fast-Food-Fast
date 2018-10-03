@@ -20,6 +20,8 @@ const ordersController = {
     }
 
     return res.status(200).send({
+      success: true,
+      success_msg: `returning ${count} available orders`,
       totalOrders: count,
       orders: fetchOrders,
     });
