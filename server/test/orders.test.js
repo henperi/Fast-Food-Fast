@@ -18,6 +18,9 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(true);
           done();
         });
     });
@@ -26,7 +29,6 @@ describe('Orders Route Tests', () => {
   describe('POST /orders', () => {
     it('should return a status of 400 when food items array is not sent', (done) => {
       const newOrder = {};
-
       chai
         .request(server)
         .post('/api/v1/orders')
@@ -61,7 +63,7 @@ describe('Orders Route Tests', () => {
 
     it('should create an order and store it in memory', (done) => {
       const newOrder = {
-        foodItems: [{ foodId: '4801ac7c-4f19-4299-b709-aab25de4f088', quantity: 2 }],
+        foodItems: [{ foodId: '699d2041-72eb-4dd5-9200-c4618eaccdd5', quantity: 2 }],
       };
       chai
         .request(server)
@@ -75,7 +77,7 @@ describe('Orders Route Tests', () => {
         });
     });
 
-    it('should return a status of 404 when the fooditems submitted do not exist in the database', (done) => {
+    it.skip('should return a status of 404 when the fooditems submitted do not exist in the database', (done) => {
       const newOrder = {
         foodItems: [{ foodId: '4801ac7c', quantity: 2 }],
       };
