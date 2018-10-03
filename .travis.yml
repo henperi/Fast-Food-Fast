@@ -12,7 +12,7 @@ services:
   - postgresql
 
 env:
-  - NODE_ENV=test
+  - NODE_ENV=TEST
 
 script:
   - npm run test

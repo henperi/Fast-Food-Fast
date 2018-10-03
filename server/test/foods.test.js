@@ -1,3 +1,11 @@
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../server';
+
+chai.use(chaiHttp);
+
+const [expect] = [chai.expect];
+
 /**
  * Test the foods route
  */
@@ -5,7 +13,7 @@ describe('Foods Route Tests', () => {
   it('should fetch all the foods stored in database', (done) => {
     chai
       .request(server)
-      .get('/api/v1/foods')
+      .get('/api/v1/menu')
       .end((err, result) => {
         expect(result).to.have.status(200);
         expect(result.body.message).to.be.equal('Food(s) found');
@@ -14,11 +22,11 @@ describe('Foods Route Tests', () => {
       });
   });
 
-  describe('GET /foods/:foodId', () => {
+  describe('GET /menu/:foodId', () => {
     it('should not fetch a food when the foodId is not found in the list of existing foodIds', (done) => {
       chai
         .request(server)
-        .get('/api/v1/foods/1')
+        .get('/api/v1/menu/1')
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
@@ -30,7 +38,7 @@ describe('Foods Route Tests', () => {
     it('should fetch a food when the foodId provided is found in the list of existing foodIds', (done) => {
       chai
         .request(server)
-        .get('/api/v1/foods/4801ac7c-4f19-4299-b709-aab25de4f088')
+        .get('/api/v1/menu/4801ac7c-4f19-4299-b709-aab25de4f088')
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body.message).to.be.equal('Food found');
@@ -39,14 +47,14 @@ describe('Foods Route Tests', () => {
     });
   });
 
-  describe('POST /foods', () => {
+  describe('POST /menu', () => {
     it('should not create a food if any of the required parameters are missing', (done) => {
       const newFood = {
         foodName: 'Chiken',
       };
       chai
         .request(server)
-        .post('/api/v1/foods')
+        .post('/api/v1/menu')
         .send(newFood)
         .end((err, result) => {
           expect(result).to.have.status(400);
@@ -66,7 +74,7 @@ describe('Foods Route Tests', () => {
       };
       chai
         .request(server)
-        .post('/api/v1/foods')
+        .post('/api/v1/menu')
         .send(newFood)
         .end((err, result) => {
           expect(result).to.have.status(201);
@@ -77,11 +85,11 @@ describe('Foods Route Tests', () => {
     });
   });
 
-  describe('PUT /foods/:foodId', () => {
+  describe('PUT /menu/:foodId', () => {
     it('it should not update the status of a food when the foodname is required', (done) => {
       chai
         .request(server)
-        .put('/api/v1/foods/4801ac7c-4f19-4299-b709-aab25de4f088')
+        .put('/api/v1/menu/4801ac7c-4f19-4299-b709-aab25de4f088')
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
@@ -97,7 +105,7 @@ describe('Foods Route Tests', () => {
       };
       chai
         .request(server)
-        .put('/api/v1/foods/4801ac7c-4f19-4299-b709-aab25de4f088')
+        .put('/api/v1/menu/4801ac7c-4f19-4299-b709-aab25de4f088')
         .send(food)
         .end((err, result) => {
           expect(result).to.have.status(200);

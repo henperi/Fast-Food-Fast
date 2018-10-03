@@ -30,7 +30,7 @@ const usersController = {
     if (findUser) {
       return res.status(409).json({
         success: false,
-        message: 'This email has already been taken',
+        error_msg: 'This email has already been taken',
       });
     }
 
@@ -45,8 +45,9 @@ const usersController = {
     };
     const createdUser = await User.createUser(newUser);
     return res.status(201).json({
-      message: 'Signup Successful',
-      createdUser,
+      success: true,
+      success_msg: 'Signup Successful',
+      createdUser: createdUser.newUser,
     });
   },
 
@@ -61,7 +62,7 @@ const usersController = {
     const errors = req.validationErrors();
 
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
     const email = req.body.email.toLowerCase();
     const [password] = [req.body.password];
@@ -79,7 +80,7 @@ const usersController = {
     if (!checkPassword) {
       return res.status(404).json({
         success: false,
-        message: 'invalid password',
+        message: 'password is wrong',
       });
     }
     const userToken = middleware.generateToken(findUser.userId, findUser.email);
