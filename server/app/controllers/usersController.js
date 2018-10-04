@@ -1,5 +1,5 @@
 import User from '../models/User.model';
-import middleware from '../middlewares/helper';
+import helper from './helper';
 
 const usersController = {
   /**
@@ -34,7 +34,7 @@ const usersController = {
       });
     }
 
-    const hashPassword = middleware.hashPassword(password);
+    const hashPassword = helper.hashPassword(password);
     const newUser = {
       email,
       hashPassword,
@@ -44,10 +44,17 @@ const usersController = {
       role,
     };
     const createdUser = await User.createUser(newUser);
-    return res.status(201).json({
-      success: true,
-      success_msg: 'Signup Successful',
-      createdUser: createdUser.newUser,
+    if (createdUser.success) {
+      return res.status(201).json({
+        success: true,
+        success_msg: 'Signup Successful',
+        createdUser: createdUser.newUser,
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      success_msg: 'Error occured try again',
     });
   },
 
@@ -71,22 +78,23 @@ const usersController = {
     if (!findUser) {
       return res.status(404).json({
         success: false,
-        message: 'email does not exist',
+        error_msg: 'email does not exist',
       });
     }
 
-    const checkPassword = middleware.comparePassword(findUser.password, password);
+    const checkPassword = helper.comparePassword(findUser.password, password);
 
     if (!checkPassword) {
       return res.status(404).json({
         success: false,
-        message: 'password is wrong',
+        error_msg: 'password is wrong',
       });
     }
-    const userToken = middleware.generateToken(findUser.userId, findUser.email);
+    console.log(findUser);
+    const userToken = helper.generateToken(findUser.user_id, findUser.email);
     return res.status(200).json({
       success: true,
-      message: 'signin successful',
+      success_msg: 'signin successful',
       userToken,
     });
   },

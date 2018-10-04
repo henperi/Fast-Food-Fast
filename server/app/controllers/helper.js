@@ -20,14 +20,6 @@ const Helper = {
     return bcrypt.compareSync(password, hashPassword);
   },
   /**
-   * isValidEmail helper method
-   * @param {string} email
-   * @returns {Boolean} True or False
-   */
-  isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  },
-  /**
    * Gnerate Token
    * @param {string} id
    * @returns {string} token
@@ -39,7 +31,7 @@ const Helper = {
         email,
       },
       process.env.SECRETE,
-      { expiresIn: '5d' },
+      { expiresIn: '1d' },
     );
     return token;
   },

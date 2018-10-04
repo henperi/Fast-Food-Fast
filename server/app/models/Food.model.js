@@ -77,10 +77,11 @@ class Food {
     const queryText = 'SELECT * from foods WHERE food_id = $1';
     try {
       const { rows } = await this.foods.query(queryText, [foodId]);
-      console.log(rows[0]);
-      return rows[0];
-    } catch (err) {
-      const response = { success: false, err };
+      console.log(rows);
+      const response = { success: true, rows: rows[0] };
+      return response;
+    } catch (error) {
+      const response = { success: false, error };
       return response;
     }
   }

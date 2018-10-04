@@ -59,14 +59,15 @@ class OrderedItems {
    * @param {data} data
    * @returns {object} inserted item
    */
-  async insertOrderedItem(orderId, foodItems) {
-    const queryText = `INSERT INTO ordered_items(order_id, item_id, food_id, food_name, food_img, 
+  async insertOrderedItem(orderId, userId, foodItems) {
+    const queryText = `INSERT INTO ordered_items(order_id, user_id, item_id, food_id, food_name, food_img, 
       unit_price, quantity, total, itemStatus, created_at, updated_at)
-      Values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       returning *`;
 
     const values = [
       orderId,
+      userId,
       randomId.v1(),
       foodItems.foodId,
       foodItems.foodName,
@@ -82,14 +83,16 @@ class OrderedItems {
     try {
       const { rows } = await this.orders.query(queryText, values);
 
+      console.log('inside_rows: ', rows);
+
       const orderedItems = {
         foodId: rows[0].food_id,
         foodName: rows[0].food_name,
         foodImg: rows[0].food_img,
         unitPrice: rows[0].unit_price,
         quantity: rows[0].quantity,
-        total: rows[0].unit_price,
-        itemStatus: rows[0].item_status,
+        total: foodItems.total,
+        itemStatus: rows[0].itemstatus,
         createdAt: rows[0].created_at,
         updatedAt: rows[0].updated_at,
       };
