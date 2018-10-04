@@ -24,7 +24,7 @@ const foodsController = {
    * @returns {object} the found food object
    */
   async fetchOneFood(req, res) {
-    const [foodId] = [req.params.foodId];
+    const { foodId } = req.params;
     const fetchFood = await Food.findOne(foodId);
     // console.log('fetcF', fetchFood);
 
@@ -59,9 +59,6 @@ const foodsController = {
       return res.status(400).json({ errors });
     }
 
-    // const foodImg = 'uploads/foods/default-food-img';
-    // req.body.foodImg = foodImg;
-
     const createdFood = await Food.createFood(req.body);
     if (createdFood.success) {
       return res.status(201).json({
@@ -90,7 +87,7 @@ const foodsController = {
       return res.status(400).json({ errors });
     }
 
-    const [foodId] = [req.params.foodId];
+    const foodId = req.params;
     const findFood = Food.findOne(foodId);
 
     if (!findFood) {

@@ -2,90 +2,24 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 
+import bodyHelper from './bodyDefinitions';
 import TestHelper from './testHelper';
+import db from '../app/models/Query.model';
 
 chai.use(chaiHttp);
 
 const [expect] = [chai.expect];
 
 /**
- * SignUp New User Helper
- */
-const newUser = {
-  emptyData: {},
-  validData: {
-    fullname: TestHelper.fullname,
-    email: TestHelper.userEmail,
-    password: TestHelper.userPassword,
-    password_confirmation: TestHelper.userPassword,
-    mobile: TestHelper.mobile,
-    address: TestHelper.address,
-  },
-  conflict_Data: {
-    fullname: TestHelper.fullname,
-    email: TestHelper.userEmail,
-    password: TestHelper.userPassword,
-    password_confirmation: TestHelper.userPassword,
-    mobile: TestHelper.mobile,
-    address: TestHelper.address,
-  },
-  missingFullname: {
-    email: TestHelper.userEmail,
-    password: TestHelper.userPassword,
-    password_confirmation: TestHelper.userPassword,
-    mobile: TestHelper.mobile,
-    address: TestHelper.address,
-  },
-};
-
-/**
- * Login A User Helper
- */
-const loginUser = {
-  emptyData: {},
-  missingPassword: {
-    email: TestHelper.email,
-  },
-  missingEmail: {
-    password: TestHelper.password,
-  },
-  userNotExist: {
-    email: 'randomUser@email.com',
-    password: TestHelper.userPassword,
-  },
-  userExist: {
-    email: TestHelper.existingEmail,
-    password: TestHelper.userPassword,
-  },
-  wrongPassword: {
-    email: TestHelper.userEmail,
-    password: TestHelper.randomPassword,
-  },
-};
-
-/**
  * Test the users route and endpoints
  */
 describe('Users Route Tests', () => {
-  describe('GET /users', () => {
-    it('should fetch all the users from the database', (done) => {
-      chai
-        .request(server)
-        .get('/api/v1/users/')
-        .end((err, result) => {
-          expect(result).to.have.status(200);
-          expect(result.body).to.be.an('object');
-          done();
-        });
-    });
-  });
-
   describe('POST /auth/signup', () => {
     it('should not create a user if the data sent is invalid or empty', (done) => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
-        .send(newUser.emptyData)
+        .send(bodyHelper.signUp.emptyData)
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
@@ -97,9 +31,8 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
-        .send(newUser.missingFullname)
+        .send(bodyHelper.signUp.missingFullname)
         .end((err, result) => {
-          console.log(result.body);
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
           expect(result.body).to.be.have.property('errors');
@@ -110,7 +43,7 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
-        .send(newUser.validData)
+        .send(bodyHelper.signUp.validData)
         .end((err, result) => {
           expect(result).to.have.status(201);
           expect(result.body).to.be.an('object');
@@ -120,7 +53,7 @@ describe('Users Route Tests', () => {
           expect(result.body)
             .to.have.property('success_msg')
             .to.equal('Signup Successful');
-          loginUser.userExist.email = result.body.createdUser.email;
+          bodyHelper.logIn.userExist.email = result.body.createdUser.email;
           done();
         });
     });
@@ -128,7 +61,7 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
-        .send(newUser.conflict_Data)
+        .send(bodyHelper.signUp.conflict_Data)
         .end((err, result) => {
           expect(result).to.have.status(409);
           expect(result.body)
@@ -147,7 +80,7 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/login')
-        .send(loginUser.emptyData)
+        .send(bodyHelper.logIn.emptyData)
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
@@ -162,11 +95,11 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/login')
-        .send(loginUser.userNotExist)
+        .send(bodyHelper.logIn.userNotExist)
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.message).to.be.equal('email does not exist');
+          expect(result.body.error_msg).to.be.equal('email does not exist');
           done();
         });
     });
@@ -174,12 +107,11 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/login')
-        .send(loginUser.wrongPassword)
+        .send(bodyHelper.logIn.wrongPassword)
         .end((err, result) => {
-          console.log('wrongPass', result.body);
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.message).to.be.equal('password is wrong');
+          expect(result.body.error_msg).to.be.equal('password is wrong');
           done();
         });
     });
@@ -187,11 +119,43 @@ describe('Users Route Tests', () => {
       chai
         .request(server)
         .post('/api/v1/auth/login')
-        .send(loginUser.userExist)
+        .send(bodyHelper.logIn.userExist)
+        .end((err, result) => {
+          bodyHelper.userToken = result.body.userToken;
+          expect(result).to.have.status(200);
+          expect(result.body).to.be.an('object');
+          expect(result.body.success_msg).to.be.equal('signin successful');
+          done();
+        });
+    });
+  });
+
+  describe('GET /users for Admins', () => {
+
+    it('should login a valid admin and fetch his token', (done) => {
+      console.log('adminLoginData', bodyHelper.logIn.asAdmin)
+      chai
+        .request(server)
+        .post('/api/v1/auth/login')
+        .send(bodyHelper.logIn.asAdmin)
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
-          expect(result.body.message).to.be.equal('signin successful');
+          expect(result.body.success_msg).to.be.equal('signin successful');
+          bodyHelper.adminToken = result.body.userToken;
+          console.log(bodyHelper.adminToken);
+          done();
+        });
+    });
+
+    it('should fetch all the users from the database', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/users/')
+        .set('x-access-token', bodyHelper.adminToken)
+        .end((err, result) => {
+          expect(result).to.have.status(200);
+          expect(result.body).to.be.an('object');
           done();
         });
     });

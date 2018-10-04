@@ -11,6 +11,7 @@
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha ./server/test/test.js --compilers js:babel-core/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "migrate-up": "node server/migration createAllTables",
+    "insert-admin": "node server/migration insertAdmin",
     "migrate-down": "node server/migration dropAllTables"
   },
   "nyc": {
