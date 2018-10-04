@@ -130,7 +130,7 @@ describe('Users Route Tests', () => {
     });
   });
 
-  describe('GET /users for Admins', () => {
+  describe.skip('GET /users for Admins', () => {
     
     it('should login a valid admin and fetch his token', (done) => {
       chai
@@ -138,11 +138,11 @@ describe('Users Route Tests', () => {
         .post('/api/v1/auth/login')
         .send(bodyHelper.logIn.asAdmin)
         .end((err, result) => {
-          bodyHelper.adminToken = result.body.userToken;
-          console.log(bodyHelper.adminToken);
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
           expect(result.body.success_msg).to.be.equal('signin successful');
+          bodyHelper.adminToken = result.body.userToken;
+          console.log(bodyHelper.adminToken);
           done();
         });
     });

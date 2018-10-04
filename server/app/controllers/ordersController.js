@@ -12,13 +12,6 @@ const ordersController = {
     const fetchOrders = await Order.findAll();
     const count = fetchOrders.length;
 
-    for (let i = 0; i < count; i += 1) {
-      /**
-       * for each fetchOrders fetch its ordered_items from an ordered_items table
-       * Then append each item to the fetchOrders.orderedItems
-       */
-    }
-
     return res.status(200).send({
       success: true,
       totalOrders: count,
@@ -35,13 +28,6 @@ const ordersController = {
     const { userId } = req.params;
     const fetchOrders = await Order.findOrdersByUserId(userId);
     const count = fetchOrders.length;
-
-    for (let i = 0; i < count; i += 1) {
-      /**
-       * for each fetchOrders fetch its ordered_items from an ordered_items table
-       * Then append each item to the fetchOrders.orderedItems
-       */
-    }
 
     return res.status(200).send({
       success: true,
@@ -87,7 +73,7 @@ const ordersController = {
       return res.status(400).json({ errors });
     }
     let { orderStatus } = req.body;
-
+    /* eslint-disable-next-line */
     if (isNaN(orderStatus) || orderStatus > 5) {
       return res.status(400).json({
         success: false,
@@ -109,7 +95,7 @@ const ordersController = {
           'Delivered',
         ];
 
-        orderStatus = orderStatusMaping[req.body.orderStatus] || orderStatusMaping[0];
+        orderStatus = orderStatusMaping[orderStatus] || orderStatusMaping[0];
         const itemStattus = orderStatus;
 
         const updatedOrder = await Order.updateOrder(orderId, orderStatus);
@@ -198,6 +184,7 @@ const ordersController = {
       const { foodId } = submittedFoodItems[i];
       const { quantity } = submittedFoodItems[i];
 
+      /* eslint-disable-next-line */
       const findFood = await Food.findOne(foodId);
       // console.log('findFood:', findFood);
       if (findFood.success && findFood.rows) {
@@ -214,6 +201,7 @@ const ordersController = {
         foodItemsOrdered.push(item);
         totalAmount += findFood.rows.unit_price * quantity;
 
+        /* eslint-disable-next-line */
         const insertOrderedItem = await Order.insertOrderedItem(orderId, userId, item);
         console.log(insertOrderedItem);
         theOrderedItem.push(insertOrderedItem.orderedItems);
