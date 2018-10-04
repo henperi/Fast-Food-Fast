@@ -109,14 +109,16 @@ class Order {
     try {
       const { rows } = await this.orders.query(queryText, values);
 
+      console.log('inside_rows: ', rows);
+
       const orderedItems = {
         foodId: rows[0].food_id,
         foodName: rows[0].food_name,
         foodImg: rows[0].food_img,
         unitPrice: rows[0].unit_price,
         quantity: rows[0].quantity,
-        total: rows[0].unit_price,
-        itemStatus: rows[0].item_status,
+        total: foodItems.total,
+        itemStatus: rows[0].itemstatus,
         createdAt: rows[0].created_at,
         updatedAt: rows[0].updated_at,
       };
@@ -138,7 +140,7 @@ class Order {
     const queryText = 'SELECT * from orders WHERE order_id=$1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
-      console.log('rows', rows);
+      console.log('rowsX', rows);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (err) {

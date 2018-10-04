@@ -32,7 +32,7 @@ const ordersController = {
    * @returns {object} All the found Orders
    */
   async fetchAllUserOrders(req, res) {
-    const userId = req.user.userId || 'rand';
+    const { userId } = req.params;
     const fetchOrders = await Order.findOrdersByUserId(userId);
     const count = fetchOrders.length;
 
@@ -44,6 +44,7 @@ const ordersController = {
     }
 
     return res.status(200).send({
+      success: true,
       totalOrders: count,
       orders: fetchOrders,
     });
@@ -85,55 +86,64 @@ const ordersController = {
     if (errors) {
       return res.status(400).json({ errors });
     }
+    let { orderStatus } = req.body;
 
-    if (Number.isNaN(req.body.orderStatus) || req.body.orderStatus > 5) {
+    if (isNaN(orderStatus) || orderStatus > 5) {
       return res.status(400).json({
-        message: 'The order status is not valid',
+        success: false,
+        error_msg: 'The order status sent is not valid',
       });
     }
 
-    const [orderId] = [req.params.orderId];
+    const { orderId } = req.params;
     const findOrder = await Order.findOne(orderId);
 
-    if (!findOrder) {
+    if (findOrder.success) {
+      if (findOrder.rows) {
+        const orderStatusMaping = [
+          'Pending',
+          'Processing',
+          'Cancelled',
+          'Rejected',
+          'Completed',
+          'Delivered',
+        ];
+
+        orderStatus = orderStatusMaping[req.body.orderStatus] || orderStatusMaping[0];
+        const itemStattus = orderStatus;
+
+        const updatedOrder = await Order.updateOrder(orderId, orderStatus);
+        if (updatedOrder.success) {
+          let count = 1;
+          for (let i = 0; i < updatedOrder.updatedData.ordered_items; i += 1) {
+            OrderedItems.updateItemStatus(orderId, null, itemStattus);
+
+            count += 1;
+            if (count === parseInt(updatedOrder.updatedData.ordered_items, 10)) {
+              return res.status(200).json({
+                success: true,
+                success_msg: `The orderStatus has been successfully set to ${
+                  updatedOrder.updatedData.order_status
+                } and all items bellonging to this order are also ${
+                  updatedOrder.updatedData.order_status
+                }`,
+                updatedOrder: updatedOrder.updatedData,
+              });
+            }
+          }
+        }
+      }
       return res.status(409).json({
-        message: 'This particular order can not be updated as it does not exist',
+        success: false,
+        error_msg: 'This particular order can not be updated as it doesnt exist',
       });
     }
 
-    const orderStatusMaping = [
-      'Pending',
-      'Processing',
-      'Cancelled',
-      'Rejected',
-      'Completed',
-      'Delivered',
-    ];
-
-    // console.log('type', typeof parseInt(req.body.orderStatus, 10));
-    const orderStatus = orderStatusMaping[req.body.orderStatus] || orderStatusMaping[0];
-    const itemStattus = orderStatus;
-
-    // findOrder.orderStatus = req.body.orderStatus;
-    const updatedOrder = await Order.updateOrder(orderId, orderStatus);
-    console.log('returned', updatedOrder);
-    if (updatedOrder.success) {
-      let count = 1;
-      for (let i = 0; i < updatedOrder.updatedData.ordered_items; i += 1) {
-        OrderedItems.updateItemStatus(orderId, null, itemStattus);
-        console.log(count, parseInt(updatedOrder.updatedData.ordered_items, 10));
-        count += 1;
-        if (count === parseInt(updatedOrder.updatedData.ordered_items, 10)) {
-          return res.status(200).json({
-            message: 'Order updated',
-            updatedOrder: updatedOrder.updatedData,
-          });
-        }
-      }
-    }
-    return res.status(200).json({
-      success: updatedOrder.success,
-      message: 'Order not updated',
+    return res.status(500).json({
+      success: false,
+      error_msg: 'An error occurred while trying to update the order, please try again',
+      guides:
+        'Make sure the order_id being sent is a valid uuid character, read the doccumentation for help',
     });
   },
 

@@ -25,7 +25,12 @@ router.post('/login', usersController.attemptSignin);
 /**
  * Fetch a users orders
  */
-router.get('/:userId/orders', Auth.validateToken, ordersController.fetchAllUserOrders);
+router.get(
+  '/:userId/orders',
+  Auth.validateToken,
+  Auth.isAdmin,
+  ordersController.fetchAllUserOrders,
+);
 
 // router.post('/orders/:user_id', ordersController.makeAnOrder);
 // router.get('/orders/:user_id', ordersController.fetchAllMyOrders);

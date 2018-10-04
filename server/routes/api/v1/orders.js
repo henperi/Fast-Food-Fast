@@ -15,7 +15,7 @@ router.get('/', Auth.validateToken, Auth.isAdmin, ordersController.fetchAllOrder
 /**
  * Fetch a specific order.
  */
-router.get('/:orderId', Auth.validateToken, ordersController.fetchOneOrder);
+router.get('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.fetchOneOrder);
 
 /**
  * Place a new order.
@@ -25,6 +25,6 @@ router.post('/', Auth.validateToken, ordersController.makeAnOrder);
 /**
  * Update the status of an order.
  */
-router.put('/:orderId', Auth.validateToken, ordersController.updateOrderStatus);
+router.put('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.updateOrderStatus);
 
 module.exports = router;
