@@ -121,7 +121,7 @@ const createUsersTable = () => {
 };
 
 const insertAdmin = () => {
-  const password = bcrypt.hashSync(process.env.ADMIN_HASHPASSWORD, bcrypt.genSaltSync(8));
+  const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
   const queryText = `INSERT INTO users(user_id, fullname, email, 
     password, mobile, address, role, created_at, updated_at)
     Values($1, $2, $3, $4, $5, $6, $7, $8, $9)

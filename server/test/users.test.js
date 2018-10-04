@@ -133,6 +133,7 @@ describe('Users Route Tests', () => {
   describe('GET /users for Admins', () => {
 
     it('should login a valid admin and fetch his token', (done) => {
+      console.log('adminLoginData', bodyHelper.logIn.asAdmin)
       chai
         .request(server)
         .post('/api/v1/auth/login')
