@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const randomId = require('uuid');
+const bcrypt = require('bcryptjs');
 
 dotenv.config();
 
@@ -120,6 +121,7 @@ const createUsersTable = () => {
 };
 
 const insertAdmin = () => {
+  const password = bcrypt.hashSync(process.env.ADMIN_HASHPASSWORD, bcrypt.genSaltSync(8));
   const queryText = `INSERT INTO users(user_id, fullname, email, 
     password, mobile, address, role, created_at, updated_at)
     Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -128,7 +130,7 @@ const insertAdmin = () => {
     randomId.v1(),
     'Henry Izontimi',
     process.env.ADMIN_EMAIL,
-    process.env.ADMIN_HASHPASSWORD,
+    password,
     '08067272175',
     'data.address',
     'Admin',

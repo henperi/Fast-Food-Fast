@@ -130,8 +130,8 @@ describe('Users Route Tests', () => {
     });
   });
 
-  describe.skip('GET /users for Admins', () => {
-    
+  describe('GET /users for Admins', () => {
+
     it('should login a valid admin and fetch his token', (done) => {
       chai
         .request(server)
