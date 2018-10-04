@@ -26,7 +26,7 @@ class Order {
       userId,
       foodItems,
       totalAmount,
-      'Processing',
+      'Pending',
       'Pending',
       new Date(),
       new Date(),
@@ -48,8 +48,8 @@ class Order {
 
       const response = { success: true, newOrder };
       return response;
-    } catch (err) {
-      const response = { success: false, err };
+    } catch (error) {
+      const response = { success: false, error };
       return response;
     }
   }
@@ -85,14 +85,15 @@ class Order {
    * @param {data} data
    * @returns {object} inserted item
    */
-  async insertOrderedItem(orderId, foodItems) {
-    const queryText = `INSERT INTO ordered_items(order_id, item_id, food_id, food_name, food_img, 
+  async insertOrderedItem(orderId, userId, foodItems) {
+    const queryText = `INSERT INTO ordered_items(order_id, user_id, item_id, food_id, food_name, food_img, 
       unit_price, quantity, total, itemStatus, created_at, updated_at)
-      Values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       returning *`;
 
     const values = [
       orderId,
+      userId,
       randomId.v1(),
       foodItems.foodId,
       foodItems.foodName,
@@ -134,11 +135,12 @@ class Order {
    * @returns {object} one order object
    */
   async findOne(orderId) {
-    const queryText = 'SELECT * from orders WHERE order_id = $1';
+    const queryText = 'SELECT * from orders WHERE order_id=$1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
-      console.log(rows[0]);
-      return rows[0];
+      console.log('rows', rows);
+      const response = { success: true, rows: rows[0] };
+      return response;
     } catch (err) {
       const response = { success: false, err };
       return response;

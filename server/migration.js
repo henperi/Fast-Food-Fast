@@ -68,6 +68,7 @@ const createOrderedItemsTable = () => {
       ordered_items(
         item_id UUID PRIMARY KEY,
         order_id VARCHAR(128) NOT NULL,
+        user_id VARCHAR(128) NOT NULL,
         food_id VARCHAR(128) NOT NULL,
         food_name VARCHAR(128) NOT NULL,
         food_img VARCHAR(128) NOT NULL,

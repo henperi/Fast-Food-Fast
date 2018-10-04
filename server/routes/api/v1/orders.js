@@ -1,5 +1,7 @@
 import express from 'express';
 
+import Auth from '../../../app/middlewares/Auth';
+
 // Import Relevant Controllers
 import ordersController from '../../../app/controllers/ordersController';
 
@@ -8,21 +10,21 @@ const router = express.Router();
 /**
  * Get all the orders.
  */
-router.get('/', ordersController.fetchAllOrders);
+router.get('/', Auth.validateToken, Auth.isAdmin, ordersController.fetchAllOrders);
 
 /**
  * Fetch a specific order.
  */
-router.get('/:orderId', ordersController.fetchOneOrder);
+router.get('/:orderId', Auth.validateToken, ordersController.fetchOneOrder);
 
 /**
  * Place a new order.
  */
-router.post('/', ordersController.makeAnOrder);
+router.post('/', Auth.validateToken, ordersController.makeAnOrder);
 
 /**
  * Update the status of an order.
  */
-router.put('/:orderId', ordersController.updateOrderStatus);
+router.put('/:orderId', Auth.validateToken, ordersController.updateOrderStatus);
 
 module.exports = router;
