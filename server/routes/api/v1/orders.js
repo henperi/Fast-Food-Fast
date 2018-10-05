@@ -15,7 +15,7 @@ router.get('/', Auth.validateToken, Auth.isAdmin, ordersController.fetchAllOrder
 /**
  * Fetch a specific order.
  */
-router.get('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.fetchOneOrder);
+router.get('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.fetchAllOrderedItems);
 
 /**
  * Place a new order.
