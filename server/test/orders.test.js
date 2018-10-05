@@ -13,7 +13,7 @@ const [expect] = [chai.expect];
  */
 describe('Orders Route Tests', () => {
   describe('GET /orders', () => {
-    it('should fetch all the orders stored in memory', (done) => {
+    it.skip('should fetch all the orders stored in memory', (done) => {
       chai
         .request(server)
         .get('/api/v1/orders')
