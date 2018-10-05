@@ -3,8 +3,6 @@ import chaiHttp from 'chai-http';
 import server from '../server';
 
 import bodyHelper from './bodyDefinitions';
-import TestHelper from './testHelper';
-import db from '../app/models/Query.model';
 
 chai.use(chaiHttp);
 
@@ -131,9 +129,8 @@ describe('Users Route Tests', () => {
   });
 
   describe('GET /users for Admins', () => {
-
     it('should login a valid admin and fetch his token', (done) => {
-      console.log('adminLoginData', bodyHelper.logIn.asAdmin)
+      // console.log('adminLoginData', bodyHelper.logIn.asAdmin);
       chai
         .request(server)
         .post('/api/v1/auth/login')
@@ -143,7 +140,7 @@ describe('Users Route Tests', () => {
           expect(result.body).to.be.an('object');
           expect(result.body.success_msg).to.be.equal('signin successful');
           bodyHelper.adminToken = result.body.userToken;
-          console.log(bodyHelper.adminToken);
+          // console.log(bodyHelper.adminToken);
           done();
         });
     });

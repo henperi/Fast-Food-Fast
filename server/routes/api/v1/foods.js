@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', foodsController.fetchAllFoods);
 router.post('/', Auth.validateToken, Auth.isAdmin, foodsController.createNewFood);
 
-router.get('/:foodId', Auth.validateToken, foodsController.fetchOneFood);
+router.get('/:foodId', foodsController.fetchOneFood);
 
 // Update the name of a food
 router.put('/:foodId', Auth.validateToken, Auth.isAdmin, foodsController.updateFood);
