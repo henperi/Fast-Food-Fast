@@ -2,78 +2,19 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 
-import TestHelper from './testHelper';
+import bodyHelper from './bodyDefinitions';
 
 chai.use(chaiHttp);
 
 const [expect] = [chai.expect];
 
 /**
- * SignUp New User Helper
- */
-const foodsHelper = {
-  emptyData: {},
-  existingFoodId: undefined,
-  validData: {
-    foodName: TestHelper.foodName,
-    foodCat: TestHelper.foodCat,
-    foodImg: TestHelper.foodImg,
-    description: TestHelper.description,
-    unitPrice: TestHelper.unitPrice,
-    quantityAvailable: TestHelper.quantityAvailable,
-  },
-  conflict_Data: {
-    foodName: TestHelper.foodName,
-    foodCat: TestHelper.foodCat,
-    foodImg: TestHelper.foodImg,
-    description: TestHelper.description,
-    unitPrice: TestHelper.unitPrice,
-    quantityAvailable: TestHelper.quantityAvailable,
-  },
-  misisngItems: {
-    foodCat: TestHelper.foodCat,
-    foodImg: TestHelper.foodImg,
-    unitPrice: TestHelper.unitPrice,
-    quantityAvailable: TestHelper.quantityAvailable,
-  },
-};
-
-/**
  * Test the foods route
  */
 describe('Foods Route Tests', () => {
-  describe('POST /menu', () => {
-    it('should return errors if any of the required parameters are missing', (done) => {
-      chai
-        .request(server)
-        .post('/api/v1/menu')
-        .send(foodsHelper.misisngItems)
-        .end((err, result) => {
-          expect(result).to.have.status(400);
-          expect(result.body).to.be.an('object');
-          expect(result.body).to.have.property('errors');
-          done();
-        });
-    });
-
-    it('should create a food and store it in database', (done) => {
-      chai
-        .request(server)
-        .post('/api/v1/menu')
-        .send(foodsHelper.validData)
-        .end((err, result) => {
-          expect(result).to.have.status(201);
-          expect(result.body).to.be.an('object');
-          expect(result.body.success_msg).to.be.equal('Food item created and added to menu');
-          // console.log(result.body.createdFood);
-          foodsHelper.existingFoodId = result.body.createdFood.foodId;
-          done();
-        });
-    });
-  });
-
   describe('GET /menu', () => {
     it('should fetch all the foods stored in database', (done) => {
+      console.log('adminToken', bodyHelper.adminToken);
       chai
         .request(server)
         .get('/api/v1/menu')
@@ -90,6 +31,38 @@ describe('Foods Route Tests', () => {
         });
     });
   });
+
+  describe('POST /menu', () => {
+    it('should return errors if any of the required parameters are missing', (done) => {
+      chai
+        .request(server)
+        .post('/api/v1/menu')
+        .set('x-access-token', bodyHelper.adminToken)
+        .send(bodyHelper.foods.misisngItems)
+        .end((err, result) => {
+          expect(result).to.have.status(400);
+          expect(result.body).to.be.an('object');
+          expect(result.body).to.have.property('errors');
+          done();
+        });
+    });
+
+    it('should create a food and store it in database', (done) => {
+      chai
+        .request(server)
+        .post('/api/v1/menu')
+        .set('x-access-token', bodyHelper.adminToken)
+        .send(bodyHelper.foods.validData)
+        .end((err, result) => {
+          expect(result).to.have.status(201);
+          expect(result.body).to.be.an('object');
+          expect(result.body.success_msg).to.be.equal('Food item created and added to menu');
+          bodyHelper.foods.existingFoodId = result.body.createdFood.foodId;
+          done();
+        });
+    });
+  });
+
   describe('GET /menu/:foodId', () => {
     it('should not fetch a food when the foodId is not found in the list of existing foodIds', (done) => {
       chai
@@ -103,10 +76,10 @@ describe('Foods Route Tests', () => {
         });
     });
 
-    it.skip('should fetch a food when the foodId provided is found in the list of existing foodIds', (done) => {
+    it('should fetch a food when the foodId provided is found in the list of existing foodIds', (done) => {
       chai
         .request(server)
-        .get(`/api/v1/menu/${foodsHelper.existingFoodId}`)
+        .get(`/api/v1/menu/${bodyHelper.foods.existingFoodId}`)
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body.message).to.be.equal('Food found');
@@ -119,7 +92,8 @@ describe('Foods Route Tests', () => {
     it('it should not update the status of a food when the foodname is required', (done) => {
       chai
         .request(server)
-        .put('/api/v1/menu/4801ac7c-4f19-4299-b709-aab25de4f088')
+        .put(`/api/v1/menu/${bodyHelper.foods.existingFoodId}`)
+        .set('x-access-token', bodyHelper.adminToken)
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
@@ -130,13 +104,11 @@ describe('Foods Route Tests', () => {
     });
 
     it('it should update the status of a food when the foodname is provided', (done) => {
-      const food = {
-        foodName: 'Henry Pere',
-      };
       chai
         .request(server)
-        .put('/api/v1/menu/4801ac7c-4f19-4299-b709-aab25de4f088')
-        .send(food)
+        .put(`/api/v1/menu/${bodyHelper.foods.existingFoodId}`)
+        .set('x-access-token', bodyHelper.adminToken)
+        .send(bodyHelper.foods.updateFoodName)
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');

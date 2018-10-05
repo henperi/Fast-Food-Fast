@@ -58,6 +58,33 @@ const userBodies = {
       password: TestHelper.randomPassword,
     },
   },
+  foods: {
+    emptyData: {},
+    existingFoodId: undefined,
+    updateFoodName: { foodName: 'A New Food Name' },
+    validData: {
+      foodName: TestHelper.foodName,
+      foodCat: TestHelper.foodCat,
+      foodImg: TestHelper.foodImg,
+      description: TestHelper.description,
+      unitPrice: TestHelper.unitPrice,
+      quantityAvailable: TestHelper.quantityAvailable,
+    },
+    conflict_Data: {
+      foodName: TestHelper.foodName,
+      foodCat: TestHelper.foodCat,
+      foodImg: TestHelper.foodImg,
+      description: TestHelper.description,
+      unitPrice: TestHelper.unitPrice,
+      quantityAvailable: TestHelper.quantityAvailable,
+    },
+    misisngItems: {
+      foodCat: TestHelper.foodCat,
+      foodImg: TestHelper.foodImg,
+      unitPrice: TestHelper.unitPrice,
+      quantityAvailable: TestHelper.quantityAvailable,
+    },
+  },
 };
 
 export default userBodies;
