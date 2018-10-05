@@ -12,6 +12,19 @@ const ordersController = {
     const fetchOrders = await Order.findAll();
     const count = fetchOrders.length;
 
+    const numOfItems = fetchOrders[0].ordered_items;
+    console.log(numOfItems);
+
+    for (let i = 0; i < count; i += 1) {
+      const qty = fetchOrders[i].ordered_items;
+      const id = fetchOrders[i].order_id;
+
+      fetchOrders[i].ordered_items = {
+        quantity: qty,
+        items_url: `https://api-fast-food-fast.herokuapp.com/api/v1/orders/${id}`,
+      };
+    }
+
     return res.status(200).send({
       success: true,
       totalOrders: count,
@@ -33,6 +46,29 @@ const ordersController = {
       success: true,
       totalOrders: count,
       orders: fetchOrders,
+    });
+  },
+
+  /**
+   * GET /orders route to find and fetch all the orders of a particular user
+   * @returns {object} All the found Orderss
+   */
+  async fetchAllOrderedItems(req, res) {
+    const { orderId } = req.params;
+    console.log(orderId);
+    const fetchItems = await OrderedItems.findItems(orderId);
+    const count = fetchItems.length;
+
+    if (count > 0) {
+      return res.status(200).send({
+        success: true,
+        totalItems: count,
+        Items: fetchItems,
+      });
+    }
+    return res.status(404).send({
+      success: false,
+      error_msg: 'No items mathching this order were found',
     });
   },
 
@@ -203,7 +239,7 @@ const ordersController = {
 
         /* eslint-disable-next-line */
         const insertOrderedItem = await Order.insertOrderedItem(orderId, userId, item);
-        console.log(insertOrderedItem);
+        // console.log(insertOrderedItem);
         theOrderedItem.push(insertOrderedItem.orderedItems);
       }
     }
@@ -214,6 +250,7 @@ const ordersController = {
         foodItemsOrdered.length,
         totalAmount,
       );
+      console.log('CO:: ', createdOrder);
       createdOrder.newOrder.orderedItems = theOrderedItem;
       return res.status(201).json({
         success: true,

@@ -14,7 +14,6 @@ const [expect] = [chai.expect];
 describe('Foods Route Tests', () => {
   describe('GET /menu', () => {
     it('should fetch all the foods stored in database', (done) => {
-      console.log('adminToken', bodyHelper.adminToken);
       chai
         .request(server)
         .get('/api/v1/menu')

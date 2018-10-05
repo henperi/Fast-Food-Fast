@@ -128,10 +128,11 @@ class OrderedItems {
    * @returns {object} one order object
    */
   async findItems(orderId) {
+    console.log('insideOrdereItemsModel', orderId);
     const queryText = 'SELECT * from ordered_items WHERE order_id = $1';
     try {
-      const { rows } = await this.orders.query(queryText, [orderId]);
-      console.log(rows);
+      const { rows } = await this.orderedItems.query(queryText, [orderId]);
+      console.log('orderIts::', rows);
       return rows;
     } catch (err) {
       const response = { success: false, err };
