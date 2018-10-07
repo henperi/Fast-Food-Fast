@@ -6,20 +6,15 @@ const foodsController = {
    * GET /foods route to find and fetch all the foods
    * @returns {object} All the found foods
    */
-  fetchAllFoods(req, res) {
-    const fetchFoods = Food.findAll();
+  async fetchAllFoods(req, res) {
+    const fetchFoods = await Food.findAll();
     const count = fetchFoods.length;
 
-    if (!fetchFoods) {
-      return res.status(404).send({ message: 'No food found' });
-    }
-    if (fetchFoods.length === 0) {
-      return res.status(404).send({ message: 'No food found' });
-    }
     return res.status(200).send({
-      message: 'Food(s) found',
-      totalfoods: count,
-      foods: fetchFoods,
+      success: true,
+      success_msg: `returning ${count} availabel food(s)`,
+      totalFoods: count,
+      foodsInMenu: fetchFoods,
     });
   },
 
@@ -28,22 +23,17 @@ const foodsController = {
    * @param {:foodId} the required foodId param from the url
    * @returns {object} the found food object
    */
-  fetchOneFood(req, res) {
-    const [foodId] = [req.params.foodId];
-    const fetchFood = Food.findOne(foodId);
+  async fetchOneFood(req, res) {
+    const { foodId } = req.params;
+    const fetchFood = await Food.findOne(foodId);
 
-    if (!fetchFood) {
-      return res.status(404).json({ message: 'Food not found' });
-    }
-    if (fetchFood.length === 0) {
-      return res.status(404).json({
-        message: 'Food not found',
+    if (fetchFood.success) {
+      return res.status(200).json({
+        message: 'Food found',
+        food: fetchFood,
       });
     }
-    return res.status(201).json({
-      message: 'Food found',
-      food: fetchFood,
-    });
+    return res.status(404).json({ message: 'Food not found' });
   },
 
   /**
@@ -54,12 +44,12 @@ const foodsController = {
    * @param {coverImg} coverImg is required
    * @returns {object} the created food object
    */
-  createNewFood(req, res) {
+  async createNewFood(req, res) {
     req.checkBody('foodName', 'Name of food is required').notEmpty();
     req.checkBody('foodCat', 'Food Category is required').notEmpty();
+    req.checkBody('foodImg', 'Cover image is required').notEmpty();
     req.checkBody('description', 'Food Description is required').notEmpty();
-    req.checkBody('coverImg', 'Cover image is required').notEmpty();
-    req.checkBody('price', 'Food price is not valid').notEmpty();
+    req.checkBody('unitPrice', 'Food price is not valid').notEmpty();
     req.checkBody('quantityAvailable', 'Quantity available is required').notEmpty();
 
     const errors = req.validationErrors();
@@ -68,10 +58,17 @@ const foodsController = {
       return res.status(400).json({ errors });
     }
 
-    const createdFood = Food.createFood(req.body);
-    return res.status(201).json({
-      message: 'Food created',
-      createdFood,
+    const createdFood = await Food.createFood(req.body);
+    if (createdFood.success) {
+      return res.status(201).json({
+        success: true,
+        success_msg: 'Food item created and added to menu',
+        createdFood: createdFood.newFood,
+      });
+    }
+    return res.status(400).json({
+      success: false,
+      success_msg: 'Error occured while creating food, try again',
     });
   },
 
@@ -80,7 +77,8 @@ const foodsController = {
    * @param {req.body.foodName} requires the foodName
    * @returns {object} the updated food object
    */
-  updateFood(req, res) {
+
+  async updateFood(req, res) {
     req.checkBody('foodName', 'Food name is required').notEmpty();
 
     const errors = req.validationErrors();
@@ -89,24 +87,27 @@ const foodsController = {
       return res.status(400).json({ errors });
     }
 
-    const [foodId] = [req.params.foodId];
-    const findFood = Food.findOne(foodId);
-
-    if (!findFood) {
+    const { foodId } = req.params;
+    const findFood = await Food.findOne(foodId);
+    if (findFood.success) {
+      if (findFood.rows) {
+        findFood.foodName = req.body.foodName;
+        return res.status(200).json({
+          success: true,
+          success_msg: 'food updated',
+          updatedFood: findFood,
+        });
+      }
       return res.status(409).json({
-        message: 'This particular food can not be updated as its id does not exist',
+        success: false,
+        error_msg: 'This particular food can not be updated as its id does not exist',
       });
     }
-    if (findFood.length === 0) {
-      return res.status(409).json({
-        message: 'This particular food can not be updated as its id does not exist',
-      });
-    }
-    findFood.foodName = req.body.foodName;
 
-    return res.status(201).json({
-      message: 'food updated',
-      updatedFood: findFood,
+    return res.status(500).json({
+      success: false,
+      error_msg: 'An error occurred, try again and make sure the foodId has a valid format',
+      // updatedFood: findFood,
     });
   },
 };
