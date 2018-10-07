@@ -47,26 +47,10 @@ class Food {
       const response = { success: true, newFood };
       return response;
     } catch (err) {
-      console.log('err:', err);
+      // console.log('err:', err);
       const response = { success: false, err };
       return response;
     }
-  }
-
-  /**
-   * @param {randomId} id
-   * @returns {object} food object
-   */
-  findByName(foodName) {
-    return this.foods.find(food => food.foodName === foodName);
-  }
-
-  /**
-   * @param {request.params.foodCat} foodCat
-   * @returns {object} food objects belonging to a category
-   */
-  findFoodsByCategory(foodCat) {
-    return this.foods.find(food => food.foodCat === foodCat);
   }
 
   /**
@@ -77,7 +61,6 @@ class Food {
     const queryText = 'SELECT * from foods WHERE food_id = $1';
     try {
       const { rows } = await this.foods.query(queryText, [foodId]);
-      console.log(rows);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (error) {
@@ -95,10 +78,8 @@ class Food {
     const queryText = 'SELECT * from foods';
     try {
       const { rows } = await this.foods.query(queryText);
-      // console.log(rows);
       return rows;
     } catch (err) {
-      console.log(err);
       const response = { success: false, err };
       return response;
     }

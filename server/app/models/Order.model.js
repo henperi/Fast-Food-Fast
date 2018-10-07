@@ -109,7 +109,7 @@ class Order {
     try {
       const { rows } = await this.orders.query(queryText, values);
 
-      console.log('inside_rows: ', rows);
+      // console.log('inside_rows: ', rows);
 
       const orderedItems = {
         foodId: rows[0].food_id,
@@ -140,7 +140,7 @@ class Order {
     const queryText = 'SELECT * from orders WHERE order_id=$1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
-      console.log('rowsX', rows);
+      // console.log('rowsX', rows);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (err) {

@@ -14,7 +14,7 @@ const Auth = {
     if (!token) {
       return res.status(400).send({
         success: false,
-        error_msg: 'Token is not provided',
+        error_msg: 'Authorization failed, Please log in to your account to continue',
       });
     }
     try {
@@ -25,7 +25,8 @@ const Auth = {
       if (!rows[0]) {
         return res.status(400).send({
           success: false,
-          error_msg: 'The token provided is either expired or invalid, please login and try again',
+          error_msg:
+            'Authorization failed, we could not verify your account, please login and try again',
         });
       }
       req.user = { userId: decodedToken.userId };
@@ -35,7 +36,8 @@ const Auth = {
     } catch (error) {
       return res.status(401).send({
         success: false,
-        error_msg: 'Authentication failed',
+        error_msg:
+          'An error occured while attempting to authenticating you, please try to login again',
       });
     }
   },
@@ -48,11 +50,11 @@ const Auth = {
    * @returns {object|void} response object
    */
   async isUser(req, res, next) {
-    console.log('role', req.userRole);
+    // console.log('role', req.userRole);
     if (req.userRole !== 'User') {
       return res.status(401).send({
         success: false,
-        error_msg: 'Unauthorized access, only users can access this endpoint',
+        error_msg: 'Unauthorized access, only users are allowed to do this',
       });
     }
     return next();
@@ -66,11 +68,11 @@ const Auth = {
    * @returns {object|void} response object
    */
   async isAdmin(req, res, next) {
-    console.log('role', req.userRole);
+    // console.log('role', req.userRole);
     if (req.userRole !== 'Admin') {
       return res.status(401).send({
         success: false,
-        error_msg: 'Unauthorized access, only admins can access this endpoint',
+        error_msg: 'Unauthorized access, only admins are allowed to do this',
       });
     }
     return next();

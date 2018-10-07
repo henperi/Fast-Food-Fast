@@ -60,6 +60,7 @@ const userBodies = {
   },
   foods: {
     emptyData: {},
+    wrongFoodId: TestHelper.randomId,
     existingFoodId: undefined,
     updateFoodName: { foodName: 'A New Food Name' },
     validData: {
@@ -83,6 +84,24 @@ const userBodies = {
       foodImg: TestHelper.foodImg,
       unitPrice: TestHelper.unitPrice,
       quantityAvailable: TestHelper.quantityAvailable,
+    },
+  },
+  orders: {
+    emptyData: {},
+    wrongOrderId: TestHelper.randomId,
+    existingOrderId: undefined,
+    updateOrderStatus: { OrderStatus: 2 },
+    undefinedFoodId: {
+      foodItems: [{ foodId: undefined, quantity: 2 }],
+    },
+    undefinedQuantity: {
+      foodItems: [{ foodId: TestHelper.randomId, quantity: undefined }],
+    },
+    quantityIsNaN: {
+      foodItems: [{ foodId: TestHelper.randomId, quantity: 'www' }],
+    },
+    foodIdNotExist: {
+      foodItems: [{ foodId: TestHelper.randomId, quantity: 2 }],
     },
   },
 };

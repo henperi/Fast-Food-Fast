@@ -20,11 +20,39 @@ const usersController = {
       return res.status(400).json({ errors });
     }
     const email = req.body.email.toLowerCase();
-    const [password] = [req.body.password];
-    const [fullname] = [req.body.fullname];
-    const [mobile] = [req.body.mobile];
-    const [address] = [req.body.address];
+    const { password } = req.body;
+    const { fullname } = req.body;
+    const { mobile } = req.body;
+    const { address } = req.body;
     const role = 'User';
+
+    if (fullname.length < 3) {
+      return res.status(400).json({
+        success: false,
+        error_msg: 'Your Fullname must be greater than 2 characters',
+      });
+    }
+
+    if (password.length < 5) {
+      return res.status(400).json({
+        success: false,
+        error_msg: 'Your Password must be at least 5 characters in length',
+      });
+    }
+
+    if (fullname.length > 35) {
+      return res.status(400).json({
+        success: false,
+        error_msg: 'Oops, your name is too long, use a shorter name',
+      });
+    }
+
+    if (address.length > 50) {
+      return res.status(400).json({
+        success: false,
+        error_msg: 'Oops, your address is too long, use a shorter version of your address',
+      });
+    }
 
     const findUser = await User.findByEmail(email);
     if (findUser) {
@@ -35,6 +63,9 @@ const usersController = {
     }
 
     const hashPassword = helper.hashPassword(password);
+    req.body.password = hashPassword;
+    req.body.role = role;
+
     const newUser = {
       email,
       hashPassword,
@@ -45,10 +76,12 @@ const usersController = {
     };
     const createdUser = await User.createUser(newUser);
     if (createdUser.success) {
+      const userToken = helper.generateToken(createdUser.newUser.userId, createdUser.newUser.email);
       return res.status(201).json({
         success: true,
         success_msg: 'Signup Successful',
         createdUser: createdUser.newUser,
+        userToken,
       });
     }
 
@@ -90,7 +123,7 @@ const usersController = {
         error_msg: 'password is wrong',
       });
     }
-    console.log(findUser);
+    // console.log(findUser);
     const userToken = helper.generateToken(findUser.user_id, findUser.email);
     return res.status(200).json({
       success: true,
