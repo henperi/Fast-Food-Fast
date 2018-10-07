@@ -83,7 +83,7 @@ class OrderedItems {
     try {
       const { rows } = await this.orders.query(queryText, values);
 
-      console.log('inside_rows: ', rows);
+      // console.log('inside_rows: ', rows);
 
       const orderedItems = {
         foodId: rows[0].food_id,
@@ -114,7 +114,7 @@ class OrderedItems {
     const queryText = 'SELECT * from ordered_items WHERE item_id = $1';
     try {
       const { rows } = await this.orders.query(queryText, [itemId]);
-      console.log(rows);
+      // console.log(rows);
       return rows[0];
     } catch (err) {
       const response = { success: false, err };
@@ -128,11 +128,11 @@ class OrderedItems {
    * @returns {object} one order object
    */
   async findItems(orderId) {
-    console.log('insideOrdereItemsModel', orderId);
+    // console.log('insideOrdereItemsModel', orderId);
     const queryText = 'SELECT * from ordered_items WHERE order_id = $1';
     try {
       const { rows } = await this.orderedItems.query(queryText, [orderId]);
-      console.log('orderIts::', rows);
+      // console.log('orderIts::', rows);
       return rows;
     } catch (err) {
       const response = { success: false, err };

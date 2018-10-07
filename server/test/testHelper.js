@@ -8,7 +8,8 @@ class TestHelper {
     this.badEmail = `${randomId.v1()}gmail.com`;
     this.userPassword = 'userPassword';
     this.randomPassword = randomId.v1();
-    this.fullname = randomId.v1();
+    this.fullname = 'Some Random Name Of Mr Man';
+    this.randomId = randomId.v1();
     this.mobile = randomId.v1();
     this.address = randomId.v1();
 

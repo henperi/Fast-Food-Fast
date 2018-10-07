@@ -54,6 +54,7 @@ describe('Foods Route Tests', () => {
         .send(bodyHelper.foods.validData)
         .end((err, result) => {
           expect(result).to.have.status(201);
+          console.log('RB:::', result.body.createdFood.foodId);
           expect(result.body).to.be.an('object');
           expect(result.body.success_msg).to.be.equal('Food item created and added to menu');
           bodyHelper.foods.existingFoodId = result.body.createdFood.foodId;
@@ -88,7 +89,7 @@ describe('Foods Route Tests', () => {
   });
 
   describe('PUT /menu/:foodId', () => {
-    it('it should not update the status of a food when the foodname is required', (done) => {
+    it('it should return error when the foodname is required', (done) => {
       chai
         .request(server)
         .put(`/api/v1/menu/${bodyHelper.foods.existingFoodId}`)
@@ -98,6 +99,25 @@ describe('Foods Route Tests', () => {
           expect(result.body).to.be.an('object');
           expect(result.body.errors[0].msg).to.be.equal('Food name is required');
           expect(result.body).to.have.property('errors');
+          done();
+        });
+    });
+
+    it('it should return error when the foodId provided is wrong', (done) => {
+      chai
+        .request(server)
+        .put(`/api/v1/menu/${bodyHelper.foods.wrongFoodId}`)
+        .set('x-access-token', bodyHelper.adminToken)
+        .send(bodyHelper.foods.updateFoodName)
+        .end((err, result) => {
+          expect(result).to.have.status(409);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(false);
+          expect(result.body.error_msg).to.be.equal(
+            'This particular food can not be updated as its id does not exist',
+          );
           done();
         });
     });

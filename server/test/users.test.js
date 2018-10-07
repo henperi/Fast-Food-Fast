@@ -13,7 +13,7 @@ const [expect] = [chai.expect];
  */
 describe('Users Route Tests', () => {
   describe('POST /auth/signup', () => {
-    it('should not create a user if the data sent is invalid or empty', (done) => {
+    it('should return error of one or more fields required are empty', (done) => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
@@ -25,7 +25,7 @@ describe('Users Route Tests', () => {
           done();
         });
     });
-    it('should not Create/Signup a user if the fullname is empty or missing', (done) => {
+    it('should return error if the fullname is undefined', (done) => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
@@ -130,7 +130,6 @@ describe('Users Route Tests', () => {
 
   describe('GET /users for Admins', () => {
     it('should login a valid admin and fetch his token', (done) => {
-      // console.log('adminLoginData', bodyHelper.logIn.asAdmin);
       chai
         .request(server)
         .post('/api/v1/auth/login')
@@ -140,7 +139,6 @@ describe('Users Route Tests', () => {
           expect(result.body).to.be.an('object');
           expect(result.body.success_msg).to.be.equal('signin successful');
           bodyHelper.adminToken = result.body.userToken;
-          // console.log(bodyHelper.adminToken);
           done();
         });
     });

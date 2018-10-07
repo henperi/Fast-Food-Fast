@@ -12,9 +12,6 @@ const ordersController = {
     const fetchOrders = await Order.findAll();
     const count = fetchOrders.length;
 
-    const numOfItems = fetchOrders[0].ordered_items;
-    console.log(numOfItems);
-
     for (let i = 0; i < count; i += 1) {
       const qty = fetchOrders[i].ordered_items;
       const id = fetchOrders[i].order_id;
@@ -40,11 +37,10 @@ const ordersController = {
   async fetchAllUserOrders(req, res) {
     const { userId } = req.params;
     const fetchOrders = await Order.findOrdersByUserId(userId);
-    const count = fetchOrders.length;
 
     return res.status(200).send({
       success: true,
-      totalOrders: count,
+      totalOrders: fetchOrders.length,
       orders: fetchOrders,
     });
   },
@@ -55,13 +51,14 @@ const ordersController = {
    */
   async fetchAllOrderedItems(req, res) {
     const { orderId } = req.params;
-    console.log(orderId);
+    // console.log(orderId);
     const fetchItems = await OrderedItems.findItems(orderId);
     const count = fetchItems.length;
 
     if (count > 0) {
       return res.status(200).send({
         success: true,
+        success_msg: 'Ordered Items fetched successfully',
         totalItems: count,
         Items: fetchItems,
       });
@@ -76,6 +73,7 @@ const ordersController = {
    * GET /orders/:id route to find and fetch a particular order given its id.
    * @returns {object} the found Order object
    */
+  /*
   async fetchOneOrder(req, res) {
     const { orderId } = req.params;
     const fetchOrder = await Order.findOne(orderId);
@@ -89,11 +87,16 @@ const ordersController = {
       }
       return res.status(404).json({
         success: false,
-        success_msg: 'The order could not be found',
+        error_msg: 'The order could not be found',
       });
     }
-    return res.status(404).json({ message: 'Order not found' });
+    return res.status(404).json({
+      success: false,
+      error_msg:
+        'An error occured while attempting to search for your order, ensure the id provided has a valid format',
+    });
   },
+  */
 
   /**
    * PUT /orders/:id route to update the status of a particular order given its id.
@@ -122,6 +125,7 @@ const ordersController = {
 
     if (findOrder.success) {
       if (findOrder.rows) {
+        // console.log('INside ROWS:::', findOrder.rows);
         const orderStatusMaping = [
           'Pending',
           'Processing',
@@ -136,7 +140,9 @@ const ordersController = {
 
         const updatedOrder = await Order.updateOrder(orderId, orderStatus);
         if (updatedOrder.success) {
-          let count = 1;
+          // console.log('Trying to update:::', updatedOrder);
+          let count = 0;
+
           for (let i = 0; i < updatedOrder.updatedData.ordered_items; i += 1) {
             OrderedItems.updateItemStatus(orderId, null, itemStattus);
 
@@ -154,10 +160,14 @@ const ordersController = {
             }
           }
         }
+        return res.status(500).json({
+          success: false,
+          error_msg: 'Error occured while trying to update this order, try again',
+        });
       }
       return res.status(409).json({
         success: false,
-        error_msg: 'This particular order can not be updated as it doesnt exist',
+        error_msg: 'This particular order can not be updated as it does not exist',
       });
     }
 
@@ -189,7 +199,6 @@ const ordersController = {
     const orderId = randomId.v1();
 
     const submittedFoodItems = req.body.foodItems;
-    // console.log('submittedFoodItems=', submittedFoodItems);
 
     const foodItemsOrdered = [];
     let totalAmount = 0;
@@ -198,19 +207,26 @@ const ordersController = {
     for (let k = 0; k < submittedFoodItems.length; k += 1) {
       const { foodId } = submittedFoodItems[k];
       const { quantity } = submittedFoodItems[k];
-
-      if (!Number.isInteger(quantity)) {
+      console.log('Here::::', submittedFoodItems[k]);
+      if (!foodId) {
         return res.status(400).json({
           success: false,
-          error_msg: 'food quantities must be valid numbers',
+          error_msg: 'The foodId is a required field in foodItems array',
+          guides: 'Please see doccumentation, for help',
+        });
+      }
+      if (!quantity) {
+        return res.status(400).json({
+          success: false,
+          error_msg: 'The quantity is a required field in foodItems array',
           guides: 'Please see doccumentation, for help',
         });
       }
 
-      if (!foodId || !quantity) {
+      if (!Number.isInteger(quantity)) {
         return res.status(400).json({
           success: false,
-          error_msg: 'foodId and quantity are required fields of foodItems when making an order',
+          error_msg: 'One or more of the food item quantities supplied is not a valid number',
           guides: 'Please see doccumentation, for help',
         });
       }
@@ -250,7 +266,7 @@ const ordersController = {
         foodItemsOrdered.length,
         totalAmount,
       );
-      console.log('CO:: ', createdOrder);
+      // console.log('CO:: ', createdOrder);
       createdOrder.newOrder.orderedItems = theOrderedItem;
       return res.status(201).json({
         success: true,
