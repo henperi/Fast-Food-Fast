@@ -42,7 +42,7 @@ var usersController = {
                 break;
               }
 
-              return _context.abrupt('return', res.status(400).json({ errors: errors }));
+              return _context.abrupt('return', res.status(400).json({ success: false, errors: errors }));
 
             case 10:
               email = req.body.email.toLowerCase();
@@ -97,7 +97,7 @@ var usersController = {
 
             case 24:
               _context.next = 26;
-              return _User2.default.findByEmail(email);
+              return _User2.default.findByEmail(req, res, email);
 
             case 26:
               findUser = _context.sent;
@@ -194,7 +194,7 @@ var usersController = {
               email = req.body.email.toLowerCase();
               password = req.body.password;
               _context2.next = 10;
-              return _User2.default.findByEmail(email);
+              return _User2.default.findByEmail(req, res, email);
 
             case 10:
               findUser = _context2.sent;

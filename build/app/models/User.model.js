@@ -99,8 +99,8 @@ var User = function () {
   }, {
     key: 'findByEmail',
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(email) {
-        var queryText, _ref4, rows, response;
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res, email) {
+        var queryText, _ref4, rows;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -119,10 +119,12 @@ var User = function () {
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2['catch'](1);
-                response = { success: false, err: _context2.t0 };
-                return _context2.abrupt('return', response);
+                return _context2.abrupt('return', res.status(500).json({
+                  success: false,
+                  error_msg: 'An error occured, while processing this request, try again later'
+                }));
 
-              case 13:
+              case 12:
               case 'end':
                 return _context2.stop();
             }
@@ -130,7 +132,7 @@ var User = function () {
         }, _callee2, this, [[1, 9]]);
       }));
 
-      function findByEmail(_x2) {
+      function findByEmail(_x2, _x3, _x4) {
         return _ref3.apply(this, arguments);
       }
 
@@ -176,7 +178,7 @@ var User = function () {
         }, _callee3, this, [[1, 9]]);
       }));
 
-      function findOne(_x3) {
+      function findOne(_x5) {
         return _ref5.apply(this, arguments);
       }
 

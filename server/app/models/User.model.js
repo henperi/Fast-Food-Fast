@@ -56,14 +56,16 @@ class User {
    * @param {email} email
    * @returns {object} user object
    */
-  async findByEmail(email) {
+  async findByEmail(req, res, email) {
     const queryText = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await this.users.query(queryText, [email]);
       return rows[0];
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).json({
+        success: false,
+        error_msg: 'An error occured, while processing this request, try again later',
+      });
     }
   }
 

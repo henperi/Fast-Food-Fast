@@ -281,6 +281,9 @@ p {
 .text-rejected {
   color: rgb(240, 35, 35);
 }
+.text-red {
+  color: rgb(240, 35, 35);
+}
 
 /* Text Alignment */
 .text-center {
@@ -312,7 +315,7 @@ p {
   padding: 5px 0px;
   transition: all 300ms linear 0s;
   text-indent: 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 input::-webkit-input-placeholder {
   color: #333232;

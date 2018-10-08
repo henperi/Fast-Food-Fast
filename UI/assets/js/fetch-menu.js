@@ -31,11 +31,11 @@ const newFood = `
       </a>
       <button class="triggerModal btn btn-blue" data-target="cartModal5">Add to Cart</button>
 
-      <div class="modal" id='#cartModal5'>
+      <div class="modal" id='#cartModal17'>
         <div class="modal-content">
           <div class="text-center">
             <span class="close-button btn btn-primary btn-sm push-right">x</span>
-            <h2 class="text-center">Add this food item to existing Cart</h2>
+            <h2 class="text-center">Add WWWthis food item to existing Cart</h2>
 
             <div class="content-div">
               <div class="item-title">Chicken Stew and Rice -
@@ -52,7 +52,7 @@ const newFood = `
                 <div class="form-member text-left">
                   <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
                 </div>
-                <button class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
+                <button onclick="toggleModal" class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
               </div>
             </form>
             <button class="close-button btn btn-primary btn-block btn-rounded btn-bg">Cancel</button>
@@ -62,6 +62,13 @@ const newFood = `
     </div>
   </div>
   `;
-const textnode = document.createTextNode('Water');
-menu.appendChild(textnode);
+// const textnode = document.createTextNode('Water');
+// menu.appendChild(textnode);
 // menu.innerHTML = '';
+
+const div = document.createElement('span');
+// div.className = 'alert alert-success';
+div.innerHTML = newFood;
+// menu.innerHTML = '';
+menu.insertAdjacentHTML('beforeend', newFood);
+// menu.addEventListener('click', toggleModal);
