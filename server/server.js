@@ -16,6 +16,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Origin, x-access-token, Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    return res.status(200).json({});
+  }
+  return next();
+});
+
 // Express Validator Middleware
 app.use(
   expressValidator({
@@ -47,20 +60,17 @@ app.use('', (req, res) => res.status(404).json({
     {
       type: 'GET',
       uri: 'api/v1/orders/',
-      desired_parameters: null,
       description: 'This endpoint fetches all users orders stored in memory',
     },
     {
       type: 'GET',
       uri: 'api/v1/orders/:orderId',
-      desired_parameters: null,
       description:
           'This endpoint uses the desired parameters to fetch a specific order stored in memory',
     },
     {
       type: 'PUT',
       uri: 'api/v1/orders/orderId',
-      desired_parameters: [{ orderStatus: { type: 'String' } }],
       description:
           'This endpoint uses the desired parameters to update the order status of a specific order stored in memory',
     },
