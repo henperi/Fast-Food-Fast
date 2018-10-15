@@ -16,7 +16,7 @@ const [expect] = [chai.expect];
  */
 describe('Users Route Tests', () => {
   before((done) => {
-    const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
+    // const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
     const queryText = `INSERT INTO users(user_id, fullname, email, 
       password, mobile, address, role, created_at, updated_at)
       Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -26,7 +26,7 @@ describe('Users Route Tests', () => {
       randomId.v1(),
       'Henry Izontimi',
       process.env.ADMIN_EMAIL,
-      password,
+      '$2a$08$.Lf3wosl0uk4G1lpl/A7FOT67bZ4r9V/nE4dt/C/MYo4Z3iEgItKa',
       '08067272175',
       'data.address',
       'Admin',
