@@ -71,35 +71,32 @@ const validationHelper = {
   makeAnOrder(req, res, next) {
     req.checkBody('foodItems', 'Food Item(s) are required').notEmpty();
 
-    const errors = req.validationErrors();
+    let errors = req.validationErrors();
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
+    errors = [];
+    let msg;
 
     const submittedFoodItems = req.body.foodItems;
     for (let k = 0; k < submittedFoodItems.length; k += 1) {
       const { foodId, quantity } = submittedFoodItems[k];
-
       if (!foodId) {
-        return res.status(400).json({
-          success: false,
-          error_msg: 'The foodId is a required field in foodItems array',
-          guides: 'Please see doccumentation, for help',
-        });
+        msg = { msg: 'The foodId is a required field in foodItems array' };
+        errors.push(msg);
       }
-
       if (!quantity) {
-        return res.status(400).json({
-          success: false,
-          error_msg: 'The quantity is a required field in foodItems array',
-          guides: 'Please see doccumentation, for help',
-        });
+        msg = { msg: 'The quantity is a required field in foodItems array' };
+        errors.push(msg);
       }
-
       if (!Number.isInteger(quantity)) {
+        msg = { msg: 'The quantity is a required field in foodItems array' };
+        errors.push(msg);
+      }
+      if (errors.length > 0) {
         return res.status(400).json({
           success: false,
-          error_msg: 'One or more of the food item quantities supplied is not a valid number',
+          errors,
           guides: 'Please see doccumentation, for help',
         });
       }
@@ -116,14 +113,13 @@ const validationHelper = {
     const errors = req.validationErrors();
 
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
     const { orderStatus } = req.body;
-    /* eslint-disable-next-line */
-    if (isNaN(orderStatus) || orderStatus > 5) {
+    if (!Number.isInteger(orderStatus) || orderStatus > 5) {
       return res.status(400).json({
         success: false,
-        error_msg: 'The order status sent is not valid',
+        errors: [{ msg: 'The order status sent is not valid' }],
       });
     }
     return next();
@@ -143,7 +139,7 @@ const validationHelper = {
     const errors = req.validationErrors();
 
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
     return next();
   },
@@ -157,7 +153,7 @@ const validationHelper = {
     const errors = req.validationErrors();
 
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
     return next();
   },
