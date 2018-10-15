@@ -45,19 +45,6 @@ const foodsController = {
    * @returns {object} the created food object
    */
   async createNewFood(req, res) {
-    req.checkBody('foodName', 'Name of food is required').notEmpty();
-    req.checkBody('foodCat', 'Food Category is required').notEmpty();
-    req.checkBody('foodImg', 'Cover image is required').notEmpty();
-    req.checkBody('description', 'Food Description is required').notEmpty();
-    req.checkBody('unitPrice', 'Food price is not valid').notEmpty();
-    req.checkBody('quantityAvailable', 'Quantity available is required').notEmpty();
-
-    const errors = req.validationErrors();
-
-    if (errors) {
-      return res.status(400).json({ errors });
-    }
-
     const createdFood = await Food.createFood(req.body);
     if (createdFood.success) {
       return res.status(201).json({
@@ -79,14 +66,6 @@ const foodsController = {
    */
 
   async updateFood(req, res) {
-    req.checkBody('foodName', 'Food name is required').notEmpty();
-
-    const errors = req.validationErrors();
-
-    if (errors) {
-      return res.status(400).json({ errors });
-    }
-
     const { foodId } = req.params;
     const findFood = await Food.findOne(foodId);
     if (findFood.success) {
@@ -107,7 +86,6 @@ const foodsController = {
     return res.status(500).json({
       success: false,
       error_msg: 'An error occurred, try again and make sure the foodId has a valid format',
-      // updatedFood: findFood,
     });
   },
 };

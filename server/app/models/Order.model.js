@@ -60,7 +60,7 @@ class Order {
    * @param {data} data
    * @returns {object} created order object
    */
-  async updateOrder(orderId, status) {
+  async updateOrder(req, res, orderId, status) {
     const queryText = `UPDATE orders SET order_status=$1, updated_at=$2 
       WHERE order_id=$3
       returning *`;
@@ -74,8 +74,10 @@ class Order {
       const response = { success: true, updatedData };
       return response;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).json({
+        success: false,
+        error_msg: 'Error occured while trying to update this order, try again',
+      });
     }
   }
 
@@ -136,44 +138,51 @@ class Order {
    * @param {userId} (optional)
    * @returns {object} one order object
    */
-  async findOne(orderId) {
+  async findOne(req, res, orderId) {
     const queryText = 'SELECT * from orders WHERE order_id=$1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
-      // console.log('rowsX', rows);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).json({
+        success: false,
+        error_msg: 'An error occurred while trying to update the order, please try again',
+        guides:
+          'Make sure the order_id being sent is a valid uuid character, read the doccumentation for help',
+      });
     }
   }
 
   /**
    * @returns {object} all orders object
    */
-  async findAll() {
+  async findAll(req, res) {
     const queryText = 'SELECT * from orders';
     try {
       const { rows } = await this.orders.query(queryText);
       return rows;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).send({
+        success: false,
+        error_msg: 'An error occured while processing your request',
+      });
     }
   }
 
   /**
    * @returns {object} all orders object
    */
-  async findOrdersByUserId(userId) {
+  async findOrdersByUserId(req, res, userId) {
     const queryText = 'SELECT * from orders WHERE ordered_by=$1';
     try {
       const { rows } = await this.orders.query(queryText, [userId]);
       return rows;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).send({
+        success: false,
+        error_msg: 'An error occured',
+      });
     }
   }
 }

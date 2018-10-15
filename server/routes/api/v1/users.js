@@ -5,6 +5,7 @@ import Auth from '../../../app/middlewares/Auth';
 // Import Relevant Controllers
 import usersController from '../../../app/controllers/usersController';
 import ordersController from '../../../app/controllers/ordersController';
+import validationHelper from '../../../app/middlewares/validation';
 
 const router = express.Router();
 /**
@@ -15,12 +16,12 @@ router.get('/', Auth.validateToken, Auth.isAdmin, usersController.fetchAllUsers)
 /**
  * Attempt To Signup A New User
  */
-router.post('/signup', usersController.attemptSignup);
+router.post('/signup', validationHelper.signup, usersController.attemptSignup);
 
 /**
  * Attempt Login An Authenticated User
  */
-router.post('/login', usersController.attemptSignin);
+router.post('/login', validationHelper.signin, usersController.attemptSignin);
 
 /**
  * Fetch a users orders
@@ -38,4 +39,4 @@ router.get(
 
 router.use('', (req, res) => res.status(404).json({ message: 'This endpoint does not exist' }));
 
-module.exports = router;
+export default router;

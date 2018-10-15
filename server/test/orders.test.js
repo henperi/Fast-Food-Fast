@@ -201,7 +201,7 @@ describe('Orders Route Tests', () => {
         .set('x-access-token', bodyHelper.adminToken)
         .send(param)
         .end((err, result) => {
-          console.log(result.body);
+          // console.log(result.body);
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
           expect(result.body.success).to.equal(true);

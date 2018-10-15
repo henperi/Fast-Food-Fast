@@ -16,7 +16,9 @@
   },
   "nyc": {
     "exclude": [
-      "build"
+      "build",
+      "server/app/models/Query.model.js",
+      "server/server.js"
     ]
   },
   "repository": {
