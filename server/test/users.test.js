@@ -1,8 +1,11 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
+import randomId from 'uuid';
+import bcrypt from 'bcryptjs';
 
+import server from '../server';
 import bodyHelper from './bodyDefinitions';
+import db from '../app/models/Query.model';
 
 chai.use(chaiHttp);
 
@@ -12,6 +15,27 @@ const [expect] = [chai.expect];
  * Test the users route and endpoints
  */
 describe('Users Route Tests', () => {
+  before((done) => {
+    const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
+    const queryText = `INSERT INTO users(user_id, fullname, email, 
+      password, mobile, address, role, created_at, updated_at)
+      Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      returning *`;
+
+    const values = [
+      randomId.v1(),
+      'Henry Izontimi',
+      process.env.ADMIN_EMAIL,
+      password,
+      '08067272175',
+      'data.address',
+      'Admin',
+      new Date(),
+      new Date(),
+    ];
+    db.query('DELETE FROM users').then(() => db.query(queryText, values).then(() => done()));
+  });
+
   describe('POST /auth/signup', () => {
     it('should return error of one or more fields required are empty', (done) => {
       chai

@@ -8,9 +8,6 @@ addons:
     repo_token:
       secure: "1cad8483e05f9dd48535e678ceea1b6e33034228fd804b0f4278e9f3e69d221e"
 
-services:
-  - postgresql
-
 env:
   - NODE_ENV=TEST
 
@@ -25,7 +22,6 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - psql -c 'create database fast_food_fast;' -U postgres
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
