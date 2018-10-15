@@ -54,7 +54,6 @@ describe('Foods Route Tests', () => {
         .send(bodyHelper.foods.validData)
         .end((err, result) => {
           expect(result).to.have.status(201);
-          console.log('RB:::', result.body.createdFood.foodId);
           expect(result.body).to.be.an('object');
           expect(result.body.success_msg).to.be.equal('Food item created and added to menu');
           bodyHelper.foods.existingFoodId = result.body.createdFood.foodId;

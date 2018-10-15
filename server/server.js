@@ -4,10 +4,8 @@ import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import 'babel-polyfill';
 
-// Routes =========================================
-import ordersRoute from './routes/api/v1/orders';
-import userRoute from './routes/api/v1/users';
-import foodRoute from './routes/api/v1/foods';
+// Import The Routes Index File =========================================
+import allRoutes from './routes/api/v1';
 
 const app = express();
 
@@ -36,36 +34,24 @@ app.use(
   }),
 );
 
-app.use('/api/v1/auth', userRoute);
-app.use('/api/v1/users', userRoute);
-app.use('/api/v1/orders', ordersRoute);
-app.use('/api/v1/menu', foodRoute);
+// Use The Routes Index File
+app.use('/api/v1/', allRoutes);
 
-app.use('', (req, res) => res.status(404).json({
-  message: 'This endpoint does not exist. Read more about the api endpoints below',
-  endpoints: [
-    {
-      type: 'GET',
-      uri: 'api/v1/orders/',
-      desired_parameters: null,
-      description: 'This endpoint fetches all users orders stored in memory',
-    },
-    {
-      type: 'GET',
-      uri: 'api/v1/orders/:orderId',
-      desired_parameters: null,
-      description:
-          'This endpoint uses the desired parameters to fetch a specific order stored in memory',
-    },
-    {
-      type: 'PUT',
-      uri: 'api/v1/orders/orderId',
-      desired_parameters: [{ orderStatus: { type: 'String' } }],
-      description:
-          'This endpoint uses the desired parameters to update the order status of a specific order stored in memory',
-    },
-  ],
-}));
+// Default to here when an invalid endpoint is entered
+app.use((req, res, next) => {
+  const errors = new Error('This endpoint does not exist. Read the documentation for Help');
+  errors.status = 404;
+  next(errors);
+});
+
+// App use
+app.use((errors, req, res) => {
+  const msg = errors.message || 'An error occured while processing your request, try again in a moment';
+  res.status(errors.status || 500);
+  res.json({
+    errors: [{ msg }],
+  });
+});
 
 // Define The Port and Host
 const PORT = process.env.PORT || 5000;

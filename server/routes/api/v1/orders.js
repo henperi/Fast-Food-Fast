@@ -1,6 +1,7 @@
 import express from 'express';
 
 import Auth from '../../../app/middlewares/Auth';
+import validationHelper from '../../../app/middlewares/validation';
 
 // Import Relevant Controllers
 import ordersController from '../../../app/controllers/ordersController';
@@ -20,11 +21,17 @@ router.get('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.fetch
 /**
  * Place a new order.
  */
-router.post('/', Auth.validateToken, ordersController.makeAnOrder);
+router.post('/', Auth.validateToken, validationHelper.makeAnOrder, ordersController.makeAnOrder);
 
 /**
  * Update the status of an order.
  */
-router.put('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.updateOrderStatus);
+router.put(
+  '/:orderId',
+  Auth.validateToken,
+  Auth.isAdmin,
+  validationHelper.updateOrderStatus,
+  ordersController.updateOrderStatus,
+);
 
-module.exports = router;
+export default router;

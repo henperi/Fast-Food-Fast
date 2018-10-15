@@ -15,7 +15,7 @@ class User {
    * @param {*} data
    * @returns {object} user ubject
    */
-  async createUser(data) {
+  async createUser(req, res, data) {
     const queryText = `INSERT INTO users(user_id, fullname, email, 
       password, mobile, address, role, created_at, updated_at)
       Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -46,8 +46,10 @@ class User {
       const response = { success: true, newUser };
       return response;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).json({
+        success: false,
+        error_msg: 'An error occured while creating your account, try again in a moment',
+      });
     }
   }
 
@@ -56,14 +58,16 @@ class User {
    * @param {email} email
    * @returns {object} user object
    */
-  async findByEmail(email) {
+  async findByEmail(req, res, email) {
     const queryText = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await this.users.query(queryText, [email]);
       return rows[0];
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).json({
+        success: false,
+        error_msg: 'An error occured while attempting to validate you, try again',
+      });
     }
   }
 
