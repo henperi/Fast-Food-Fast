@@ -15,40 +15,35 @@ const validationHelper = {
     req.checkBody('mobile', 'Mobile is required').notEmpty();
     req.checkBody('address', 'Address is required').notEmpty();
 
-    const errors = req.validationErrors();
-
+    let errors = req.validationErrors();
     if (errors) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({ success: false, errors });
     }
-    const { password } = req.body;
-    const { fullname } = req.body;
-    const { address } = req.body;
+    const { password, fullname, address } = req.body;
+
+    errors = [];
+    let msg;
 
     if (fullname.length < 3) {
-      return res.status(400).json({
-        success: false,
-        error_msg: 'Your Fullname must be greater than 2 characters',
-      });
+      msg = { msg: 'Your Fullname must be greater than 2 characters' };
+      errors.push(msg);
     }
-
-    if (password.length < 5) {
-      return res.status(400).json({
-        success: false,
-        error_msg: 'Your Password must be at least 5 characters in length',
-      });
-    }
-
     if (fullname.length > 35) {
-      return res.status(400).json({
-        success: false,
-        error_msg: 'Oops, your name is too long, use a shorter name',
-      });
+      msg = { msg: 'Oops, your name is too long, use a shorter name' };
+      errors.push(msg);
     }
-
+    if (password.length < 5) {
+      msg = { msg: 'Your Password must be at least 5 characters in length' };
+      errors.push(msg);
+    }
     if (address.length > 50) {
+      msg = { msg: 'Oops, your address is too long, use a shorter version of your address' };
+      errors.push(msg);
+    }
+    if (errors.length > 0) {
       return res.status(400).json({
         success: false,
-        error_msg: 'Oops, your address is too long, use a shorter version of your address',
+        errors,
       });
     }
     return next();
@@ -83,8 +78,7 @@ const validationHelper = {
 
     const submittedFoodItems = req.body.foodItems;
     for (let k = 0; k < submittedFoodItems.length; k += 1) {
-      const { foodId } = submittedFoodItems[k];
-      const { quantity } = submittedFoodItems[k];
+      const { foodId, quantity } = submittedFoodItems[k];
 
       if (!foodId) {
         return res.status(400).json({
