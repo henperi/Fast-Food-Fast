@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const randomId = require('uuid');
 const bcrypt = require('bcryptjs');
 
+require('babel-polyfill');
+
 dotenv.config();
 
 const envType = process.env.ENV_TYPE;
@@ -234,19 +236,19 @@ const dropFoodsTable = () => {
     });
 };
 
-const createAllTables = () => {
-  createUsersTable();
-  createOrderedItemsTable();
-  createOrdersTable();
-  createFoodsTable();
-};
+async function createAllTables() {
+  await createUsersTable();
+  await createOrderedItemsTable();
+  await createOrdersTable();
+  await createFoodsTable();
+}
 
-const dropAllTables = () => {
-  dropFoodsTable();
-  dropOrderedItemsTable();
-  dropOrdersTable();
-  dropUsersTable();
-};
+async function dropAllTables() {
+  await dropFoodsTable();
+  await dropOrderedItemsTable();
+  await dropOrdersTable();
+  await dropUsersTable();
+}
 
 pool.on('remove', () => {
   console.log('client removed');
