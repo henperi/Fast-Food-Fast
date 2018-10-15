@@ -2,10 +2,12 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import randomId from 'uuid';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
 
 import server from '../server';
 import bodyHelper from './bodyDefinitions';
 import db from '../app/models/Query.model';
+import User from '../app/models/User.model';
 
 chai.use(chaiHttp);
 
@@ -16,27 +18,36 @@ const [expect] = [chai.expect];
  */
 describe('Users Route Tests', () => {
   before((done) => {
-    // const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
-    const queryText = `INSERT INTO users(user_id, fullname, email, 
-      password, mobile, address, role, created_at, updated_at)
-      Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
-      returning *`;
-
-    const values = [
-      randomId.v1(),
-      'Henry Izontimi',
-      process.env.ADMIN_EMAIL,
-      '$2a$08$.Lf3wosl0uk4G1lpl/A7FOT67bZ4r9V/nE4dt/C/MYo4Z3iEgItKa',
-      '08067272175',
-      'data.address',
-      'Admin',
-      new Date(),
-      new Date(),
-    ];
-    db.query('DELETE FROM users').then(() => db.query(queryText, values).then(() => done()));
+    db.query('DELETE FROM users').then(() => done());
   });
 
   describe('POST /auth/signup', () => {
+    it('should create an admin', (done) => {
+      const adminData = {
+        fullname: 'Henry Izontimi',
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
+        password_confirmation: process.env.ADMIN_PASSWORD,
+        mobile: '08067272175',
+        address: 'TestHelper.address',
+        role: 'Admin',
+      };
+      chai
+        .request(server)
+        .post('/api/v1/auth/signup')
+        .send(adminData)
+        .end((err, result) => {
+          expect(result).to.have.status(201);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(true);
+          expect(result.body)
+            .to.have.property('success_msg')
+            .to.equal('Signup Successful');
+          done();
+        });
+    });
     it('should return error of one or more fields required are empty', (done) => {
       chai
         .request(server)

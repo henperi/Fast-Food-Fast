@@ -11,7 +11,7 @@ const usersController = {
     const { fullname } = req.body;
     const { mobile } = req.body;
     const { address } = req.body;
-    const role = 'User';
+    const role = req.body.role || 'User';
 
     const findUser = await User.findByEmail(req, res, email);
     if (findUser) {
