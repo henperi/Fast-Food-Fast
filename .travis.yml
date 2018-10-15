@@ -20,7 +20,7 @@ script:
 before_script:
   - npm run migrate-down
   - npm run migrate-up
-  - npm run insert-admin
+  # - npm run insert-admin
   - npm install
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
