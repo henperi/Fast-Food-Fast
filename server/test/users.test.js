@@ -18,7 +18,9 @@ const [expect] = [chai.expect];
  */
 describe('Users Route Tests', () => {
   before((done) => {
-    db.query('DELETE FROM users').then(() => done());
+    db.query('DELETE FROM users')
+    .then(() => done())
+    .catch(err => console.log(err));
   });
 
   describe('POST /auth/signup', () => {

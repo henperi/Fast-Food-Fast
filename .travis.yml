@@ -10,6 +10,7 @@ addons:
 
 env:
   - NODE_ENV=TEST
+  - ENV_TYPE=TEST
 
 script:
   - npm run test
