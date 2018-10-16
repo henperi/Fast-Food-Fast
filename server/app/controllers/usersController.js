@@ -17,7 +17,7 @@ const usersController = {
     if (findUser) {
       return res.status(409).json({
         success: false,
-        error_msg: 'This email has already been taken',
+        errors: [{ msg: 'This email has already been taken' }],
       });
     }
 
@@ -37,13 +37,13 @@ const usersController = {
     if (!createdUser.success) {
       return res.status(400).json({
         success: false,
-        error_msg: 'Request was unsuccessful, try again in a moment',
+        errors: [{ msg: 'Request was unsuccessful, try again in a moment' }],
       });
     }
     const userToken = helper.generateToken(createdUser.newUser.userId, createdUser.newUser.email);
     return res.status(201).json({
       success: true,
-      success_msg: 'Signup Successful',
+      responseMsg: 'Signup Successful',
       createdUser: createdUser.newUser,
       userToken,
     });
@@ -60,7 +60,7 @@ const usersController = {
     if (!findUser) {
       return res.status(404).json({
         success: false,
-        error_msg: 'email does not exist',
+        errors: [{ msg: 'email does not exist' }],
       });
     }
 
@@ -69,13 +69,13 @@ const usersController = {
     if (!checkPassword) {
       return res.status(404).json({
         success: false,
-        error_msg: 'password is wrong',
+        errors: [{ msg: 'password is wrong' }],
       });
     }
     const userToken = helper.generateToken(findUser.user_id, findUser.email);
     return res.status(200).json({
       success: true,
-      success_msg: 'signin successful',
+      responseMsg: 'signin successful',
       userToken,
     });
   },

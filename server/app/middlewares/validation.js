@@ -82,15 +82,15 @@ const validationHelper = {
     for (let k = 0; k < submittedFoodItems.length; k += 1) {
       const { foodId, quantity } = submittedFoodItems[k];
       if (!foodId) {
-        msg = { msg: 'The foodId is a required field in foodItems array' };
+        msg = { msg: 'Selected food item(s) must have a corresponding foodId' };
         errors.push(msg);
       }
       if (!quantity) {
-        msg = { msg: 'The quantity is a required field in foodItems array' };
+        msg = { msg: 'Please input the quantity for the food item(s) selected' };
         errors.push(msg);
       }
       if (!Number.isInteger(quantity)) {
-        msg = { msg: 'The quantity is a required field in foodItems array' };
+        msg = { msg: 'Ensure the quantity typed is a valid number' };
         errors.push(msg);
       }
       if (errors.length > 0) {
