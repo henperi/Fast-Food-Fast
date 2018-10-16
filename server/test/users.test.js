@@ -1,8 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
+import randomId from 'uuid';
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
 
+import server from '../server';
 import bodyHelper from './bodyDefinitions';
+import db from '../app/models/Query.model';
+import User from '../app/models/User.model';
 
 chai.use(chaiHttp);
 
@@ -12,7 +17,39 @@ const [expect] = [chai.expect];
  * Test the users route and endpoints
  */
 describe('Users Route Tests', () => {
+  before((done) => {
+    db.query('DELETE FROM users')
+    .then(() => done())
+    .catch(err => console.log(err));
+  });
+
   describe('POST /auth/signup', () => {
+    it('should create an admin', (done) => {
+      const adminData = {
+        fullname: 'Henry Izontimi',
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
+        password_confirmation: process.env.ADMIN_PASSWORD,
+        mobile: '08067272175',
+        address: 'TestHelper.address',
+        role: 'Admin',
+      };
+      chai
+        .request(server)
+        .post('/api/v1/auth/signup')
+        .send(adminData)
+        .end((err, result) => {
+          expect(result).to.have.status(201);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(true);
+          expect(result.body)
+            .to.have.property('success_msg')
+            .to.equal('Signup Successful');
+          done();
+        });
+    });
     it('should return error of one or more fields required are empty', (done) => {
       chai
         .request(server)
