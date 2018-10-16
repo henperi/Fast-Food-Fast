@@ -53,9 +53,8 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
-          expect(result.body)
-            .to.have.property('error_msg')
-            .to.equal('The foodId is a required field in foodItems array');
+          expect(result.body).to.have.property('errors');
+          // .to.equal('The foodId is a required field in foodItems array');
           done();
         });
     });
@@ -70,9 +69,8 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
-          expect(result.body)
-            .to.have.property('error_msg')
-            .to.equal('The quantity is a required field in foodItems array');
+          expect(result.body).to.have.property('errors');
+          // .to.equal('The quantity is a required field in foodItems array');
           done();
         });
     });
@@ -86,9 +84,8 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
-          expect(result.body)
-            .to.have.property('error_msg')
-            .to.equal('One or more of the food item quantities supplied is not a valid number');
+          expect(result.body).to.have.property('errors');
+          // .to.equal('One or more of the food item quantities supplied is not a valid number');
           done();
         });
     });
@@ -126,7 +123,6 @@ describe('Orders Route Tests', () => {
     });
   });
 
-
   describe('GET /orders/:orderId', () => {
     it('should return a status of 404 when the ordeId url param provided does not match any existing orderIds in db', (done) => {
       chai
@@ -136,7 +132,9 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body).to.have.property('error_msg').to.equal('No items mathching this order were found');
+          expect(result.body)
+            .to.have.property('error_msg')
+            .to.equal('No items mathching this order were found');
           done();
         });
     });
@@ -149,7 +147,9 @@ describe('Orders Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
-          expect(result.body).to.have.property('success_msg').to.equal('Ordered Items fetched successfully');
+          expect(result.body)
+            .to.have.property('success_msg')
+            .to.equal('Ordered Items fetched successfully');
           done();
         });
     });
@@ -183,13 +183,10 @@ describe('Orders Route Tests', () => {
           // console.log(result.body);
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
-          expect(result.body.error_msg).to.equal(
-            'The order status sent is not valid',
-          );
+          expect(result.body.errors[0].msg).to.equal('The order status sent is not valid');
           done();
         });
     });
-
 
     it('it should return 200 when everythin is valid', (done) => {
       const param = {

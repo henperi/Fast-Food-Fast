@@ -37,7 +37,7 @@ describe('Users Route Tests', () => {
           done();
         });
     });
-    it('should Create/Signup a user and store it in the database if the data sent is valid', (done) => {
+    it('should Create a user and store it in the database if the data sent is valid', (done) => {
       chai
         .request(server)
         .post('/api/v1/auth/signup')
@@ -49,7 +49,7 @@ describe('Users Route Tests', () => {
             .to.have.property('success')
             .to.equal(true);
           expect(result.body)
-            .to.have.property('success_msg')
+            .to.have.property('responseMsg')
             .to.equal('Signup Successful');
           bodyHelper.logIn.userExist.email = result.body.createdUser.email;
           done();
@@ -66,8 +66,7 @@ describe('Users Route Tests', () => {
             .to.have.property('success')
             .to.equal(false);
           expect(result.body)
-            .to.have.property('error_msg')
-            .to.equal('This email has already been taken');
+            .to.have.property('errors');
           done();
         });
     });
@@ -97,7 +96,7 @@ describe('Users Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.error_msg).to.be.equal('email does not exist');
+          expect(result.body.errors[0].msg).to.be.equal('email does not exist');
           done();
         });
     });
@@ -109,7 +108,7 @@ describe('Users Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.error_msg).to.be.equal('password is wrong');
+          expect(result.body.errors[0].msg).to.be.equal('password is wrong');
           done();
         });
     });
@@ -122,7 +121,7 @@ describe('Users Route Tests', () => {
           bodyHelper.userToken = result.body.userToken;
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
-          expect(result.body.success_msg).to.be.equal('signin successful');
+          expect(result.body.responseMsg).to.be.equal('signin successful');
           done();
         });
     });
@@ -137,7 +136,7 @@ describe('Users Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(200);
           expect(result.body).to.be.an('object');
-          expect(result.body.success_msg).to.be.equal('signin successful');
+          expect(result.body.responseMsg).to.be.equal('signin successful');
           bodyHelper.adminToken = result.body.userToken;
           done();
         });
