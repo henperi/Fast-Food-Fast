@@ -124,8 +124,8 @@ const createUsersTable = () => {
 };
 
 const insertAdmin = () => {
-  const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-  const password = hashPassword(process.env.ADMIN_PASSWORD);
+  // const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  // const password = hashPassword(process.env.ADMIN_PASSWORD);
 
   // const password = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8));
   const queryText = `INSERT INTO users(user_id, fullname, email, 
@@ -136,7 +136,7 @@ const insertAdmin = () => {
     randomId.v1(),
     'Henry Izontimi',
     process.env.ADMIN_EMAIL,
-    password,
+    '$2a$08$mpwIA1Yk/TpXntTOedpDGeln9qUKcLfA/5CdyOsSh02ZckYnqn8Zq',
     '08067272175',
     'data.address',
     'Admin',

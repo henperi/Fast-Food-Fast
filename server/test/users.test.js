@@ -67,7 +67,6 @@ describe('Users Route Tests', () => {
             .to.equal(false);
           expect(result.body)
             .to.have.property('errors');
-            // .to.equal('This email has already been taken');
           done();
         });
     });
