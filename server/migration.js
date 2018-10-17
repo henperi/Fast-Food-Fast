@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const randomId = require('uuid');
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 // const helper = require('./app/controllers/helper');
 
 require('babel-polyfill');

@@ -3,17 +3,18 @@ import TestHelper from './testHelper';
 /**
  * User Helper
  */
-
 const userBodies = {
   userToken: undefined,
   adminToken: undefined,
+  randomValidToken:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlY2JmYzQxMC1kMThiLTExZTgtYTAwMi1mMzFmZWRlNjg3ZDciLCJlbWFpbCI6Im5hbmN5QGdtYWlsLmNvbSIsImlhdCI6MTUzOTc3NDE0OSwiZXhwIjoxNTM5ODYwNTQ5fQ.Rrdom4AQxL6OfWJFMF6_jyuTfbTwr5lq77U67zmjah0',
   signUp: {
     emptyData: {},
     validData: {
       fullname: TestHelper.fullname,
       email: TestHelper.userEmail,
       password: TestHelper.userPassword,
-      password_confirmation: TestHelper.userPassword,
+      passwordConfirmation: TestHelper.userPassword,
       mobile: TestHelper.mobile,
       address: TestHelper.address,
     },
@@ -21,14 +22,14 @@ const userBodies = {
       fullname: TestHelper.fullname,
       email: TestHelper.userEmail,
       password: TestHelper.userPassword,
-      password_confirmation: TestHelper.userPassword,
+      passwordConfirmation: TestHelper.userPassword,
       mobile: TestHelper.mobile,
       address: TestHelper.address,
     },
     missingFullname: {
       email: TestHelper.userEmail,
       password: TestHelper.userPassword,
-      password_confirmation: TestHelper.userPassword,
+      passwordConfirmation: TestHelper.userPassword,
       mobile: TestHelper.mobile,
       address: TestHelper.address,
     },

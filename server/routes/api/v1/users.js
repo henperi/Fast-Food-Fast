@@ -32,6 +32,10 @@ router.get(
   Auth.isAdmin,
   ordersController.fetchAllUserOrders,
 );
+/**
+ * Fetch the authenticated users profile
+ */
+router.get('/my-profile', Auth.validateToken, usersController.fetchProfile);
 
 // router.post('/orders/:user_id', ordersController.makeAnOrder);
 // router.get('/orders/:user_id', ordersController.fetchAllMyOrders);

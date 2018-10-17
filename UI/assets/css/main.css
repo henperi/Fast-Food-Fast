@@ -281,6 +281,12 @@ p {
 .text-rejected {
   color: rgb(240, 35, 35);
 }
+.text-red {
+  color: red;
+}
+.text-green {
+  color: rgb(1, 143, 43);
+}
 
 /* Text Alignment */
 .text-center {
@@ -312,7 +318,7 @@ p {
   padding: 5px 0px;
   transition: all 300ms linear 0s;
   text-indent: 5px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 input::-webkit-input-placeholder {
   color: #333232;
@@ -498,10 +504,10 @@ button:disabled {
   flex: 1 1 45%;
   max-width: 50%;
 }
-.card > .food-menu > .food-item {
-  /* flex: 1 1 46.7%; */
-  /* max-width: 46.7%; */
-}
+/* .card > .food-menu > .food-item {
+  flex: 1 1 46.7%;
+  max-width: 46.7%;
+} */
 
 /* food-menu */
 .food-menu {
@@ -649,6 +655,35 @@ section {
   border-radius: 25px;
 }
 
+.hide {
+  display: none;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.t-40 {
+  font-size: 40px;
+}
+
+.t-28 {
+  font-size: 28px;
+}
+
+.list-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  border: 0.5px solid lightgrey;
+  margin-bottom: -1px;
+}
+.list-item:first-child {
+  border-radius: 5px 5px 0px 0px;
+}
+.list-item:last-child {
+  border-radius: 0px 0px 5px 5px;
+}
 /* 
 *===================================================================================
 * Everything Media Query

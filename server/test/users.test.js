@@ -65,8 +65,7 @@ describe('Users Route Tests', () => {
           expect(result.body)
             .to.have.property('success')
             .to.equal(false);
-          expect(result.body)
-            .to.have.property('errors');
+          expect(result.body).to.have.property('errors');
           done();
         });
     });
@@ -125,6 +124,20 @@ describe('Users Route Tests', () => {
           done();
         });
     });
+
+    it('should return error when a user tries to access an admins endpoint', (done) => {
+      console.log('bodyHelper.userToken', bodyHelper.userToken);
+      chai
+        .request(server)
+        .get('/api/v1/users/')
+        .set('x-access-token', bodyHelper.userToken)
+        .end((err, result) => {
+          expect(result).to.have.status(401);
+          expect(result.body).to.be.an('object');
+          expect(result.body.errors[0].msg).to.equal('Unauthorized access, only admins are allowed to do this');
+          done();
+        });
+    });
   });
 
   describe('GET /users for Admins', () => {
@@ -142,7 +155,51 @@ describe('Users Route Tests', () => {
         });
     });
 
-    it('should fetch all the users from the database', (done) => {
+    it('should return error if the token is not sent', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/users/')
+        .end((err, result) => {
+          expect(result).to.have.status(400);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(false);
+          done();
+        });
+    });
+
+    it('should return error if the token sent is of invalid format', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/users/')
+        .set('x-access-token', 'bodyHelper.signUp.validData.fullname')
+        .end((err, result) => {
+          expect(result).to.have.status(401);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(false);
+          done();
+        });
+    });
+
+    it('should return error if the token sent is of valid format but not found', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/users/')
+        .set('x-access-token', bodyHelper.randomValidToken)
+        .end((err, result) => {
+          expect(result).to.have.status(404);
+          expect(result.body).to.be.an('object');
+          expect(result.body)
+            .to.have.property('success')
+            .to.equal(false);
+          done();
+        });
+    });
+
+    it('should fetch all the users from the database when an admin attempts to access', (done) => {
       chai
         .request(server)
         .get('/api/v1/users/')
