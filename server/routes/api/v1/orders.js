@@ -21,7 +21,13 @@ router.get('/:orderId', Auth.validateToken, Auth.isAdmin, ordersController.fetch
 /**
  * Place a new order.
  */
-router.post('/', Auth.validateToken, validationHelper.makeAnOrder, ordersController.makeAnOrder);
+router.post(
+  '/',
+  Auth.validateToken,
+  Auth.isUser,
+  validationHelper.makeAnOrder,
+  ordersController.makeAnOrder,
+);
 
 /**
  * Update the status of an order.

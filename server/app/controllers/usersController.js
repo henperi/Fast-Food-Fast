@@ -73,10 +73,16 @@ const usersController = {
       });
     }
     const userToken = helper.generateToken(findUser.user_id, findUser.email);
+
+    findUser.userId = findUser.user_id;
+    findUser.user_id = undefined;
+    const { fullname, role, userId } = findUser;
+
     return res.status(200).json({
       success: true,
       responseMsg: 'signin successful',
       userToken,
+      userData: { fullname, role, userId },
     });
   },
 
@@ -89,6 +95,24 @@ const usersController = {
     return res.status(200).json({
       success: true,
       foundUser: fetchUsers,
+    });
+  },
+
+  async fetchProfile(req, res) {
+    const { userId } = req.user;
+    const findUser = await User.findById(req, res, userId);
+    if (!findUser) {
+      return res.status(404).json({
+        success: false,
+        errors: [{ msg: 'Could not fetch profile, not found' }],
+      });
+    }
+    findUser.userId = findUser.user_id;
+    findUser.user_id = undefined;
+    return res.status(200).json({
+      success: true,
+      responseMsg: 'Profile fetched successfully',
+      profile: findUser,
     });
   },
 };

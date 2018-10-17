@@ -11,7 +11,7 @@ const validationHelper = {
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password_confirmation', 'Passwords do not match').equals(req.body.password);
+    req.checkBody('passwordConfirmation', 'Passwords do not match').equals(req.body.password);
     req.checkBody('mobile', 'Mobile is required').notEmpty();
     req.checkBody('address', 'Address is required').notEmpty();
 

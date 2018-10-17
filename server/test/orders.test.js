@@ -121,6 +121,23 @@ describe('Orders Route Tests', () => {
           done();
         });
     });
+
+    it('should return error when an admin tries to make an order', (done) => {
+      const newOrder = {
+        foodItems: [{ foodId: bodyHelper.foods.existingFoodId, quantity: 2 }],
+      };
+      chai
+        .request(server)
+        .post('/api/v1/orders')
+        .set('x-access-token', bodyHelper.adminToken)
+        .send(newOrder)
+        .end((err, result) => {
+          expect(result).to.have.status(401);
+          expect(result.body).to.be.an('object');
+          expect(result.body.errors[0].msg).to.be.equal('Unauthorized access, only users are allowed to do this');
+          done();
+        });
+    });
   });
 
   describe('GET /orders/:orderId', () => {
@@ -180,7 +197,6 @@ describe('Orders Route Tests', () => {
         .set('x-access-token', bodyHelper.adminToken)
         .send(param)
         .end((err, result) => {
-          // console.log(result.body);
           expect(result).to.have.status(400);
           expect(result.body).to.be.an('object');
           expect(result.body.errors[0].msg).to.equal('The order status sent is not valid');
