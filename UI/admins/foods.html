@@ -8,6 +8,7 @@
     <title>Fast-Food-Fast | Index page</title>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
 </head>
 
 <body>
@@ -46,8 +47,11 @@
     </header>
 
     <main class="main-content">
+        <section class="m-t-40 text-center">
+            <h2 class="setup-page hide t-40">Loading... <i class="fa fa-spin fa-spinner"></i> </h2>
+        </section>
 
-        <div class="container">
+        <div class="container hide">
             <section class="text-center">
                 <h1 class="text-blue">Howdy Admin?</h1>
                 <h2>Welcome To Your Foods Menu</h2>
@@ -170,6 +174,7 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script src="../src/adminRedirectCtrl.js"></script>
 </body>
 
 </html>
