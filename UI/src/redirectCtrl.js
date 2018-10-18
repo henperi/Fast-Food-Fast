@@ -1,13 +1,12 @@
-const main = document.querySelector('main');
-const container = document.querySelector('.container');
-const userToken = localStorage.getItem('userToken') || undefined;
+// const main = document.querySelector('main');
+// const localAPI = 'http://localhost:5000/api/v1';
+// const remoteAPI = 'http://localhost:5000/api/v1';
+// const userToken = localStorage.getItem('userToken') || undefined;
 
 if (!userToken) {
   localStorage.setItem('flashMsg', 'You need to login');
   window.location.replace('../signin.html');
 }
-const localAPI = 'http://localhost:5000/api/v1';
-const remoteAPI = 'http://localhost:5000/api/v1';
 
 const fetchProfileUrl = `${localAPI}/users/my-profile`;
 fetch(fetchProfileUrl, {

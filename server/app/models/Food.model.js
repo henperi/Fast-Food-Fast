@@ -74,14 +74,16 @@ class Food {
    * @param null
    * @returns {object:} All foods stored in the database
    */
-  async findAll() {
+  async findAll(req, res) {
     const queryText = 'SELECT * from foods';
     try {
       const { rows } = await this.foods.query(queryText);
       return rows;
     } catch (err) {
-      const response = { success: false, err };
-      return response;
+      return res.status(500).send({
+        success: false,
+        errors: [{ msg: 'An error occured, try again later' }],
+      });
     }
   }
 }

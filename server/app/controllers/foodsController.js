@@ -7,14 +7,13 @@ const foodsController = {
    * @returns {object} All the found foods
    */
   async fetchAllFoods(req, res) {
-    const fetchFoods = await Food.findAll();
+    const fetchFoods = await Food.findAll(req, res);
     const count = fetchFoods.length;
-
     return res.status(200).send({
       success: true,
-      success_msg: `returning ${count} availabel food(s)`,
+      responseMsg: 'Available food itmes in menu fetched',
       totalFoods: count,
-      foodsInMenu: fetchFoods,
+      menu: fetchFoods,
     });
   },
 
@@ -29,11 +28,12 @@ const foodsController = {
 
     if (fetchFood.success) {
       return res.status(200).json({
-        message: 'Food found',
-        food: fetchFood,
+        success: true,
+        responseMsg: 'Food found',
+        food: fetchFood.rows,
       });
     }
-    return res.status(404).json({ message: 'Food not found' });
+    return res.status(404).json({ success: false, errors: [{ msg: 'Food not found' }] });
   },
 
   /**

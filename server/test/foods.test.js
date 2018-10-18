@@ -23,9 +23,9 @@ describe('Foods Route Tests', () => {
             .to.have.property('success')
             .to.equal(true);
           expect(result.body)
-            .to.have.property('success_msg')
-            .to.equal(`returning ${result.body.totalFoods} availabel food(s)`);
-          expect(result.body).to.have.property('foodsInMenu');
+            .to.have.property('responseMsg')
+            .to.equal('Available food itmes in menu fetched');
+          expect(result.body).to.have.property('menu');
           done();
         });
     });
@@ -70,7 +70,7 @@ describe('Foods Route Tests', () => {
         .end((err, result) => {
           expect(result).to.have.status(404);
           expect(result.body).to.be.an('object');
-          expect(result.body.message).to.be.equal('Food not found');
+          expect(result.body.errors[0].msg).to.be.equal('Food not found');
           done();
         });
     });
@@ -81,7 +81,7 @@ describe('Foods Route Tests', () => {
         .get(`/api/v1/menu/${bodyHelper.foods.existingFoodId}`)
         .end((err, result) => {
           expect(result).to.have.status(200);
-          expect(result.body.message).to.be.equal('Food found');
+          expect(result.body.responseMsg).to.be.equal('Food found');
           done();
         });
     });
