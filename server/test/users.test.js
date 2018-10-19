@@ -190,7 +190,7 @@ describe('Users Route Tests', () => {
     //     .get('/api/v1/users/')
     //     .set('x-access-token', bodyHelper.randomValidToken)
     //     .end((err, result) => {
-    //       expect(result).to.have.status(401);
+    //       expect(result).to.have.status(404);
     //       expect(result.body).to.be.an('object');
     //       expect(result.body)
     //         .to.have.property('success')
