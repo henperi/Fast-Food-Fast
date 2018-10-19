@@ -9,6 +9,8 @@ import allRoutes from './routes/api/v1';
 
 const app = express();
 
+app.use(express.static('server/UI'));
+
 // Some neccessary middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
