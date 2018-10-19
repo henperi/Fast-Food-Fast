@@ -8,9 +8,6 @@ const loader = document.querySelector('.loader');
 const signup = document.querySelector('.signup');
 const responseArea = document.querySelector('.response-area');
 
-const localAPI = 'http://localhost:5000/api/v1';
-const remoteAPI = 'http://localhost:5000/api/v1';
-
 window.addEventListener('keypress', () => {
   responseArea.innerHTML = '';
 });
@@ -103,10 +100,19 @@ signup.addEventListener('click', (e) => {
 
         // Redirect to admin page if its an admin
         if (role === 'Admin') {
+          setFlash(
+            'flash-success',
+            `Welcome Admin ${name}, manage user orders and create food items to sell`,
+          );
           window.location.replace('admins/foods.html');
           return;
         }
         // Redirect to users page if its not an admin
+        setFlash(
+          'flash-success',
+          `Hello ${name}, Thanks for signin up on, Fast Food Fast let's you order 
+          food items and pay easily at delivery point`,
+        );
         window.location.replace('users/foods.html');
         return;
       }
@@ -121,5 +127,6 @@ signup.addEventListener('click', (e) => {
       console.log('err', error);
       loader.classList.add('hide');
       responseArea.innerHTML = '<li class="list-item text-red">A network error occured tried again</li>';
+      flash('flash-error', `<li class="list-item text-red">${error}</li>`);
     });
 });
