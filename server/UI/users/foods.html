@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fast-Food-Fast | Index page</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="topnav" id="myTopnav">
+            <div class="left-nav">
+                <a href="../index.html" class="brand">Fast Food Fast</a>
+            </div>
+            <div class="right-nav">
+                <a href="foods.html" class="active">Foods Menu</a>
+                <div class="dropdown">
+                    <button class="dropbtn">My Orders
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="pending-orders.html">Pending Orders</a>
+                        <a href="completed-orders.html">Completed Orders</a>
+                        <a class="all-orders.html" href="all-orders.html">All My Orders</a>
+                    </div>
+                </div>
+                <a href="my-profile.html" class="">My Profile</a>
+                <a class="btn btn-green" href="my-cart.html">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="count cart-count">0</span>
+                </a>
+                <a href="javascript:;" class="btn-rounded logout">Logout</a>
+                <a href="javascript:void(0);" class="icon">&#9776;</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="m-t-40 text-center">
+            <h2 class="setup-page hide t-40">Loading... <i class="fa fa-spin fa-spinner"></i> </h2>
+        </section>
+
+        <div class="container hide">
+            <h1 class="text-center">Whats On Our Menu</h1>
+            <section class="card">
+                <div class="food-menu">
+                    <div class="food-item card card-shadow">
+                        <div class="flex">
+                            <div class="image-div">
+                                <img src=" ../img/food-items/1.jpg" class="image" width="100%" />
+                            </div>
+                            <div class="content-div">
+                                <div class="item-title">Chicken Stew and Rice -
+                                    <span class="badge price">&#8358;3,500</span>
+                                </div>
+                                <div class="item-subtitle">
+                                    <a href="">Cooked Foods</a>
+                                </div>
+                                <div class="item-description">qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev
+                                    fvdcvev vre</div>
+                                <span class="item-description link">More Details</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="order-now.html">
+                                <button class="btn btn-primary">Order Now</button>
+                            </a>
+                            <button class="triggerModal btn btn-blue" data-target="cartModal">Add to Cart</button>
+
+                            <div class="modal" id='#cartModal'>
+                                <div class="modal-content">
+                                    <div class="text-center">
+                                        <span class="close-button btn btn-primary btn-sm push-right">x</span>
+                                        <h2 class="text-center">Add this food item to existing Cart</h2>
+
+                                        <div class="content-div">
+                                            <div class="item-title">Chicken Stew and Rice -
+                                                <span class="badge price">&#8358;3,500</span>
+                                            </div>
+                                            <div class="item-description">
+                                                <p>qwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev
+                                                    vre asc
+                                                    eqwewdsc asdfefedv ewdscvev dsfedv ewdvewv svewvfd ewfsfev fvdcvev
+                                                    vres</p>
+                                            </div>
+                                        </div>
+                                        <form action="javascript:;" method="POST" class=" card card-shadow">
+                                            <div class="flex">
+                                                <h2>Desired Quantity</h2>
+                                                <div class="form-member text-left">
+                                                    <input type="number" class="form-input" placeholder="Enter Desired Quantity example 3">
+                                                </div>
+                                                <button class="btn btn-blue btn-block btn-rounded btn-bg">Add To Cart</button>
+                                            </div>
+                                        </form>
+                                        <button class="close-button btn btn-primary btn-block btn-rounded btn-bg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary btn-rounded">View more</button>
+                </div>
+            </section>
+        </div>
+        <div class="cart card-shadow text-center">
+            <div class="right-nav close-button">
+                <i class="fa fa-close"></i>
+            </div>
+            <div class="container">
+                <i class="fa fa-shopping-cart"></i>
+                My Cart
+            </div>
+            <div class="card text-inverse">
+                <span class="cart-count">6</span> Items added
+            </div>
+            <div class="container">
+                <a href="my-cart.html" class="btn btn-sm btn-green">View</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
+    </footer>
+
+    <script src="../src/index.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../src/redirectCtrl.js"></script>
+    <script src="../src/fetchMenuCtrl.js"></script>
+    <script src="../src/addToCartCtrl.js"></script>
+</body>
+
+</html>
