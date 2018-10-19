@@ -31,10 +31,11 @@
                     </div>
                 </div>
                 <a href="my-profile.html" class="">My Profile</a>
-                <a class="btn btn-green" href="my-cart.html">My Cart
-                    <span class="count">98</span>
+                <a class="btn btn-green" href="my-cart.html">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="count cart-count">0</span>
                 </a>
-                <a href="../logout.html" class="btn-rounded">Logout</a>
+                <a href="javascript:;" class="btn-rounded logout">Logout</a>
                 <a href="javascript:void(0);" class="icon">&#9776;</a>
             </div>
         </nav>
@@ -110,6 +111,21 @@
                 </div>
             </section>
         </div>
+        <div class="cart card-shadow text-center">
+            <div class="right-nav close-button">
+                <i class="fa fa-close"></i>
+            </div>
+            <div class="container">
+                <i class="fa fa-shopping-cart"></i>
+                My Cart
+            </div>
+            <div class="card text-inverse">
+                <span class="cart-count">6</span> Items added
+            </div>
+            <div class="container">
+                <a href="my-cart.html" class="btn btn-sm btn-green">View</a>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -120,6 +136,7 @@
     <script src="../assets/js/main.js"></script>
     <script src="../src/redirectCtrl.js"></script>
     <script src="../src/fetchMenuCtrl.js"></script>
+    <script src="../src/addToCartCtrl.js"></script>
 </body>
 
 </html>

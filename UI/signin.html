@@ -13,38 +13,42 @@
 
 <body>
 
-    <div class="container hero-fullx">
-        <div class="text-center contain-50">
-            <div class="card card-shadow text-inverse">
-                <h2>Login To Your Account</h2>
-                <p>Login to have a wonderful experience and enjoy amazing discounts</p>
-                <form class="form-data contain" action="javascript:;" method="POST">
-                    <div class="form-member">
-                        <input type="email" name="email" class="form-input email" placeholder="Enter Email">
-                    </div>
-                    <div class="form-member">
-                        <input type="password" name="password" class="form-input password" placeholder="Enter Password">
-                    </div>
-                    <div class="form-member">
-                        <div class="response-area">
+    <main>
+        <div class="container hero-fullx">
+            <div class="text-center contain-50">
+                <div class="card card-shadow text-inverse">
+                    <h2>Login To Your Account</h2>
+                    <p>Login to have a wonderful experience and enjoy amazing discounts</p>
+                    <form class="form-data contain" action="javascript:;" method="POST">
+                        <div class="form-member">
+                            <input type="email" name="email" class="form-input email" placeholder="Enter Email">
                         </div>
-                        <div class="hide loader">
-                            <i class="fa fa-spinner fa-spin"></i>
+                        <div class="form-member">
+                            <input type="password" name="password" class="form-input password" placeholder="Enter Password">
                         </div>
-                        <button name="login" type="button" class="btn btn-green btn-block login">Login</button>
-                    </div>
-                    <p>Don't have an account?
-                        <a href="signup.html" class="link">Signup Instead</a>
-                    </p>
-                    <p>Go back home
-                        <a href="index.html" class="link">Home</a>
-                    </p>
-                </form>
+                        <div class="form-member">
+                            <div class="response-area">
+                            </div>
+                            <div class="hide loader">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                            <button name="login" type="button" class="btn btn-green btn-block login">Login</button>
+                        </div>
+                        <p>Don't have an account?
+                            <a href="signup.html" class="link">Signup Instead</a>
+                        </p>
+                        <p>Go back home
+                            <a href="index.html" class="link">Home</a>
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <script src="./assets/js/main.js"></script>
+    <script src="./src/index.js"></script>
     <script src="./src/loginCtrl.js"></script>
-    <script src="./src/flashMsg.js"></script>
     <script src="./src/tokenExist.js"></script>
 </body>
 

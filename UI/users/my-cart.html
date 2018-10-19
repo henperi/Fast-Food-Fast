@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fast-Food-Fast | Profile</title>
+    <title>Fast-Food-Fast | My Cart</title>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
@@ -32,10 +32,11 @@
                     </div>
                 </div>
                 <a href="my-profile.html" class="">My Profile</a>
-                <a class="btn btn-green" href="my-cart.html">My Cart
-                    <span class="count">98</span>
+                <a class="btn btn-green" href="my-cart.html">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="count cart-count">0</span>
                 </a>
-                <a href="../logout.html" class="btn-rounded">Logout</a>
+                <a href="javascript:;" class="btn-rounded logout">Logout</a>
                 <a href="javascript:void(0);" class="icon">&#9776;</a>
             </div>
         </nav>
@@ -50,7 +51,7 @@
 
             <section class="card text-center">
                 <h2 class="">My Cart
-                    <a class="link">(2 Items)</a>
+                    <a class="link">(<span class="cart-count">2</span> Items)</a>
                 </h2>
                 <div class="card card-shadow">
                     <div class="table">
@@ -198,7 +199,7 @@
                     </div>
                 </div>
                 <div class="text-center contain-50">
-                    <a href="javascript:;" class="btn btn-green btn-bg btn-rounded btn-block">Checkout</a href="javascript:;">
+                    <button class="btn btn-green btn-bg btn-rounded btn-block place-order">Place Order</button>
                 </div>
             </section>
 
@@ -210,8 +211,11 @@
         <div class="footer text-center">Fast Food Fast. &copy; All Rights Reserved</div>
     </footer>
 
-        <script src="../src/index.js"></script>     <script src="../assets/js/main.js"></script>
-    <script src="../src/redirectCtrl.js"></script>
+    <script src="../src/index.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <!-- <script src="../src/redirectCtrl.js"></script> -->
+    <script src="../src/addToCartCtrl.js"></script>
+    <script src="../src/showCartCtrl.js"></script>
 </body>
 
 </html>

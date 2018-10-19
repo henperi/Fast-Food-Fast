@@ -27,27 +27,6 @@ const toggler = (event) => {
   if (event.target.parentElement.parentElement.classList.contains('topnav')) {
     event.target.parentElement.parentElement.classList.toggle('responsive');
   }
-  if (event.target.classList.contains('reload')) {
-    document.querySelector('.loader').classList.remove('hide');
-    setInterval(() => {
-      window.location.reload();
-    }, 800);
-  }
-};
-
-/**
- * Custom Redirects with or without flash messages
- */
-const redirectWithFlash = (url, flashMsg, canReturn) => {
-  if (!flashMsg && !canReturn) {
-    window.location.href = url;
-  }
-  if (flashMsg && !canReturn) {
-    localStorage.setItem('flashMsg', flashMsg);
-    window.location.href = url;
-  }
-  localStorage.setItem('flashMsg', flashMsg);
-  window.location.replace(url);
 };
 
 // Add an event listener to the dom to listen for certain types of events
