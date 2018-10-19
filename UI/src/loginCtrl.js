@@ -4,9 +4,6 @@ const login = document.querySelector('.login');
 const loader = document.querySelector('.loader');
 const responseArea = document.querySelector('.response-area');
 
-const localAPI = 'http://localhost:5000/api/v1';
-const remoteAPI = 'http://localhost:5000/api/v1';
-
 window.addEventListener('keypress', () => {
   responseArea.innerHTML = '';
 });
@@ -52,7 +49,6 @@ login.addEventListener('click', (e) => {
   })
     .then(res => res.json())
     .then((data) => {
-      console.log('data', data);
       // If no errors and login is successfull
       if (data.success) {
         loader.classList.add('hide');
@@ -62,17 +58,25 @@ login.addEventListener('click', (e) => {
         const { userId, role, fullname } = data.userData;
 
         localStorage.setItem('userToken', userToken);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('fullname', fullname);
-        localStorage.setItem('role', role);
+        // localStorage.setItem('userId', userId);
+        // localStorage.setItem('fullname', fullname);
+        // localStorage.setItem('role', role);
 
         // Redirect to admin page if its an admin
         if (role === 'Admin') {
-          window.location.replace('admins/foods.html');
+          setFlash(
+            'flash-success',
+            'Welcome Admin, manage user orders and create food items to sell',
+          );
+          redirectTo('admins/foods.html');
           return;
         }
         // Redirect to users page if its not an admin
-        window.location.replace('users/foods.html');
+        setFlash(
+          'flash-success',
+          '<p class="t-18">Welcome to Fast Food Fast, order items and pay easily at delivery point.</p>',
+        );
+        redirectTo('users/foods.html');
         return;
       }
 
@@ -83,8 +87,7 @@ login.addEventListener('click', (e) => {
       loader.classList.add('hide');
     })
     .catch((error) => {
-      console.log('err', error);
       loader.classList.add('hide');
-      responseArea.innerHTML = '<li class="list-item text-red">A network error occured tried again</li>';
+      responseArea.innerHTML = '<li class="list-item text-red">A network or connection error occured tried again in a moment</li>';
     });
 });
