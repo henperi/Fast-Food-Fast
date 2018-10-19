@@ -1,6 +1,7 @@
-const userToken = localStorage.getItem('userToken') || undefined;
+// const userToken = localStorage.getItem('userToken') || undefined;
 
 if (userToken) {
-  localStorage.setItem('flashMsg', 'You are already loged in');
+  flash('flash-success', 'You are already logged in');
+  setFlash('flash-success', 'You are already logged in');
   window.location.replace('users/foods.html');
 }
