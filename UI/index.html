@@ -23,11 +23,13 @@
                 <a href="foods-menu.html" class="">Foods Menu</a>
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact Us</a>
-                <a href="signin.html" class="">Signin</a>
-                <a href="signup.html">Signup</a>
-                <a class="btn btn-green" href="users/my-cart.html">My Cart
-                    <span class="count">98</span>
-                </a>
+                <span class="no-auth">
+                    <a href="signin.html" class="">Signin</a>
+                    <a href="signup.html">Signup</a>
+                    <a class="btn btn-green" href="users/my-cart.html">My Cart
+                        <i class="fa fa-shopping-cart"></i> <span class="count cart-count">0</span>
+                    </a>
+                </span>
                 <a href="javascript:void(0);" class="icon">&#9776;</a>
             </div>
         </nav>
@@ -317,7 +319,14 @@
             </section>
 
         </div>
-
+        <div class="cart card-shadow text-center">
+            <div class="right-nav">x</div>
+            <div class="container">My Cart</div>
+            <div class="card text-inverse"><span class="cart-count">6</span> Items added</div>
+            <div class="container">
+                <a href="users/my-cart.html" class="btn btn-green">View</a>
+            </div>
+        </div>
     </main>
 
     <footer class="footer text-center">
@@ -325,6 +334,7 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <!-- <script src="src/index.js"></script> -->
 </body>
 
 </html>
