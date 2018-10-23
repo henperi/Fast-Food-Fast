@@ -670,6 +670,55 @@ section {
 .t-28 {
   font-size: 28px;
 }
+.fs-20 {
+  font-size: 20px;
+}
+.fs-50 {
+  font-size: 50px;
+}
+.fs-100 {
+  font-size: 100px;
+}
+.fs-150 {
+  font-size: 150px;
+}
+.fs-200 {
+  font-size: 200px;
+}
+
+/* Animations */
+.slide-from-right {
+  position: fixed;
+  display: block;
+  animation: slide-from-right 2.8s ease-in-out both;
+}
+/* Animations */
+.slide-from-right:active {
+  position: fixed;
+  display: block;
+  animation: slide-in 1.8s 50s ease-in-out both;
+}
+
+@keyframes slide-from-right {
+  0% {
+    right: -100px;
+  }
+  80% {
+    right: 5px;
+  }
+  100% {
+    right: -100px;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    right: -100px;
+  }
+  100% {
+    right: 5px;
+  }
+}
 
 .list-item {
   position: relative;
