@@ -9,6 +9,7 @@ import allRoutes from './routes/api/v1';
 
 const app = express();
 
+// Static assets
 app.use(express.static('server/UI'));
 
 // Some neccessary middleware
@@ -53,12 +54,14 @@ app.use(
 // Use The Routes Index File
 app.use('/api/v1/', allRoutes);
 
+// 404 page
+app.use('*/*', express.static('server/UI/404.html'));
+
 // Default to here when an invalid endpoint is entered
-app.use((req, res, next) => {
-  const errors = new Error('This endpoint does not exist. Read the documentation for Help');
-  errors.status = 404;
-  next(errors);
-});
+app.use('/', (req, res) => res.status(404).json({
+  success: false,
+  errors: [{ msg: 'This endpoint does not exist' }],
+}));
 
 // App use
 app.use((errors, req, res) => {
