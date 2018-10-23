@@ -605,7 +605,7 @@ label {
   border-radius: 5px;
   max-width: 38%;
   bottom: 0;
-  right: 0;
+  right: -100px;
   color: #fff;
   background: rgb(69, 89, 179);
   font-size: 16px;
@@ -690,14 +690,22 @@ section {
 .slide-from-right {
   position: fixed;
   display: block;
-  animation: slide-from-right 2.8s ease-in-out both;
+  animation: slide-from-right 1.8s ease-in-out both;
 }
 /* Animations */
 .slide-from-right:active {
   position: fixed;
   display: block;
-  animation: slide-in 1.8s 50s ease-in-out both;
+  animation: slide-in 1.8s ease-in-out forwards alternate,
+    slide-in 1.8s 4s ease-in-out forwards reverse;
 }
+
+/* .cart:hover {
+  position: fixed;
+  display: block;
+  animation: slide-in 1.8s ease-in-out forwards alternate,
+    slide-in 1.8s 4s ease-in-out forwards reverse;
+} */
 
 @keyframes slide-from-right {
   0% {
@@ -736,11 +744,21 @@ section {
 .flash {
   /* flex-flow: column; */
   position: fixed;
-  display: flex;
+  /* display: flex; */
   width: 70%;
   z-index: 10000;
-  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.5s;
+  animation: slide-in-out 5s both;
 }
+
+@keyframes slide-in-out {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
 .flash-success {
   background-color: rgb(3, 197, 61);
   color: white;

@@ -75,9 +75,9 @@ const flash = (flashtype, flashMsg) => {
     <p>${flashMsg}</p>
   `;
   document.querySelector('main').insertAdjacentElement('afterbegin', flashbox);
-  setInterval(() => {
-    document.querySelector('main').removeChild(flashbox);
-  }, 3000);
+  //   setInterval(() => {
+  //     document.querySelector('main').removeChild(flashbox);
+  //   }, 3000);
 };
 
 /**

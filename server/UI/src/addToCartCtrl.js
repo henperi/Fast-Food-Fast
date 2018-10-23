@@ -21,6 +21,8 @@ const addToCart = (event) => {
         // The food is in cart already so increment it
         foodItems[i].quantity += Math.abs(quantity);
         localStorage.setItem('foodItems', JSON.stringify(foodItems));
+        document.querySelector('.cart').classList.toggle('slide-from-right');
+
         updateCartCounter(foodItems);
         flash(
           'flash-success',
@@ -35,6 +37,7 @@ const addToCart = (event) => {
 
       foodItems.push(newItem);
       localStorage.setItem('foodItems', JSON.stringify(foodItems));
+      document.querySelector('.cart').classList.toggle('slide-from-right');
 
       updateCartCounter(foodItems);
       flash('flash-success', 'Item added to cart');
