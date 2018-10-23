@@ -41,6 +41,6 @@ router.get('/my-profile', Auth.validateToken, usersController.fetchProfile);
 // router.get('/orders/:user_id', ordersController.fetchAllMyOrders);
 // router.get('/orders/:user_id/:order_id', ordersController.fetchMySingleOrder);
 
-router.use('', (req, res) => res.status(404).json({ message: 'This endpoint does not exist' }));
+// router.use('', (req, res) => res.status(404).json({ message: 'This endpoint does not exist' }));
 
 export default router;

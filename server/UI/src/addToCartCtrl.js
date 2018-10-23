@@ -1,16 +1,3 @@
-// let cartItems = localStorage.getItem('foodItems') || undefined;
-// let foodItems = cartItems ? JSON.parse(cartItems) : [];
-
-// /**
-//  * Update the cart items counter
-//  */
-// const updateCartCounter = () => {
-//   document.querySelectorAll('.cart-count').forEach((counter) => {
-//     const count = counter;
-//     count.innerHTML = `${foodItems.length}`;
-//   });
-// };
-
 updateCartCounter();
 
 /**
@@ -20,7 +7,7 @@ const addToCart = (event) => {
   if (event.target.classList.contains('addToCart')) {
     // cartItems = localStorage.getItem('foodItems') || undefined;
     // foodItems = cartItems ? JSON.parse(cartItems) : [];
-
+    getCart();
     // Get the foodId and quantity to add
     const foodId = event.srcElement.getAttribute('data-foodId');
     const quantity = Number(document.getElementById(`#${foodId}`).querySelector('.quantity').value) || 1;
@@ -34,12 +21,12 @@ const addToCart = (event) => {
         // The food is in cart already so increment it
         foodItems[i].quantity += Math.abs(quantity);
         localStorage.setItem('foodItems', JSON.stringify(foodItems));
-        n += 1;
         updateCartCounter(foodItems);
         flash(
           'flash-success',
           `Increased the quantity of this item in your cart by ${Math.abs(quantity)}`,
         );
+        n += 1;
       }
     }
     if (n === 0) {

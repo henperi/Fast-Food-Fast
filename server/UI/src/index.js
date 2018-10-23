@@ -48,6 +48,11 @@ const redirectTo = (url, canReturn) => {
   window.location.replace(url);
 };
 
+const getCart = () => {
+  cartItems = localStorage.getItem('foodItems') || undefined;
+  foodItems = cartItems ? JSON.parse(cartItems) : [];
+};
+
 /**
  * Set A flash to be called on the next page
  * @param {String} flashType The flash type (flash-success || flash-error)
@@ -72,7 +77,7 @@ const flash = (flashtype, flashMsg) => {
   document.querySelector('main').insertAdjacentElement('afterbegin', flashbox);
   setInterval(() => {
     document.querySelector('main').removeChild(flashbox);
-  }, 2000);
+  }, 3000);
 };
 
 /**
@@ -314,6 +319,7 @@ const renderEmptyCart = () => {
     .querySelector('.table')
     .insertAdjacentHTML('afterend', '<h3 class="text-center">No food Items in cart</h3>');
   document.querySelector('.place-order').classList.add('hide');
+  document.querySelector('.placeOrderModal').classList.add('hide');
 };
 
 // Check for flash messages
