@@ -141,6 +141,25 @@ class OrderedItems {
   }
 
   /**
+   * @param {orderId} required
+   * @param {userId} (optional)
+   * @returns {object} one order object
+   */
+  async findUserItems(orderId, userId) {
+    // console.log('insideOrdereItemsModel', orderId);
+    const queryText = `SELECT item_id, user_id, food_id, food_name, unit_price, quantity, total, itemstatus, 
+    created_at from ordered_items WHERE order_id = $1 AND user_id = $2`;
+    try {
+      const { rows } = await this.orderedItems.query(queryText, [orderId, userId]);
+      // console.log('orderIts::', rows);
+      return rows;
+    } catch (err) {
+      const response = { success: false, err };
+      return response;
+    }
+  }
+
+  /**
    * @returns {object} all orders object
    */
   async findAll() {

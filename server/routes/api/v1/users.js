@@ -26,11 +26,16 @@ router.post('/login', validationHelper.signin, usersController.attemptSignin);
 /**
  * Fetch a users orders
  */
+router.get('/:userId/orders', Auth.validateToken, Auth.isUser, ordersController.fetchAllUserOrders);
+
+/**
+ * Fetch the items in an order
+ */
 router.get(
-  '/:userId/orders',
+  '/:userId/orders/:orderId',
   Auth.validateToken,
-  Auth.isAdmin,
-  ordersController.fetchAllUserOrders,
+  Auth.isUser,
+  ordersController.fetchAllUserOrderedItems,
 );
 /**
  * Fetch the authenticated users profile

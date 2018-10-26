@@ -12,26 +12,55 @@ const localhost = window.location.origin;
 const localAPI = `${localhost}/api/v1`;
 const remoteAPI = 'https://fast-food-fast-app.herokuapp.com/api/v1';
 
-// if (userToken) {
-//   document.querySelector('.no-auth').innerHTML = `
-//   <div class="dropdown">
-//       <button class="dropbtn">My Orders
-//           <i class="fa fa-caret-down"></i>
-//       </button>
-//       <div class="dropdown-content">
-//           <a href="pending-orders.html">Pending Orders</a>
-//           <a href="completed-orders.html">Completed Orders</a>
-//           <a class="all-orders.html" href="all-orders.html">All My Orders</a>
-//       </div>
-//   </div>
-//   <a href="my-profile.html" class="">My Profile</a>
-//   <a class="btn btn-green" href="my-cart.html">
-//       <i class="fa fa-shopping-cart"></i>
-//       <span class="count cart-count">0</span>
-//   </a>
-//   <a href="javascript:;" class="btn-rounded logout">Logout</a>
-//   `;
-// }
+// alert(window.location.pathname);
+if (userToken) {
+  document.querySelector('.right-nav').innerHTML = `
+  <a href="foods.html" class="active">Foods Menu</a>
+  <div class="dropdown hide">
+      <button class="dropbtn">My Orders
+          <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+          <a class="hide" href="pending-orders.html">Pending Orders</a>
+          <a class="hide" href="completed-orders.html">Completed Orders</a>
+          <a href="all-orders.html">All My Orders</a>
+      </div>
+  </div>
+  <a href="all-orders.html">My Orders</a>
+  <a href="my-profile.html" class="">My Profile</a>
+  <a class="btn btn-green" href="my-cart.html">
+      <i class="fa fa-shopping-cart"></i>
+      <span class="count cart-count">0</span>
+  </a>
+  <a href="javascript:;" class="btn-rounded logout">Logout</a>
+  <a href="javascript:void(0);" class="icon">&#9776;</a>
+  `;
+  if (window.location.pathname === '/index.html' || window.location.pathname === '/') {
+    document.querySelector('.right-nav').innerHTML = `
+    <a href="users/foods.html" class="active">Foods Menu</a>>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact Us</a>
+    <div class="dropdown hide">
+        <button class="dropbtn">My Orders
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a class="hide" href="users/pending-orders.html">Pending Orders</a>
+            <a class="hide" href="users/completed-orders.html">Completed Orders</a>
+            <a class="users/all-orders.html" href="all-orders.html">All My Orders</a>
+            </div>
+            </div>
+    <a class="" href="users/all-orders.html">My Orders</a>
+    <a href="users/my-profile.html" class="">My Profile</a>
+    <a class="btn btn-green" href="users/my-cart.html">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="count cart-count">0</span>
+    </a>
+    <a href="javascript:;" class="btn-rounded logout">Logout</a>
+    <a href="javascript:void(0);" class="icon">&#9776;</a>
+    `;
+  }
+}
 
 /**
  * Custom Redirects: redirect the user to a certain page
@@ -70,7 +99,7 @@ const setFlash = (flashType, flashMsg) => {
  */
 const flash = (flashtype, flashMsg) => {
   const flashbox = document.createElement('div');
-  flashbox.className = `container card card-shadow flash ${flashtype}`;
+  flashbox.className = `card card-shadow flash ${flashtype}`;
   flashbox.innerHTML = `
     <p>${flashMsg}</p>
   `;
@@ -140,6 +169,18 @@ const fetchAuthUserProfile = () => {
  */
 const formatCash = amount => amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
+const formatDate = date => `${
+  date
+    .toLocaleString()
+    .replace(/-/g, '/')
+    .split('T')[0]
+} ${
+  date
+    .toLocaleString()
+    .split('T')[1]
+    .split('.')[0]
+}`;
+
 /**
  * Render the poor network page
  */
@@ -177,7 +218,7 @@ const renderFoodMenuComponent = foodItem => `
   </div>
   <div>
       <a href="${localhost}/users/order-now.html?id=${foodItem.food_id}" 
-        class="btn btn-primary">Order Now
+        class="btn btn-primary">View Now
       </a>
       <button class="triggerModal btn btn-blue" 
       data-target="${foodItem.food_id}">Add to Cart</button>
@@ -226,7 +267,7 @@ const renderCartItemComponent = (data, quantity) => `
     <td>${quantity}</td>
     <td>&#8358; ${formatCash(data.food.unit_price * quantity)}</td>
     <td class="">
-        <button class="triggerModal btn btn-primary btn-sm" 
+        <button class="hide triggerModal btn btn-primary btn-sm" 
           data-target='${data.food.food_id}_updateModal'>
           Update Qauntity
         </button>
