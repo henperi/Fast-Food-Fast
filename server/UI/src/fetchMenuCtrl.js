@@ -1,4 +1,5 @@
 const fetchMenuUrl = `${localAPI}/menu`;
+foodMenu.innerHTML = '';
 fetch(fetchMenuUrl, {
   method: 'GET',
   headers: {
@@ -11,14 +12,12 @@ fetch(fetchMenuUrl, {
   .then(res => res.json())
   .then((data) => {
     // If no errors and signup is successfull
-    foodMenu.innerHTML = '';
     if (data.success) {
       let item = '';
       if (data.menu.length > 0) {
         for (let i = 0; i < data.menu.length; i += 1) {
           const foodItem = data.menu[i];
           item += renderFoodMenuComponent(foodItem);
-          // console.log(item);
         }
         foodMenu.innerHTML = item;
         return;

@@ -5,12 +5,14 @@ import Food from '../models/Food.model';
 
 const ordersController = {
   /**
-   * GET /orders route to find and fetch all the orders
+   * GET /orders route to find and fetch all the orders(For Admins)
    * @returns {object} All the found Orders
    */
   async fetchAllOrders(req, res) {
     const fetchOrders = await Order.findAll(req, res);
     const count = fetchOrders.length;
+    const { host } = req.headers;
+    console.log(req.headers);
 
     for (let i = 0; i < count; i += 1) {
       const qty = fetchOrders[i].ordered_items;
@@ -18,7 +20,7 @@ const ordersController = {
 
       fetchOrders[i].ordered_items = {
         quantity: qty,
-        items_url: `https://api-fast-food-fast.herokuapp.com/api/v1/orders/${id}`,
+        items_url: `${host}/api/v1/orders/${id}`,
       };
     }
 
@@ -31,22 +33,7 @@ const ordersController = {
   },
 
   /**
-   * GET /orders route to find and fetch all the orders of a particular user
-   * @returns {object} All the found Orders
-   */
-  async fetchAllUserOrders(req, res) {
-    const { userId } = req.params;
-    const fetchOrders = await Order.findOrdersByUserId(req, res, userId);
-
-    return res.status(200).send({
-      success: true,
-      totalOrders: fetchOrders.length,
-      orders: fetchOrders,
-    });
-  },
-
-  /**
-   * GET /orders route to find and fetch all the orders of a particular user
+   * GET /orders route to find and fetch all the orders of a particular user (For Admins)
    * @returns {object} All the found Orderss
    */
   async fetchAllOrderedItems(req, res) {
@@ -68,6 +55,60 @@ const ordersController = {
     });
   },
 
+  /**
+   * GET /orders route to find and fetch all the orders of a particular user (For Users)
+   * @returns {object} All the found Orders
+   */
+  async fetchAllUserOrders(req, res) {
+    const { userId } = req.params;
+    const fetchOrders = await Order.findOrdersByUserId(req, res, userId);
+    const count = fetchOrders.length;
+    const { host } = req.headers;
+
+    for (let i = 0; i < count; i += 1) {
+      const qty = fetchOrders[i].ordered_items;
+      const id = fetchOrders[i].order_id;
+
+      fetchOrders[i].ordered_items = {
+        quantity: qty,
+        items_url: `${host}/api/v1/users/${userId}/orders/${id}`,
+      };
+    }
+
+    return res.status(200).send({
+      success: true,
+      totalOrders: fetchOrders.length,
+      orders: fetchOrders,
+    });
+  },
+
+  /**
+   * GET /orders route to find and fetch all the orders of a particular user (For Admins)
+   * @returns {object} All the found Orderss
+   */
+  async fetchAllUserOrderedItems(req, res) {
+    const { orderId } = req.params;
+    const { userId } = req.user;
+    const fetchItems = await OrderedItems.findUserItems(orderId, userId);
+    const count = fetchItems.length;
+
+    // const { orderId } = fetchItems;
+    // fetchItems.items.order_id = undefined;
+
+    if (count > 0) {
+      return res.status(200).send({
+        success: true,
+        success_msg: 'Ordered Items fetched successfully',
+        totalItems: count,
+        orderId,
+        items: fetchItems,
+      });
+    }
+    return res.status(404).send({
+      success: false,
+      error_msg: 'No items mathching this order were found',
+    });
+  },
   /**
    * GET /orders/:id route to find and fetch a particular order given its id.
    * @returns {object} the found Order object

@@ -271,14 +271,17 @@ p {
 .text-white {
   color: white !important;
 }
-.text-pending {
+.text-pending,
+.text-Pending {
   color: #dfab02;
 }
-.text-success {
+.text-success,
+.text-Completed {
   color: rgb(3, 197, 61);
 }
 
-.text-rejected {
+.text-rejected,
+.text-Rejected {
   color: rgb(240, 35, 35);
 }
 .text-red {
@@ -693,7 +696,7 @@ section {
   animation: slide-from-right 1.8s ease-in-out both;
 }
 /* Animations */
-.slide-from-right:active {
+.cart:hover {
   position: fixed;
   display: block;
   animation: slide-in 1.8s ease-in-out forwards alternate,

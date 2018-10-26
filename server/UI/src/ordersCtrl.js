@@ -4,13 +4,14 @@ const loader = document.querySelector('.loader');
 const responseArea = document.querySelector('.response-area');
 // const tbody = document.querySelector('tbody');
 
-console.log(foodItems);
-const placeOrderData = { foodItems };
+// console.log(foodItems);
 
 const placeOrder = () => {
   responseArea.innerHTML = '';
   loader.classList.remove('hide');
+  getCart();
 
+  const placeOrderData = { foodItems };
   // Check for login here first
 
   // Then make request

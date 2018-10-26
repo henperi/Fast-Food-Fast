@@ -4,8 +4,8 @@
 window.addEventListener('load', () => {
   document.querySelector('.setup-page').classList.remove('hide');
   setInterval(() => {
-    document.querySelector('.setup-page').classList.add('hide');
     document.querySelector('.container').classList.remove('hide');
+    document.querySelector('.setup-page').classList.add('hide');
   }, 2000);
 });
 
