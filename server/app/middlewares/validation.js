@@ -108,6 +108,7 @@ const validationHelper = {
    * Validate updateOrderStatus method in ordersController
    */
   updateOrderStatus(req, res, next) {
+    // console.log(req.body);
     req.checkBody('orderStatus', 'order status is required').notEmpty();
 
     const errors = req.validationErrors();
@@ -116,7 +117,7 @@ const validationHelper = {
       return res.status(400).json({ success: false, errors });
     }
     const { orderStatus } = req.body;
-    if (!Number.isInteger(orderStatus) || orderStatus > 5) {
+    if (!Number.isInteger(Number(orderStatus)) || orderStatus > 4) {
       return res.status(400).json({
         success: false,
         errors: [{ msg: 'The order status sent is not valid' }],
@@ -136,10 +137,37 @@ const validationHelper = {
     req.checkBody('unitPrice', 'Food price is not valid').notEmpty();
     req.checkBody('quantityAvailable', 'Quantity available is required').notEmpty();
 
-    const errors = req.validationErrors();
+    let errors = req.validationErrors();
 
     if (errors) {
       return res.status(400).json({ success: false, errors });
+    }
+
+    const { unitPrice, quantityAvailable } = req.body;
+    errors = [];
+    console.log(unitPrice, quantityAvailable);
+    if (!Number.isInteger(Number(unitPrice))) {
+      const msg = { msg: 'Food price must be a valid number' };
+      errors.push(msg);
+    }
+    if (unitPrice < 1) {
+      const msg = { msg: 'Oops, Food price can not be less than 1' };
+      errors.push(msg);
+    }
+
+    if (!Number.isInteger(Number(quantityAvailable))) {
+      const msg = { msg: 'Available quantity must be a valid number' };
+      errors.push(msg);
+    }
+    if (quantityAvailable < 1) {
+      const msg = { msg: 'Oops, Available quantity can not be less than 1' };
+      errors.push(msg);
+    }
+    if (errors.length > 0) {
+      return res.status(400).json({
+        success: false,
+        errors,
+      });
     }
     return next();
   },

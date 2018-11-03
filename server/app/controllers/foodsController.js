@@ -53,9 +53,9 @@ const foodsController = {
         createdFood: createdFood.newFood,
       });
     }
-    return res.status(400).json({
+    return res.status(500).json({
       success: false,
-      success_msg: 'Error occured while creating food, try again',
+      errors: [{ msg: 'Error occured while creating food, try again' }],
     });
   },
 

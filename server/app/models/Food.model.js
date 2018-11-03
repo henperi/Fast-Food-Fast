@@ -11,7 +11,6 @@ class Food {
   }
 
   async createFood(data) {
-    // console.log(data);
     const queryText = `INSERT INTO foods(food_id, food_name, food_cat, food_img,
       description, unit_price, quantity_available, created_at, updated_at)
       Values($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -61,6 +60,22 @@ class Food {
     const queryText = 'SELECT * from foods WHERE food_id = $1';
     try {
       const { rows } = await this.foods.query(queryText, [foodId]);
+      const response = { success: true, rows: rows[0] };
+      return response;
+    } catch (error) {
+      const response = { success: false, error };
+      return response;
+    }
+  }
+
+  /**
+   * @param {String} foodName
+   * @returns {object} food object
+   */
+  async findByName(foodName) {
+    const queryText = 'SELECT * from foods WHERE food_name = $1';
+    try {
+      const { rows } = await this.foods.query(queryText, [foodName]);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (error) {
