@@ -24,6 +24,7 @@ if (cartItems) {
     })
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         if (data.success) {
           n += 1;
           total += data.food.unit_price * quantity;

@@ -61,31 +61,45 @@
                             <h3>Fill out the food details and click create</h3>
                             <div class="form-member text-left">
                                 <label for="">Food Name</label>
-                                <input type="text" class="form-input" placeholder="Enter Food Name" value="" required>
+                                <input type="text" class="form-input foodName" placeholder="Enter Food Name" value=""
+                                    required>
                             </div>
                             <div class="form-member text-left">
                                 <label for="">Food Description</label>
-                                <textarea class="form-input" placeholder="Enter Food Name" required></textarea>
+                                <textarea class="form-input description" placeholder="Enter Food Description" required></textarea>
                             </div>
                             <div class="form-member text-left">
                                 <label for="">Food Price</label>
-                                <input type="number" class="form-input" placeholder="Enter Food Price" value=""
+                                <input type="numberX" class="form-input unitPrice" placeholder="Enter Food Price" value=""
                                     required>
                             </div>
                             <div class="form-member text-left">
                                 <label for="">Food Image</label>
-                                <input type="file" class="form-input file" placeholder="Enter Food Name" required>
+                                <input type="file" class="form-input file foodImg" placeholder="Enter Food Name"
+                                    required>
+                            </div>
+                            <div class="form-member text-left">
+                                <label for="">Declare Availabe Quantity</label>
+                                <input type="numberX" class="form-input quantityAvailable" placeholder="Enter Available Quantity"
+                                    required>
                             </div>
                             <div class="form-member text-left">
                                 <label for="">Choose Food Category</label>
-                                <select class="form-input" required>
+                                <select class="form-input foodCat" required>
                                     <option value="">Select Category</option>
                                     <option>Cooked Foods</option>
                                     <option>Drinks</option>
                                     <option>Pasteries</option>
                                 </select>
                             </div>
-                            <button class="btn btn-blue btn-block btn-rounded btn-bg">Create Food</button>
+
+                            <div class="response-area">
+                            </div>
+                            <div class="hide loader">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                            <button type="submit" class="btn btn-blue btn-block btn-rounded btn-bg createFood">Create
+                                Food</button>
                         </div>
                     </form>
 
@@ -101,7 +115,9 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../src/adminRedirectCtrl.js"></script>
+    <script src="./src/index.js"></script>
+    <script src="./src/createFood.js"></script>
+    <!-- <script src="../src/adminRedirectCtrl.js"></script> -->
 </body>
 
 </html>
