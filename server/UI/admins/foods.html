@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fast-Food-Fast | Index page</title>
+    <title>Fast-Food-Fast | Menu</title>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <a href="my-profile.html" class="">My Profile</a>
-                <a href="../logout.html" class="btn-rounded">Logout</a>
+                <a href="javascript:;" class="btn-rounded">Logout</a>
                 <a href="javascript:void(0);" class="icon">&#9776;</a>
             </div>
         </nav>
@@ -66,8 +66,8 @@
                 </div>
             </section>
 
-            <section class="card">
-                <h2 class="text-center">Cooked Foods</h2>
+            <section class="card admin-card">
+                <h2 class="text-center">All Foods in Menu</h2>
                 <div class="food-menu">
 
                     <div class="food-item card card-shadow card-shadow">
@@ -174,7 +174,9 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../src/adminRedirectCtrl.js"></script>
+    <script src="./src/index.js"></script>
+    <script src="./src/fetchMenu.js"></script>
+    <!-- <script src="../src/adminRedirectCtrl.js"></script> -->
 </body>
 
 </html>

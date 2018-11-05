@@ -276,12 +276,14 @@ p {
   color: #dfab02;
 }
 .text-success,
+.text-completed,
 .text-Completed {
   color: rgb(3, 197, 61);
 }
 
 .text-rejected,
-.text-Rejected {
+.text-Rejected,
+.text-cancelled {
   color: rgb(240, 35, 35);
 }
 .text-red {

@@ -12,7 +12,7 @@ const ordersController = {
     const fetchOrders = await Order.findAll(req, res);
     const count = fetchOrders.length;
     const { host } = req.headers;
-    console.log(req.headers);
+    // console.log(req.headers);
 
     for (let i = 0; i < count; i += 1) {
       const qty = fetchOrders[i].ordered_items;
@@ -46,7 +46,7 @@ const ordersController = {
         success: true,
         success_msg: 'Ordered Items fetched successfully',
         totalItems: count,
-        Items: fetchItems,
+        items: fetchItems,
       });
     }
     return res.status(404).send({
@@ -150,14 +150,7 @@ const ordersController = {
 
     const findOrder = await Order.findOne(req, res, orderId);
     if (findOrder.rows) {
-      const orderStatusMaping = [
-        'Pending',
-        'Processing',
-        'Cancelled',
-        'Rejected',
-        'Completed',
-        'Delivered',
-      ];
+      const orderStatusMaping = ['Pending', 'Processing', 'Rejected', 'Completed', 'Delivered'];
 
       orderStatus = orderStatusMaping[orderStatus] || orderStatusMaping[0];
       const itemStatus = orderStatus;

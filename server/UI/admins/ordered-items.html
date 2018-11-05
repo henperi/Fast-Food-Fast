@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fast-Food-Fast | Profile</title>
+    <title>Fast-Food-Fast | Ordered Items</title>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/font-awesome.min.css" />
@@ -55,10 +55,10 @@
         <div class="container hide">
 
             <section class="card text-center">
-                <h2 class="">Ordered Items (
-                    <a class="link">Order Id: #55678</a>)</h2>
-                <h3 class="">Ordered By (
-                    <a class="link">Mr. Test User</a>)</h3>
+                <h2 class="">Ordered Items
+                    <a class="link hide">Order Id: #55678</a></h2>
+                <h3 class="">Ordered By
+                    <a class="link hide">Mr. Test User</a></h3>
                 <div class="card card-shadow">
                     <div class="table">
                         <table>
@@ -70,8 +70,7 @@
                                 <th>Amount</th>
                                 <th>Date Ordered</th>
                                 <th>Order Status</th>
-                                <th>Delivery Status</th>
-                                <th>Actions</th>
+                                <th class="hide">Actions</th>
                             </thead>
                             <tbody>
                                 <tr>
@@ -148,14 +147,6 @@
             </section>
 
         </div>
-
-        <div class="cart card-shadow text-center">
-            <div class="container">My Cart</div>
-            <div class="card text-inverse">6 Items added</div>
-            <div class="container">
-                <a href="my-cart.html" class="btn btn-green">View</a>
-            </div>
-        </div>
     </main>
 
     <footer>
@@ -163,7 +154,8 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../src/adminRedirectCtrl.js"></script>
+    <script src="./src/index.js"></script>
+    <script src="./src/getUserItems.js"></script>
 </body>
 
 </html>
