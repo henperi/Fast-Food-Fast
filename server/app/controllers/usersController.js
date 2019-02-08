@@ -40,11 +40,16 @@ const usersController = {
         errors: [{ msg: 'Request was unsuccessful, try again in a moment' }],
       });
     }
-    const userToken = helper.generateToken(createdUser.newUser.userId, createdUser.newUser.email);
+    const userToken = helper.generateToken(
+      createdUser.newUser.userId,
+      createdUser.newUser.email,
+      createdUser.newUser.role,
+      createdUser.newUser.fullname,
+    );
     return res.status(201).json({
       success: true,
       responseMsg: 'Signup Successful',
-      createdUser: createdUser.newUser,
+      // createdUser: createdUser.newUser,
       userToken,
     });
   },
@@ -60,29 +65,35 @@ const usersController = {
     if (!findUser) {
       return res.status(404).json({
         success: false,
-        errors: [{ msg: 'email does not exist' }],
+        errors: [{ msg: 'Email or password is wrong' }],
       });
     }
+    // console.log(findUser.password, password);
 
     const checkPassword = helper.comparePassword(findUser.password, password);
 
     if (!checkPassword) {
       return res.status(404).json({
         success: false,
-        errors: [{ msg: 'password is wrong' }],
+        errors: [{ msg: 'Email or password is wrong' }],
       });
     }
-    const userToken = helper.generateToken(findUser.user_id, findUser.email);
+    const userToken = helper.generateToken(
+      findUser.user_id,
+      findUser.email,
+      findUser.role,
+      findUser.fullname,
+    );
 
-    findUser.userId = findUser.user_id;
-    findUser.user_id = undefined;
-    const { fullname, role, userId } = findUser;
-
+    // findUser.userId = findUser.user_id;
+    // findUser.user_id = undefined;
+    // const { fullname, role, userId } = findUser;
+    console.log(userToken);
     return res.status(200).json({
       success: true,
-      responseMsg: 'signin successful',
+      responseMsg: 'Signin successful',
       userToken,
-      userData: { fullname, role, userId },
+      // userData: { fullname, role, userId },
     });
   },
 

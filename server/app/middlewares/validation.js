@@ -105,6 +105,18 @@ const validationHelper = {
   },
 
   /**
+   * Validate makeAnOrder method in ordersController
+   */
+  deleteAnOrder(req, res, next) {
+    req.checkBody('orderId', 'orderId is required').notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).json({ success: false, errors });
+    }
+    return next();
+  },
+  /**
    * Validate updateOrderStatus method in ordersController
    */
   updateOrderStatus(req, res, next) {

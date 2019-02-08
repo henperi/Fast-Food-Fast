@@ -63,6 +63,7 @@ class User {
     const queryText = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await this.users.query(queryText, [email]);
+      // console.log(rows[0]);
       return rows[0];
     } catch (err) {
       return res.status(500).json({

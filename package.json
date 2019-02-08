@@ -1,6 +1,9 @@
 {
   "name": "fast-food-fast",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.3.0"
+  },
   "description": "Fast Food Fast Nodejs API endpoints to power the fast food fast web app client",
   "main": "./server/server.js",
   "scripts": {
