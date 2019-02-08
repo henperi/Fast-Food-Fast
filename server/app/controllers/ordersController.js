@@ -248,6 +248,43 @@ const ordersController = {
       reasons: 'The fooditems sent do not exist in the list of available foods',
     });
   },
+
+  /**
+   * PUT /orders/:id route to update the status of a particular order given its id.
+   * @param {orderStatus} orderStatus is required
+   * @returns {object} the updated Order object
+   */
+  async deleteOrder(req, res) {
+    const { orderId } = req.body;
+    console.log('==================');
+    console.log(orderId);
+
+    const findOrder = await Order.findOne(req, res, orderId);
+    if (findOrder.rows) {
+      const deletedOrder = await Order.deleteOrder(orderId);
+      console.log('==========');
+      console.log(deletedOrder);
+      console.log('==========');
+
+      if (deletedOrder.success) {
+        console.log('==========');
+        console.log('Inside deletedOrder.success');
+        console.log('==========');
+        const deleteOrderedItems = await OrderedItems.deleteItems(orderId);
+
+        if (deleteOrderedItems.success) {
+          return res.status(200).json({
+            success: true,
+            success_msg: 'Order has been successfully deleted',
+          });
+        }
+      }
+    }
+    return res.status(404).json({
+      success: false,
+      error_msg: 'This particular order can not be deleted as it does not exist',
+    });
+  },
 };
 
 export default ordersController;

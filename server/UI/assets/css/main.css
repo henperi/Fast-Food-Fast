@@ -152,10 +152,12 @@ nav {
   width: 45%;
   border-radius: 0.5rem;
 }
+
 .close-button {
   line-height: 1.5rem;
   cursor: pointer;
 }
+
 .close-button:hover {
   background-color: darkgray;
 }

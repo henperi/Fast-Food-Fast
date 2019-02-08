@@ -142,6 +142,7 @@ class Order {
     const queryText = 'SELECT * from orders WHERE order_id=$1';
     try {
       const { rows } = await this.orders.query(queryText, [orderId]);
+      console.log(rows);
       const response = { success: true, rows: rows[0] };
       return response;
     } catch (err) {
@@ -183,6 +184,29 @@ class Order {
         success: false,
         error_msg: 'An error occured',
       });
+    }
+  }
+
+  /**
+   * Delete an Order
+   * @param {userId} userId
+   * @param {data} data
+   * @returns {object} created order object
+   */
+  async deleteOrder(orderId) {
+    const queryText = 'DELETE FROM orders WHERE order_id = $1 returning *';
+
+    const values = [orderId];
+
+    try {
+      const { rows } = await this.orders.query(queryText, values);
+      const data = rows[0];
+      const response = { success: true, data };
+
+      return response;
+    } catch (error) {
+      const response = { success: false, error };
+      return response;
     }
   }
 }

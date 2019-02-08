@@ -172,6 +172,31 @@ class OrderedItems {
       return response;
     }
   }
+
+  /**
+   * Delete an Order
+   * @param {userId} userId
+   * @param {data} data
+   * @returns {object} created order object
+   */
+  async deleteItems(orderId) {
+    const queryText = 'DELETE FROM ordered_items WHERE order_id=$1 returning *';
+
+    const values = [orderId];
+
+    try {
+      const { rows } = await this.orderedItems.query(queryText, values);
+      console.log('Inside deleteItems');
+      console.log(rows);
+      const data = rows[0];
+      const response = { success: true, data };
+
+      return response;
+    } catch (error) {
+      const response = { success: false, error };
+      return response;
+    }
+  }
 }
 
 export default new OrderedItems();

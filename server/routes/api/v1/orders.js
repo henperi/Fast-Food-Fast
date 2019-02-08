@@ -40,4 +40,14 @@ router.put(
   ordersController.updateOrderStatus,
 );
 
+/**
+ * Delete an order given its id.
+ */
+router.delete(
+  '/',
+  Auth.validateToken,
+  Auth.isUser,
+  validationHelper.deleteAnOrder,
+  ordersController.deleteOrder,
+);
 export default router;
